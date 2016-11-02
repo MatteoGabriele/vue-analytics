@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "ecmaFeatures": {
+    "module": true,
+  },
+  "settings": {
+    "import/resolver": "webpack",
+  },
+  "rules": {
+    "no-console": 1,
+    "no-debugger": 1,
+    "no-unused-vars": 1,
+  }
+}
