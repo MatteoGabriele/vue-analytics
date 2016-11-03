@@ -1,7 +1,9 @@
 # vue-analytics
 Vue plugin to handle basic Google Analytics tracking: pages and events.
 
-Here the documentation on how to use Google Analytics [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+
+> you still need to inject the script tag of Google Analytics yourself, you can find it at the bottom of the page
 
 ## Installation
 ```js
@@ -47,7 +49,23 @@ import router from './router'
 Vue.use(VueAnalytics, { router, excludeRoutes: ['home'] })
 ```
 
+There is already a [Google Analytics extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) for Chrome that allows you to read what's going on.
+This logger will just tell you what type of tracking is fired and which parameters.
 Enable/disable logs. Default value is false.
 ```js
 Vue.use(VueAnalytics, { debug: true })
+```
+
+### Google Analytics script tag
+Copy/paste this at the bottom of the body tag.
+The plugin will start tracking only if the script is loaded.
+```html
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-XXXX-1', 'auto');
+</script>
 ```

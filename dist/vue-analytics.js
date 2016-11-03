@@ -59,15 +59,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _utils = __webpack_require__(2);
 
 	var config = {
 	  debug: false,
@@ -82,23 +80,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return;
 	  }
 
-	  var context = category + '/' + action + '/' + label;
-
-	  if (typeof value !== 'number') {
-	    (0, _utils.log)('Event ' + context + ', needs an integer as \'value\'.', 'error', config.debug);
-	    return;
+	  if (config.debug) {
+	    console.groupCollapsed('[VueAnalytics] Track event category "' + category + '"');
+	    console.log('category: ' + category);
+	    console.log('action: ' + action);
+	    console.log('label: ' + label);
+	    console.log('value: ' + value);
+	    console.groupEnd();
 	  }
 
-	  (0, _utils.log)('Tracking event ' + context, 'normal', config.debug);
 	  window.ga('send', 'event', category, action, label, value);
 	};
 
-	var page = function page(_page, title, location) {
+	var page = function page(_page) {
+	  var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+	  var location = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
 	  if (typeof window.ga === 'undefined') {
 	    return;
 	  }
 
-	  (0, _utils.log)('Tracking pageview ' + _page, 'normal', config.debug);
+	  if (config.debug) {
+	    console.groupCollapsed('[VueAnalytics] Track page "' + _page + '"');
+	    console.log('page: ' + _page);
+	    console.log('title: ' + title);
+	    console.log('location: ' + location);
+	    console.groupEnd();
+	  }
+
 	  window.ga('send', 'pageview', { page: _page, title: title, location: location });
 	};
 
@@ -127,43 +136,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return;
 	        }
 
-	        Vue.$track.page(path);
+	        Vue.$track.page(path, name, window.location.href);
 	      });
 	    })();
 	  }
 	};
 
 	exports.default = { install: install };
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var log = exports.log = function log(text) {
-	  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'normal';
-	  var debug = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-	  if (!debug) {
-	    return;
-	  }
-
-	  var general = 'padding: 10px 5px; line-height: 30px;';
-	  var normal = general + ' background: #ccc; color: #444444';
-	  var success = general + ' background: #219621; color: #ffffff';
-	  var error = general + ' background: #b9090b; color: #ffffff';
-	  var warning = general + ' background: #f1e05a; color: #333333';
-
-	  var types = { success: success, error: error, normal: normal, warning: warning };
-
-	  console.log('');
-	  console.log('%c [VueAnalytics] ' + text + ' ', types[type]);
-	  console.log('');
-	};
 
 /***/ }
 /******/ ])

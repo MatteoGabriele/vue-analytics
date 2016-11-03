@@ -1,8 +1,6 @@
-import { log } from './utils'
-
 /**
  * Configuration
- * @type {Boolean}
+ * @type {Object}
  */
 let config = {
   debug: false,
@@ -21,14 +19,17 @@ const event = (category, action, label = '', value = 0) => {
     return
   }
 
-  const context = `${category}/${action}/${label}`
-
-  if (typeof value !== 'number') {
-    log(`Event ${context}, needs an integer as 'value'.`, 'error', config.debug)
-    return
+  if (config.debug) {
+    /* eslint-disable */
+    console.groupCollapsed(`[VueAnalytics] Track event category "${category}"`)
+    console.log(`category: ${category}`)
+    console.log(`action: ${action}`)
+    console.log(`label: ${label}`)
+    console.log(`value: ${value}`)
+    console.groupEnd()
+    /* eslint-enable */
   }
 
-  log(`Tracking event ${context}`, 'normal', config.debug)
   window.ga('send', 'event', category, action, label, value)
 }
 
@@ -38,12 +39,21 @@ const event = (category, action, label = '', value = 0) => {
  * @param  {String} title
  * @param  {String} location
  */
-const page = (page, title, location) => {
+const page = (page, title = '', location = '') => {
   if (typeof window.ga === 'undefined') {
     return
   }
 
-  log(`Tracking pageview ${page}`, 'normal', config.debug)
+  if (config.debug) {
+    /* eslint-disable */
+    console.groupCollapsed(`[VueAnalytics] Track page "${page}"`)
+    console.log(`page: ${page}`)
+    console.log(`title: ${title}`)
+    console.log(`location: ${location}`)
+    console.groupEnd()
+    /* eslint-enable */
+  }
+
   window.ga('send', 'pageview', { page, title, location })
 }
 
@@ -68,7 +78,7 @@ const install = (Vue, options = {}) => {
         return
       }
 
-      Vue.$track.page(path)
+      Vue.$track.page(path, name, window.location.href)
     })
   }
 }
