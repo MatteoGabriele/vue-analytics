@@ -1,6 +1,6 @@
 {
   "name": "vue-analytics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Google Analytics plugin for Vue",
   "main": "dist/vue-analytics.js",
   "repository": {
