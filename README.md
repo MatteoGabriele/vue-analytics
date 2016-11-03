@@ -1,8 +1,11 @@
 # vue-analytics
 Vue plugin to handle Google Analytics tracking
 
+## Installation
+```js
+npm install vue-analytics
+```
 ## Usage
-### Installation
 ```js
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
