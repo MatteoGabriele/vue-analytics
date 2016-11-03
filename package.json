@@ -5,7 +5,7 @@
   "main": "dist/vue-analytics.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/MatteoGabriele/vue-analytics"
   },
   "scripts": {
     "dev": "./node_modules/.bin/webpack -w"
@@ -23,7 +23,7 @@
   "author": "Matteo Gabriele <m.gabriele.dev@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/MatteoGabriele/vue-analytics/issues"
   },
   "homepage": "",
   "devDependencies": {
