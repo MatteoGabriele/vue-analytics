@@ -6,7 +6,7 @@ Here the documentation about [pageview](https://developers.google.com/analytics/
 > you still need to inject the script tag of Google Analytics yourself, you can find it at the bottom of the page
 
 ## Installation
-```js
+```shell
 npm install vue-analytics
 ```
 ## Usage
@@ -22,7 +22,7 @@ Vue.use(VueAnalytics)
  * @param  {String} title
  * @param  {String} location
  */
-Vue.$track.page('/home')
+Vue.track.page('/home')
 
 /**
  * Event tracking
@@ -31,9 +31,37 @@ Vue.$track.page('/home')
  * @param  {String} [label='']
  * @param  {Number} [value=0]
  */
-Vue.$track.event('share', 'click', 'facebook')
+Vue.track.event('share', 'click', 'facebook')
 
 ```
+
+### Component usage
+Also possible to use it inside a component scope
+```js
+export default {
+  mounted () {
+      this.$track.event(...)
+    }
+}
+```
+
+### Naming conventions
+For better readability `track` is the name of choice, but to maintain a reference to Google Analytics, also `ga` is passed as an alias so this code will also be valid
+```js
+import Vue from 'vue'
+
+Vue.ga.event('share', 'click', 'facebook')
+
+```
+or
+```js
+export default {
+  mounted () {
+      this.$ga.event(...)
+    }
+}
+```
+
 ### Options
 Is possible to pass the router instance inside the options and it will automatically start to track pages on every route changes.
 ```js
