@@ -68,7 +68,14 @@ const install = (Vue, options = {}) => {
   config.excludes = excludeRoutes || config.excludes
   config.debug = !!debug
 
-  Vue['$track'] = { event, page }
+  /**
+   * Naming conventions
+   * Using "track" for semantic purposes
+   * Using "ga", as an alias, for a more familiar feeling
+   */
+  Vue.track = Vue.ga = { event, page }
+
+  Vue.prototype.$track = Vue.prototype.$ga = { event, page }
 
   if (router) {
     const { excludes } = config
@@ -78,7 +85,7 @@ const install = (Vue, options = {}) => {
         return
       }
 
-      Vue.$track.page(path, name, window.location.href)
+      Vue.track.page(path, name, window.location.href)
     })
   }
 }
