@@ -123,6 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Vue.track = Vue.ga = { event: event, page: page };
 
+	  Vue.$track = { event: event, page: page };
+
 	  Vue.prototype.$track = Vue.prototype.$ga = { event: event, page: page };
 
 	  if (router) {
