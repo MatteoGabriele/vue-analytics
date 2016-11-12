@@ -121,7 +121,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  config.excludes = excludeRoutes || config.excludes;
 	  config.debug = !!debug;
 
-	  Vue['$track'] = { event: event, page: page };
+	  Vue.track = Vue.ga = { event: event, page: page };
+
+	  Vue.prototype.$track = Vue.prototype.$ga = { event: event, page: page };
 
 	  if (router) {
 	    (function () {
@@ -136,7 +138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return;
 	        }
 
-	        Vue.$track.page(path, name, window.location.href);
+	        Vue.track.page(path, name, window.location.href);
 	      });
 	    })();
 	  }
