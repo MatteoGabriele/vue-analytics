@@ -8,7 +8,8 @@
     "url": "https://github.com/MatteoGabriele/vue-analytics"
   },
   "scripts": {
-    "dev": "./node_modules/.bin/webpack -w"
+    "dev": "./node_modules/.bin/webpack -w",
+    "build": "./node_modules/.bin/webpack -p --warnings=false"
   },
   "keywords": [
     "Google",
