@@ -75,6 +75,9 @@ const install = (Vue, options = {}) => {
    */
   Vue.track = Vue.ga = { event, page }
 
+  // compatibility
+  Vue.$track = { event, page }
+
   Vue.prototype.$track = Vue.prototype.$ga = { event, page }
 
   if (router) {
