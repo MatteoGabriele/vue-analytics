@@ -10,6 +10,7 @@ Here the documentation about [pageview](https://developers.google.com/analytics/
 npm install vue-analytics
 ```
 ## Usage
+
 ```js
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
@@ -37,6 +38,7 @@ Vue.track.event('share', 'click', 'facebook')
 
 ### Component usage
 Also possible to use it inside a component scope
+
 ```js
 export default {
   mounted () {
@@ -47,13 +49,16 @@ export default {
 
 ### Naming conventions
 For better readability `track` is the name of choice, but to maintain a reference to Google Analytics, also `ga` is passed as an alias so this code will also be valid
+
 ```js
 import Vue from 'vue'
 
 Vue.ga.event('share', 'click', 'facebook')
 
 ```
+
 or
+
 ```js
 export default {
   mounted () {
@@ -64,6 +69,7 @@ export default {
 
 ### Options
 Is possible to pass the router instance inside the options and it will automatically start to track pages on every route changes.
+
 ```js
 import router from './router'
 
@@ -71,6 +77,7 @@ Vue.use(VueAnalytics, { router })
 ```
 
 Exclude specific path from being tracked by passing an array of route names.
+
 ```js
 import router from './router'
 
@@ -80,6 +87,7 @@ Vue.use(VueAnalytics, { router, excludeRoutes: ['home'] })
 There is already a [Google Analytics extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) for Chrome that allows you to read what's going on.
 This logger will just tell you what type of tracking is fired and which parameters.
 Enable/disable logs. Default value is false.
+
 ```js
 Vue.use(VueAnalytics, { debug: true })
 ```
@@ -87,6 +95,7 @@ Vue.use(VueAnalytics, { debug: true })
 ### Google Analytics script tag
 Copy/paste this at the bottom of the body tag.
 The plugin will start tracking only if the script is loaded.
+
 ```html
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
