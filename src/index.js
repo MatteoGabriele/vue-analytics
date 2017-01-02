@@ -14,7 +14,7 @@ let config = {
  * @param  {String} [label='']
  * @param  {Number} [value=0]
  */
-const event = (category, action, label = '', value = 0) => {
+const event = function (category, action, label = '', value = 0) {
   if (typeof window.ga === 'undefined') {
     return
   }
@@ -39,7 +39,7 @@ const event = (category, action, label = '', value = 0) => {
  * @param  {String} title
  * @param  {String} location
  */
-const page = (page, title = '', location = '') => {
+const page = function (page, title = '', location = '') {
   if (typeof window.ga === 'undefined') {
     return
   }
@@ -57,12 +57,40 @@ const page = (page, title = '', location = '') => {
   window.ga('send', 'pageview', { page, title, location })
 }
 
+export const loadScript = function (id) {
+  return new Promise((resolve, reject) => {
+    let script = document.createElement('script')
+    const prior = document.getElementsByTagName('script')[0]
+
+    script.async = 1
+
+    prior.parentNode.insertBefore(script, prior)
+
+    script.onload = script.onreadystatechange = function (_, isAbort) {
+      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+        script.onload = script.onreadystatechange = null
+        script = undefined
+
+        if (isAbort) {
+          reject({ error: true })
+          return
+        }
+
+        window.ga('create', id, 'auto')
+
+        resolve({ success: true, id })
+      }
+    }
+    script.src = '//www.google-analytics.com/analytics.js'
+  })
+}
+
 /**
  * Vue installer
  * @param  {Vue instance} Vue
  * @param  {Object} [options={}]
  */
-const install = (Vue, options = {}) => {
+const install = function (Vue, options = {}) {
   const { router, debug, excludeRoutes } = options
 
   config.excludes = excludeRoutes || config.excludes
@@ -74,10 +102,6 @@ const install = (Vue, options = {}) => {
    * Using "ga", as an alias, for a more familiar feeling
    */
   Vue.track = Vue.ga = { event, page }
-
-  // compatibility
-  Vue.$track = { event, page }
-
   Vue.prototype.$track = Vue.prototype.$ga = { event, page }
 
   if (router) {
