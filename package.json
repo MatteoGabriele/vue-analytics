@@ -20,7 +20,7 @@
     "vue-analytics",
     "vue"
   ],
-  "main": "dist/storage-helper.js",
+  "main": "dist/vue-analytics.js",
   "files": [
     "dist/vue-analytics.js",
     "dist/vue-analytics.min.js",

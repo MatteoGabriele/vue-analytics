@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v1.2.0
+ * vue-analytics v1.3.2
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
