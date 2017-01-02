@@ -57,6 +57,12 @@ const page = function (page, title = '', location = '') {
   window.ga('send', 'pageview', { page, title, location })
 }
 
+/**
+ * Google Analytics script loader
+ * it auto adds Google Analytics script without needs to modify the HTML page.
+ * @param  {String} id Google Analytics ID
+ * @return {Promise}
+ */
 export const loadScript = function (id) {
   return new Promise((resolve, reject) => {
     let script = document.createElement('script')
