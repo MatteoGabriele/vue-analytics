@@ -52,7 +52,7 @@ It is possible to load the script tag to enable Googla Analytics using the `load
 
 ```js
 import Vue from 'vue'
-import VueAnalytics, { loadScript } from 'vue-anaylics'
+import VueAnalytics, { loadScript } from 'vue-analytics'
 
 Vue.use(VueAnalytics)
 
