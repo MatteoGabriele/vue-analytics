@@ -48,7 +48,7 @@ export default {
 ```
 
 ### Google Analytics script
-It is possible to load the script tag to enable Googla Analytics using the `loadScript` method and passing the provided ID
+It is possible to load the script tag to enable Google Analytics using the `loadScript` method and passing the provided ID
 
 ```js
 import Vue from 'vue'
