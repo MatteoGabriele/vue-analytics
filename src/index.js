@@ -91,6 +91,10 @@ export const loadScript = function (id) {
   })
 }
 
+const isTrackable = (name) => {
+  return !(config.excludes.length && config.excludes.indexOf(name) !== -1)
+}
+
 /**
  * Vue installer
  * @param  {Vue instance} Vue
@@ -110,11 +114,22 @@ const install = function (Vue, options = {}) {
   Vue.track = Vue.ga = { event, page }
   Vue.prototype.$track = Vue.prototype.$ga = { event, page }
 
-  if (router) {
-    const { excludes } = config
+  // I don't like timeouts but apparently the currentRoute is not fully available yet
+  // so need to wait the famous 0 second.
+  // @todo: find a better way
+  setTimeout(() => {
+    const route = router.currentRoute
 
+    if (!isTrackable(route.name)) {
+      return
+    }
+
+    Vue.track.page(route.path, route.name, window.location.href)
+  }, 0)
+
+  if (router) {
     router.afterEach(({ path, name }) => {
-      if (excludes.length && excludes.indexOf(name) !== -1) {
+      if (!isTrackable(name)) {
         return
       }
 
