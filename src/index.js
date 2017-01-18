@@ -4,6 +4,7 @@
  */
 let config = {
   debug: false,
+  auto: true,
   excludes: []
 }
 
@@ -91,7 +92,36 @@ export const loadScript = function (id) {
   })
 }
 
-const isTrackable = (name) => {
+/**
+ * Start tracking
+ * @param  {Vue} Vue
+ * @param  {VueRouter} router
+ */
+const start = function (Vue, router) {
+  return function () {
+    if (router) {
+      setTimeout(() => {
+        const route = router.currentRoute
+
+        if (!isTrackable(route.name)) {
+          return
+        }
+
+        Vue.track.page(route.path, route.name, window.location.href)
+      }, 0)
+
+      router.afterEach(({ path, name }) => {
+        if (!isTrackable(name)) {
+          return
+        }
+
+        Vue.track.page(path, name, window.location.href)
+      })
+    }
+  }
+}
+
+const isTrackable = function (name) {
   return !(config.excludes.length && config.excludes.indexOf(name) !== -1)
 }
 
@@ -101,10 +131,11 @@ const isTrackable = (name) => {
  * @param  {Object} [options={}]
  */
 const install = function (Vue, options = {}) {
-  const { router, debug, excludeRoutes } = options
+  const { router } = options
 
-  config.excludes = excludeRoutes || config.excludes
-  config.debug = !!debug
+  config.excludes = options.excludeRoutes || config.excludes
+  config.debug = !!options.debug
+  config.auto = typeof options.auto !== 'undefined' ? options.auto : config.auto
 
   /**
    * Naming conventions
@@ -113,28 +144,10 @@ const install = function (Vue, options = {}) {
    */
   Vue.track = Vue.ga = { event, page }
   Vue.prototype.$track = Vue.prototype.$ga = { event, page }
+  Vue.startTracking = start(Vue, router)
 
-  // I don't like timeouts but apparently the currentRoute is not fully available yet
-  // so need to wait the famous 0 second.
-  // @todo: find a better way
-  setTimeout(() => {
-    const route = router.currentRoute
-
-    if (!isTrackable(route.name)) {
-      return
-    }
-
-    Vue.track.page(route.path, route.name, window.location.href)
-  }, 0)
-
-  if (router) {
-    router.afterEach(({ path, name }) => {
-      if (!isTrackable(name)) {
-        return
-      }
-
-      Vue.track.page(path, name, window.location.href)
-    })
+  if (config.auto) {
+    Vue.startTracking()
   }
 }
 
