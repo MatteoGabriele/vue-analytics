@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v1.3.2
+ * vue-analytics v1.3.3
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -108,6 +108,10 @@ var loadScript = function loadScript(id) {
   });
 };
 
+var isTrackable = function isTrackable(name) {
+  return !(config.excludes.length && config.excludes.indexOf(name) !== -1);
+};
+
 /**
  * Vue installer
  * @param  {Vue instance} Vue
@@ -131,22 +135,30 @@ var install = function install(Vue) {
   Vue.track = Vue.ga = { event: event, page: page };
   Vue.prototype.$track = Vue.prototype.$ga = { event: event, page: page };
 
+  // I don't like timeouts but apparently the currentRoute is not fully available yet
+  // so need to wait the famous 0 second.
+  // @todo: find a better way
+  setTimeout(function () {
+    var route = router.currentRoute;
+
+    if (!isTrackable(route.name)) {
+      return;
+    }
+
+    Vue.track.page(route.path, route.name, window.location.href);
+  }, 0);
+
   if (router) {
-    (function () {
-      var excludes = config.excludes;
+    router.afterEach(function (_ref) {
+      var path = _ref.path,
+          name = _ref.name;
 
+      if (!isTrackable(name)) {
+        return;
+      }
 
-      router.afterEach(function (_ref) {
-        var path = _ref.path,
-            name = _ref.name;
-
-        if (excludes.length && excludes.indexOf(name) !== -1) {
-          return;
-        }
-
-        Vue.track.page(path, name, window.location.href);
-      });
-    })();
+      Vue.track.page(path, name, window.location.href);
+    });
   }
 };
 
