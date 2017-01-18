@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v1.3.3
+ * vue-analytics v1.3.4
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -15,6 +15,7 @@
  */
 var config = {
   debug: false,
+  auto: true,
   excludes: []
 };
 
@@ -108,6 +109,38 @@ var loadScript = function loadScript(id) {
   });
 };
 
+/**
+ * Start tracking
+ * @param  {Vue} Vue
+ * @param  {VueRouter} router
+ */
+var start = function start(Vue, router) {
+  return function () {
+    if (router) {
+      setTimeout(function () {
+        var route = router.currentRoute;
+
+        if (!isTrackable(route.name)) {
+          return;
+        }
+
+        Vue.track.page(route.path, route.name, window.location.href);
+      }, 0);
+
+      router.afterEach(function (_ref) {
+        var path = _ref.path,
+            name = _ref.name;
+
+        if (!isTrackable(name)) {
+          return;
+        }
+
+        Vue.track.page(path, name, window.location.href);
+      });
+    }
+  };
+};
+
 var isTrackable = function isTrackable(name) {
   return !(config.excludes.length && config.excludes.indexOf(name) !== -1);
 };
@@ -119,13 +152,12 @@ var isTrackable = function isTrackable(name) {
  */
 var install = function install(Vue) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var router = options.router,
-      debug = options.debug,
-      excludeRoutes = options.excludeRoutes;
+  var router = options.router;
 
 
-  config.excludes = excludeRoutes || config.excludes;
-  config.debug = !!debug;
+  config.excludes = options.excludeRoutes || config.excludes;
+  config.debug = !!options.debug;
+  config.auto = typeof options.auto !== 'undefined' ? options.auto : config.auto;
 
   /**
    * Naming conventions
@@ -134,31 +166,10 @@ var install = function install(Vue) {
    */
   Vue.track = Vue.ga = { event: event, page: page };
   Vue.prototype.$track = Vue.prototype.$ga = { event: event, page: page };
+  Vue.startTracking = start(Vue, router);
 
-  // I don't like timeouts but apparently the currentRoute is not fully available yet
-  // so need to wait the famous 0 second.
-  // @todo: find a better way
-  setTimeout(function () {
-    var route = router.currentRoute;
-
-    if (!isTrackable(route.name)) {
-      return;
-    }
-
-    Vue.track.page(route.path, route.name, window.location.href);
-  }, 0);
-
-  if (router) {
-    router.afterEach(function (_ref) {
-      var path = _ref.path,
-          name = _ref.name;
-
-      if (!isTrackable(name)) {
-        return;
-      }
-
-      Vue.track.page(path, name, window.location.href);
-    });
+  if (config.auto) {
+    Vue.startTracking();
   }
 };
 
