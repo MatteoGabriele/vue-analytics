@@ -3,8 +3,6 @@ Vue plugin to handle basic Google Analytics tracking: pages and events.
 
 Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
 
-For 
-
 ## Installation
 ```shell
 npm install vue-analytics
@@ -116,13 +114,13 @@ import router from './router'
 Vue.use(VueAnalytics, { router, auto: false })
 
 loadScript('UA-XXX-N').then((response) => {
-	if (response.error) {
-		// something bad happened!
-		return
-	}
-		
-	// We can start auto-tracking!
-	Vue.startTracking()
+  if (response.error) {
+    // something bad happened!
+    return
+  }
+
+  // We can start auto-tracking!
+  Vue.startTracking()
 })
 ```
 
