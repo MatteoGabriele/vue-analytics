@@ -52,10 +52,11 @@
     "eslint-loader": "^1.6.0",
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
+    "lodash.merge": "^4.6.0",
     "rollup": "^0.39.2",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-uglify": "^1.0.1",
-    "storage-helper": "^1.0.0",
     "webpack": "^1.13.2"
-  }
+  },
+  "dependencies": {}
 }
