@@ -7,6 +7,7 @@ let config = {
   debug: false,
   autoTracking: true,
   id: 'UA-XXX-X',
+  manual: false,
   ignoreRoutes: []
 }
 
