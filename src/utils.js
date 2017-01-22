@@ -1,10 +1,15 @@
 import config from './config'
 
+/**
+ * Whining helper
+ * @param  {String} message
+ */
 export const warn = function (message) {
   /* eslint-disable */
   console.warn(`[VueAnalytics] ${message}`)
   /* eslint-enable */
 }
+
 /**
  * Google Analytics script loader
  * it auto adds Google Analytics script without needs to modify the HTML page.
@@ -17,7 +22,6 @@ export const loadScript = function (id) {
     const prior = document.getElementsByTagName('script')[0]
 
     script.async = 1
-
     prior.parentNode.insertBefore(script, prior)
 
     script.onload = script.onreadystatechange = function (_, isAbort) {
@@ -35,6 +39,7 @@ export const loadScript = function (id) {
         resolve({ success: true, id })
       }
     }
+
     script.src = '//www.google-analytics.com/analytics.js'
   })
 }
