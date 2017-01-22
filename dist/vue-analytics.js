@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v1.4.1
+ * vue-analytics v2.0.0
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -17,7 +17,7 @@ merge = 'default' in merge ? merge['default'] : merge;
 var config = {
   debug: false,
   autoTracking: true,
-  id: 'UA-XXX-X',
+  id: null,
   manual: false,
   ignoreRoutes: []
 };
@@ -91,9 +91,13 @@ var trackEvent = function (category, action) {
  * Whining helper
  * @param  {String} message
  */
-var warn = function warn(message) {
+var warn = function warn() {
+  for (var _len = arguments.length, message = Array(_len), _key = 0; _key < _len; _key++) {
+    message[_key] = arguments[_key];
+  }
+
   /* eslint-disable */
-  console.warn('[VueAnalytics] ' + message);
+  console.warn('[VueAnalytics] ' + message.join(' '));
   /* eslint-enable */
 };
 
@@ -146,12 +150,12 @@ var exists = function exists(name) {
  */
 var autoTracking = function (router) {
   if (!router && config.autoTracking) {
-    warn('You need to pass the VueRouter instance in the plugin options');
+    var url = 'https://github.com/MatteoGabriele/vue-analytics#auto-tracking';
+    warn('auto-tracking doesn\'t work without a router instance.', url);
     return;
   }
 
-  if (!router && !config.autoTracking) {
-    warn('You need to pass the VueRouter instance to the autoTracking method or turn on auto mode');
+  if (!config.autoTracking) {
     return;
   }
 
@@ -184,15 +188,19 @@ var init = function init(router) {
     return;
   }
 
+  if (!config.id) {
+    var url = 'https://github.com/MatteoGabriele/vue-analytics#usage';
+    warn('Please enter a Google Analaytics tracking ID', url);
+    return;
+  }
+
   loadScript(config.id).then(function (response) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script');
       return;
     }
 
-    if (config.autoTracking) {
-      autoTracking(router);
-    }
+    autoTracking(router);
   });
 };
 
@@ -203,19 +211,16 @@ var init = function init(router) {
  */
 var install = function install(Vue) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var router = options.router;
 
-  updateConfig({
-    autoTracking: options.autoTracking,
-    debug: options.debug,
-    id: options.id,
-    manual: options.manual,
-    ignoreRoutes: options.ignoreRoutes
-  });
+
+  delete options.router;
+  updateConfig(options);
+
+  init(router);
 
   Vue.$ga = { trackEvent: trackEvent, trackPage: trackPage };
   Vue.prototype.$ga = { trackEvent: trackEvent, trackPage: trackPage };
-
-  init(options.router);
 };
 
 var index = {
