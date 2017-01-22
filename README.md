@@ -4,24 +4,39 @@ Vue plugin to handle basic Google Analytics tracking: pages and events.
 Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
 
 ## Installation
+
 ```shell
 npm install vue-analytics
 ```
+
 ## Usage
 
 ```js
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
-Vue.use(VueAnalytics)
+// your Google Analytcs domain ID
+const id = 'UA-XXX-X'
 
+Vue.use(VueAnalytics, { id })
+
+```
+
+
+## Tracking methods
+
+It's only possible to track events and pages.
+
+`trackEvent` and `trackPage` methods are available in the Vue instance 
+
+```js
 /**
  * Page tracking
  * @param  {String} page
  * @param  {String} title
  * @param  {String} location
  */
-Vue.track.page('/home')
+Vue.$ga.trackPage('/home')
 
 /**
  * Event tracking
@@ -30,101 +45,116 @@ Vue.track.page('/home')
  * @param  {String} [label='']
  * @param  {Number} [value=0]
  */
-Vue.track.event('share', 'click', 'facebook')
-
+Vue.$ga.trackEvent('share', 'click', 'facebook')
 ```
 
-### Component usage
-
-Also possible to use it inside a component scope
+and also in the component scope itself
 
 ```js
-export default {
-  mounted () {
-      this.$track.event(...)
-    }
+export default {	
+	mounted () {
+		this.$ga.trackPage('/home')
+	},
+	
+	methods: {
+		onShareButtonClick () {
+			this.$ga.trackEvent('share', 'click', 'facebook')
+		}
+	}
 }
 ```
 
-### Routes
+## Auto-tracking
 
-Is possible to pass the router instance inside the options and it will automatically start to track pages on every route changes.
+Auto-tracking is enabled by default and it will load the Google Analytics script and start tracking every route change.
 
-**important**
-To be able to automatically track every page, a route needs to have a `name` property
-
-
-```js
-import router from './router'
-
-Vue.use(VueAnalytics, { router })
-```
-
-Exclude specific path from being tracked by passing an array of route names.
-
-```js
-import router from './router'
-
-Vue.use(VueAnalytics, { router, excludeRoutes: ['home'] })
-```
-
-### Naming conventions
-
-For better readability `track` is the name of choice, but to maintain a reference to Google Analytics, also `ga` is passed as an alias so this code will also be valid
+To be able to work properly the route object needs to have a `name` and a `path`
 
 ```js
 import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
 
-Vue.ga.event('share', 'click', 'facebook')
+const router = new VueRouter({
+	routes: [
+		{
+			name: 'home',
+			path: '/'
+		}
+	]
+})
+
+// your Google Analytcs domain ID
+const id = 'UA-XXX-X'
+
+Vue.use(VueAnalytics, { id, router })
 
 ```
 
-or
+**If you only need to track your routes, this is everything you need to do!**
+
+#### Disable auto-tracking
 
 ```js
-export default {
-  mounted () {
-      this.$ga.event(...)
-    }
-}
-```
-
-### Google Analytics script
-
-It is possible to load the script tag to enable Google Analytics using the `loadScript` method and passing the provided ID
-
-```js
-import Vue from 'vue'
-import VueAnalytics, { loadScript } from 'vue-analytics'
-
-Vue.use(VueAnalytics,)
-
-loadScript('UA-XXX-N')
-```
-
-### Auto-tracking and Google Analytics script
-
-If we choose to automatically track every page, because we need to know when the script file is loaded, we need to turn off auto-tracking and start it when the file is loaded.
-
-```js
-import Vue from 'vue'
-import VueAnalytics, { loadScript } from 'vue-analytics'
-import router from './router'
-
-Vue.use(VueAnalytics, { router, auto: false })
-
-loadScript('UA-XXX-N').then((response) => {
-  if (response.error) {
-    // something bad happened!
-    return
-  }
-
-  // We can start auto-tracking!
-  Vue.startTracking()
+Vue.use(VueAnalytics, {
+	id: 'UA-XXX-X',
+	autoTracking: false
 })
 ```
 
-### Debug
+#### Ignore routes
+
+Auto-tracking tracks every route in you router instance, but if needed, it's possible to pass an array of route names that we don't want to track
+
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
+
+const router = new VueRouter({
+	routes: [
+		{
+			name: 'home',
+			path: '/',
+			component: {
+				template: '<div>home page!</div>'
+			}
+		},
+		{
+			name: 'about',
+			path: '/about',
+			component: {
+				template: '<div>about page!</div>'
+			}
+		}
+	]
+})
+
+Vue.use(VueAnalytics, {
+	id: 'UA-XXX-X',
+	router: router
+	ignoreRoutes: ['home']
+})
+```
+
+## Go manual!
+
+You can disable auto-tracking and the auto-loading of the Google Analytics script just setting `manual` to `true`
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+	manual: true
+})
+```
+
+With this setup, the plugin only exposes the tracking methods, so you need to manually load the script tag from Google, attach the domain ID to the Google snippet and tracking pages manually.
+
+I don't know why you want to do this...but you can!
+
+## Debug
 
 There is already a [Google Analytics extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) for Chrome that allows you to read what's going on.
 This logger will just tell you what type of tracking is fired and which parameters.
@@ -134,7 +164,7 @@ Enable/disable logs. Default value is false.
 Vue.use(VueAnalytics, { debug: true })
 ```
 
-### Issues and features requests
+# Issues and features requests
 Please drop an issue, if you find something that doesn't work, or a feature request at https://github.com/MatteoGabriele/vue-analytics/issues
 
 Follow me on twitter [@matteo_gabriele](https://twitter.com/matteo_gabriele)
