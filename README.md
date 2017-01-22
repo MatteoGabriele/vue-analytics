@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/vue-analytics.svg)](https://badge.fury.io/js/vue-analytics) [![npm](https://img.shields.io/npm/dt/vue-analytics.svg)](https://www.npmjs.com/package/vue-analytics)
+
+
 # vue-analytics
 Vue plugin to handle basic Google Analytics tracking: pages and events.
 
