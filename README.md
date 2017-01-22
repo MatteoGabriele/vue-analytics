@@ -78,7 +78,17 @@ const router = new VueRouter({
 	routes: [
 		{
 			name: 'home',
-			path: '/'
+			path: '/',
+			component: {
+				template: '<div>home page!</div>'
+			}
+		},
+		{
+			name: 'about',
+			path: '/about',
+			component: {
+				template: '<div>about page!</div>'
+			}
 		}
 	]
 })
@@ -107,29 +117,6 @@ Auto-tracking tracks every route in you router instance, but if needed, it's pos
 
 
 ```js
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueAnalytics from 'vue-analytics'
-
-const router = new VueRouter({
-	routes: [
-		{
-			name: 'home',
-			path: '/',
-			component: {
-				template: '<div>home page!</div>'
-			}
-		},
-		{
-			name: 'about',
-			path: '/about',
-			component: {
-				template: '<div>about page!</div>'
-			}
-		}
-	]
-})
-
 Vue.use(VueAnalytics, {
 	id: 'UA-XXX-X',
 	router: router
@@ -142,9 +129,6 @@ Vue.use(VueAnalytics, {
 You can disable auto-tracking and the auto-loading of the Google Analytics script just setting `manual` to `true`
 
 ```js
-import Vue from 'vue'
-import VueAnalytics from 'vue-analytics'
-
 Vue.use(VueAnalytics, {
 	manual: true
 })
@@ -161,7 +145,9 @@ This logger will just tell you what type of tracking is fired and which paramete
 Enable/disable logs. Default value is false.
 
 ```js
-Vue.use(VueAnalytics, { debug: true })
+Vue.use(VueAnalytics, { 
+	debug: true 
+})
 ```
 
 # Issues and features requests
