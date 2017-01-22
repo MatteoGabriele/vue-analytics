@@ -6,7 +6,7 @@ import merge from 'lodash.merge'
 let config = {
   debug: false,
   autoTracking: true,
-  id: 'UA-XXX-X',
+  id: null,
   manual: false,
   ignoreRoutes: []
 }

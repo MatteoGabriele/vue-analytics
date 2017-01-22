@@ -13,15 +13,19 @@ const init = function (router) {
     return
   }
 
+  if (!config.id) {
+    const url = 'https://github.com/MatteoGabriele/vue-analytics#usage'
+    warn('Please enter a Google Analaytics tracking ID', url)
+    return
+  }
+
   loadScript(config.id).then(function (response) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script')
       return
     }
 
-    if (config.autoTracking) {
-      autoTracking(router)
-    }
+    autoTracking(router)
   })
 }
 
@@ -31,18 +35,15 @@ const init = function (router) {
  * @param  {Object} [options={}]
  */
 const install = function (Vue, options = {}) {
-  updateConfig({
-    autoTracking: options.autoTracking,
-    debug: options.debug,
-    id: options.id,
-    manual: options.manual,
-    ignoreRoutes: options.ignoreRoutes
-  })
+  const { router } = options
+
+  delete options.router
+  updateConfig(options)
+
+  init(router)
 
   Vue.$ga = { trackEvent, trackPage }
   Vue.prototype.$ga = { trackEvent, trackPage }
-
-  init(options.router)
 }
 
 export default {

@@ -8,12 +8,12 @@ import trackPage from './page'
  */
 export default function (router) {
   if (!router && config.autoTracking) {
-    warn('You need to pass the VueRouter instance in the plugin options')
+    const url = 'https://github.com/MatteoGabriele/vue-analytics#auto-tracking'
+    warn('auto-tracking doesn\'t work without a router instance.', url)
     return
   }
 
-  if (!router && !config.autoTracking) {
-    warn('You need to pass the VueRouter instance to the autoTracking method or turn on auto mode')
+  if (!config.autoTracking) {
     return
   }
 

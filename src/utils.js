@@ -4,9 +4,9 @@ import config from './config'
  * Whining helper
  * @param  {String} message
  */
-export const warn = function (message) {
+export const warn = function (...message) {
   /* eslint-disable */
-  console.warn(`[VueAnalytics] ${message}`)
+  console.warn(`[VueAnalytics] ${message.join(' ')}`)
   /* eslint-enable */
 }
 
