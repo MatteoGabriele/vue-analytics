@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.0.0
+ * vue-analytics v2.0.3
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -149,13 +149,13 @@ var exists = function exists(name) {
  * @param  {VueRouter} router
  */
 var autoTracking = function (router) {
-  if (!router && config.autoTracking) {
+  if (config.manual && !router && config.autoTracking) {
     var url = 'https://github.com/MatteoGabriele/vue-analytics#auto-tracking';
     warn('auto-tracking doesn\'t work without a router instance.', url);
     return;
   }
 
-  if (!config.autoTracking) {
+  if (!config.autoTracking || !router) {
     return;
   }
 
