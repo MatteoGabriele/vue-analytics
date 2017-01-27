@@ -67,6 +67,16 @@ export default {
 }
 ```
 
+## Google Analytics script loaded callback
+
+```js
+Vue.use(VueAnalytics, {
+  onAnalyticsReady () {
+    // here Google Analaytics is ready to track!
+  }
+})
+```
+
 ## Auto-tracking
 
 Auto-tracking is enabled by default and it will load the Google Analytics script and start tracking every route change.
@@ -166,12 +176,12 @@ Vue.use(VueAnalytics)
 const id = 'UA-XXX-X'
 
 loadScript(id).then((response) => {
-	if (response.error) {
-		// couldn't load the Google script
-		return
-	}
-	
-	// all fine!
+  if (response.error) {
+    // couldn't load the Google script
+    return
+  }
+
+  // all fine!
 })
 ```
 
@@ -210,11 +220,11 @@ Vue.use(VueAnalytics)
 const id = 'UA-XXX-X'
 
 loadScript(id).then((response) => {
-	if (response.error) {
-		return
-	}
-	
-	autoTracking(router)
+  if (response.error) {
+    return
+  }
+
+  autoTracking(router)
 })
 ```
 
