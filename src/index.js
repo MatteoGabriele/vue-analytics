@@ -8,7 +8,7 @@ import { loadScript, warn } from './utils'
  * With default configurationsm it loads Google Analytics script and start autoTracking
  * @param  {VueRouter} router
  */
-const init = function (router) {
+const init = function (router, callback) {
   if (config.manual) {
     return
   }
@@ -23,6 +23,10 @@ const init = function (router) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script')
       return
+    }
+
+    if (callback && typeof callback === 'function') {
+      callback()
     }
 
     autoTracking(router)
@@ -40,7 +44,7 @@ const install = function (Vue, options = {}) {
   delete options.router
   updateConfig(options)
 
-  init(router)
+  init(router, options.onAnalyticsReady)
 
   Vue.$ga = { trackEvent, trackPage }
   Vue.prototype.$ga = { trackEvent, trackPage }
