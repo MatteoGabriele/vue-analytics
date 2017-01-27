@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.0.3
+ * vue-analytics v2.1.0
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -183,7 +183,7 @@ var autoTracking = function (router) {
  * With default configurationsm it loads Google Analytics script and start autoTracking
  * @param  {VueRouter} router
  */
-var init = function init(router) {
+var init = function init(router, callback) {
   if (config.manual) {
     return;
   }
@@ -198,6 +198,10 @@ var init = function init(router) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script');
       return;
+    }
+
+    if (callback && typeof callback === 'function') {
+      callback();
     }
 
     autoTracking(router);
@@ -217,7 +221,7 @@ var install = function install(Vue) {
   delete options.router;
   updateConfig(options);
 
-  init(router);
+  init(router, options.onAnalyticsReady);
 
   Vue.$ga = { trackEvent: trackEvent, trackPage: trackPage };
   Vue.prototype.$ga = { trackEvent: trackEvent, trackPage: trackPage };
