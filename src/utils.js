@@ -40,7 +40,7 @@ export const loadScript = function (id) {
       }
     }
 
-    script.src = '//www.google-analytics.com/analytics.js'
+    script.src = 'https://www.google-analytics.com/analytics.js'
   })
 }
 
