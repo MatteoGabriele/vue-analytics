@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.1.0
+ * vue-analytics v2.1.1
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -131,7 +131,7 @@ var loadScript = function loadScript(id) {
       }
     };
 
-    script.src = '//www.google-analytics.com/analytics.js';
+    script.src = 'https://www.google-analytics.com/analytics.js';
   });
 };
 
