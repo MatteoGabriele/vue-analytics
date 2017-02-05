@@ -140,6 +140,46 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+## Set
+
+Sets a single field and value pair or a group of field/value pairs on a tracker object.
+
+Read more about Googla analytics [set](https://developers.google.com/analytics/devguides/collection/analyticsjs/command-queue-reference#set) method
+
+```js
+Vue.$ga.set(fieldName, fieldValue)
+
+// also possible to pass an object literal
+Vue.$ga.set({ fieldName, fieldName })
+
+```
+
+or in your component scope
+
+```js
+export default {
+	methods: {
+		onClick () {
+			this.$ga.set(fieldName, fieldValue)
+		}
+	}
+}
+```
+
+## User Explorer report
+
+Add the `userId` on first load just passing it in the options object
+
+```js
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  userId: 'xxx'
+})
+```
+
+**it is also possible to set the `userId` in runtime using the `set` method**
+
+
 ## Debug
 
 There is already a [Google Analytics extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) for Chrome that allows you to read what's going on.
