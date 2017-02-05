@@ -14,9 +14,10 @@ export const warn = function (...message) {
  * Google Analytics script loader
  * it auto adds Google Analytics script without needs to modify the HTML page.
  * @param  {String} id Google Analytics ID
+ * @param  {Object} options
  * @return {Promise}
  */
-export const loadScript = function (id) {
+export const loadScript = function (id, options = {}) {
   return new Promise((resolve, reject) => {
     let script = document.createElement('script')
     const prior = document.getElementsByTagName('script')[0]
@@ -34,7 +35,8 @@ export const loadScript = function (id) {
           return
         }
 
-        window.ga('create', id, 'auto')
+        window.ga('create', id, 'auto', options)
+        window.ga('send', 'pageview')
 
         resolve({ success: true, id })
       }

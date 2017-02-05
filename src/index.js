@@ -2,6 +2,7 @@ import config, { updateConfig } from './config'
 import trackPage from './track/page'
 import trackEvent from './track/event'
 import autoTracking from './track/autoTracking'
+import set from './set'
 import { loadScript, warn } from './utils'
 
 /**
@@ -19,7 +20,13 @@ const init = function (router, callback) {
     return
   }
 
-  loadScript(config.id).then(function (response) {
+  let options = {}
+
+  if (config.userId) {
+    options.userId = config.userId
+  }
+
+  loadScript(config.id, options).then(function (response) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script')
       return
@@ -46,8 +53,9 @@ const install = function (Vue, options = {}) {
 
   init(router, options.onAnalyticsReady)
 
-  Vue.$ga = { trackEvent, trackPage }
-  Vue.prototype.$ga = { trackEvent, trackPage }
+  const features = { trackEvent, trackPage, set }
+  Vue.$ga = features
+  Vue.prototype.$ga = features
 }
 
 export default {
