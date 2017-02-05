@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.1.1
+ * vue-analytics v2.2.0
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -18,6 +18,7 @@ var config = {
   debug: false,
   autoTracking: true,
   id: null,
+  userId: null,
   manual: false,
   ignoreRoutes: []
 };
@@ -105,9 +106,12 @@ var warn = function warn() {
  * Google Analytics script loader
  * it auto adds Google Analytics script without needs to modify the HTML page.
  * @param  {String} id Google Analytics ID
+ * @param  {Object} options
  * @return {Promise}
  */
 var loadScript = function loadScript(id) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   return new Promise(function (resolve, reject) {
     var script = document.createElement('script');
     var prior = document.getElementsByTagName('script')[0];
@@ -125,7 +129,8 @@ var loadScript = function loadScript(id) {
           return;
         }
 
-        window.ga('create', id, 'auto');
+        window.ga('create', id, 'auto', options);
+        window.ga('send', 'pageview');
 
         resolve({ success: true, id: id });
       }
@@ -179,6 +184,59 @@ var autoTracking = function (router) {
   });
 };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+var set$$1 = function () {
+  if (typeof window.ga === 'undefined') {
+    return;
+  }
+
+  for (var _len = arguments.length, data = Array(_len), _key = 0; _key < _len; _key++) {
+    data[_key] = arguments[_key];
+  }
+
+  if (!data.length) {
+    return;
+  }
+
+  if (_typeof(data[0]) === 'object' && data[0].constructor === Object) {
+    /* eslint-disable */
+    console.groupCollapsed('[VueAnalytics] Set');
+
+    var params = data[0];
+    for (var key in params) {
+      console.log(key + ': ' + params[key]);
+    }
+
+    console.groupEnd();
+    /* eslint-enable */
+
+    // Use the ga.set with an object literal
+    window.ga('set', params);
+
+    return;
+  }
+
+  if (data.length < 2 || typeof data[0] !== 'string' && typeof data[1] !== 'string') {
+    warn('$ga.set needs a field name and a field value, or you can pass an object literal');
+    return;
+  }
+
+  /* eslint-disable */
+  console.groupCollapsed('[VueAnalytics] Set');
+  console.log('Field name: ' + data[0]);
+  console.log('Field value: ' + data[1]);
+  console.groupEnd();
+  /* eslint-enable */
+
+  // Use ga.set with field name and field value
+  window.ga('set', data[0], data[1]);
+};
+
 /**
  * With default configurationsm it loads Google Analytics script and start autoTracking
  * @param  {VueRouter} router
@@ -194,7 +252,13 @@ var init = function init(router, callback) {
     return;
   }
 
-  loadScript(config.id).then(function (response) {
+  var options = {};
+
+  if (config.userId) {
+    options.userId = config.userId;
+  }
+
+  loadScript(config.id, options).then(function (response) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script');
       return;
@@ -223,8 +287,9 @@ var install = function install(Vue) {
 
   init(router, options.onAnalyticsReady);
 
-  Vue.$ga = { trackEvent: trackEvent, trackPage: trackPage };
-  Vue.prototype.$ga = { trackEvent: trackEvent, trackPage: trackPage };
+  var features = { trackEvent: trackEvent, trackPage: trackPage, set: set$$1 };
+  Vue.$ga = features;
+  Vue.prototype.$ga = features;
 };
 
 var index = {
