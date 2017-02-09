@@ -1,10 +1,15 @@
 import merge from 'lodash.merge'
+import { warn } from './utils'
 
 /**
  * Default configuration
  */
 let config = {
-  debug: false,
+  debug: {
+    enabled: false,
+    trace: false,
+    sendHitTask: true
+  },
   autoTracking: true,
   id: null,
   userId: null,
@@ -18,6 +23,12 @@ let config = {
  * @return {Object}
  */
 export const updateConfig = function (params) {
+  // Until v3.0.0 check for `debug` old setup
+  if (typeof params.debug === 'boolean') {
+    const url = 'https://github.com/MatteoGabriele/vue-analytics#debug'
+    warn('Please use the new debug setup', url)
+  }
+
   return merge(config, params)
 }
 

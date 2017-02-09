@@ -1,44 +1,10 @@
-import config, { updateConfig } from './config'
+import { updateConfig } from './config'
+import loadScript from './loadScript'
 import trackPage from './track/page'
 import trackEvent from './track/event'
 import autoTracking from './track/autoTracking'
 import set from './set'
-import { loadScript, warn } from './utils'
-
-/**
- * With default configurationsm it loads Google Analytics script and start autoTracking
- * @param  {VueRouter} router
- */
-const init = function (router, callback) {
-  if (config.manual) {
-    return
-  }
-
-  if (!config.id) {
-    const url = 'https://github.com/MatteoGabriele/vue-analytics#usage'
-    warn('Please enter a Google Analaytics tracking ID', url)
-    return
-  }
-
-  let options = {}
-
-  if (config.userId) {
-    options.userId = config.userId
-  }
-
-  loadScript(config.id, options).then(function (response) {
-    if (response.error) {
-      warn('Ops! Could\'t load the Google Analytics script')
-      return
-    }
-
-    if (callback && typeof callback === 'function') {
-      callback()
-    }
-
-    autoTracking(router)
-  })
-}
+import init from './init'
 
 /**
  * Vue installer
