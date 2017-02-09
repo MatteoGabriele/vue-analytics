@@ -182,13 +182,20 @@ Vue.use(VueAnalytics, {
 
 ## Debug
 
-There is already a [Google Analytics extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) for Chrome that allows you to read what's going on.
-This logger will just tell you what type of tracking is fired and which parameters.
-Enable/disable logs. Default value is false.
+Implements Google Analaytics debug library.
+
+You can find documentation about `trace` and `sendHitTask` [here](https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging)
+
+**Please remember that it is for debug only. The file size of analytics_debug.js is way larger than analytics.js**
+
 
 ```js
 Vue.use(VueAnalytics, {
-  debug: true
+  debug: {
+  	enable: true,
+  	trace: false,
+  	sendHitTask: true
+  }
 })
 ```
 
