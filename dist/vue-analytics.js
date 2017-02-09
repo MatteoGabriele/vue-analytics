@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.2.0
+ * vue-analytics v2.3.0
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -12,10 +12,37 @@
 merge = 'default' in merge ? merge['default'] : merge;
 
 /**
+ * Whining helper
+ * @param  {String} message
+ */
+var warn = function warn() {
+  for (var _len = arguments.length, message = Array(_len), _key = 0; _key < _len; _key++) {
+    message[_key] = arguments[_key];
+  }
+
+  /* eslint-disable */
+  console.warn('[VueAnalytics] ' + message.join(' '));
+  /* eslint-enable */
+};
+
+/**
+ * Returns if a string exists in the array of routes
+ * @param  {String} name
+ * @return {Boolean}
+ */
+var exists = function exists(name) {
+  return !!(config.ignoreRoutes.length && config.ignoreRoutes.indexOf(name) !== -1);
+};
+
+/**
  * Default configuration
  */
 var config = {
-  debug: false,
+  debug: {
+    enabled: false,
+    trace: false,
+    sendHitTask: true
+  },
   autoTracking: true,
   id: null,
   userId: null,
@@ -29,7 +56,96 @@ var config = {
  * @return {Object}
  */
 var updateConfig = function updateConfig(params) {
+  // Until v3.0.0 check for `debug` old setup
+  if (typeof params.debug === 'boolean') {
+    var url = 'https://github.com/MatteoGabriele/vue-analytics#debug';
+    warn('Please use the new debug setup', url);
+  }
+
   return merge(config, params);
+};
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+var set$$1 = function () {
+  if (typeof window.ga === 'undefined') {
+    return;
+  }
+
+  for (var _len = arguments.length, data = Array(_len), _key = 0; _key < _len; _key++) {
+    data[_key] = arguments[_key];
+  }
+
+  if (!data.length) {
+    return;
+  }
+
+  if (_typeof(data[0]) === 'object' && data[0].constructor === Object) {
+    // Use the ga.set with an object literal
+    window.ga('set', data[0]);
+
+    return;
+  }
+
+  if (data.length < 2 || typeof data[0] !== 'string' && typeof data[1] !== 'string') {
+    warn('$ga.set needs a field name and a field value, or you can pass an object literal');
+    return;
+  }
+
+  // Use ga.set with field name and field value
+  window.ga('set', data[0], data[1]);
+};
+
+var loadScript = function () {
+  return new Promise(function (resolve, reject) {
+    var script = document.createElement('script');
+    var options = config.userId || {};
+    var debugSource = config.debug.enabled ? '_debug' : '';
+    var source = 'https://www.google-analytics.com/analytics' + debugSource + '.js';
+    var prior = document.getElementsByTagName('script')[0];
+
+    script.async = 1;
+    prior.parentNode.insertBefore(script, prior);
+
+    script.onload = script.onreadystatechange = function (_, isAbort) {
+      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+        script.onload = script.onreadystatechange = null;
+        script = undefined;
+
+        if (isAbort) {
+          return reject({
+            error: true,
+            id: config.id
+          });
+        }
+
+        if (config.debug.enabled) {
+          window.ga_debug = {
+            trace: config.debug.trace
+          };
+        }
+
+        window.ga('create', config.id, 'auto', options);
+
+        if (!config.debug.sendHitTask) {
+          set$$1('sendHitTask', null);
+        }
+
+        window.ga('send', 'pageview');
+
+        resolve({
+          success: true,
+          id: config.id
+        });
+      }
+    };
+
+    script.src = source;
+  });
 };
 
 /**
@@ -44,16 +160,6 @@ var trackPage = function (page) {
 
   if (typeof window.ga === 'undefined') {
     return;
-  }
-
-  if (config.debug) {
-    /* eslint-disable */
-    console.groupCollapsed('[VueAnalytics] Track page "' + page + '"');
-    console.log('page: ' + page);
-    console.log('title: ' + title);
-    console.log('location: ' + location);
-    console.groupEnd();
-    /* eslint-enable */
   }
 
   window.ga('send', 'pageview', { page: page, title: title, location: location });
@@ -74,79 +180,7 @@ var trackEvent = function (category, action) {
     return;
   }
 
-  if (config.debug) {
-    /* eslint-disable */
-    console.groupCollapsed('[VueAnalytics] Track event category "' + category + '"');
-    console.log('category: ' + category);
-    console.log('action: ' + action);
-    console.log('label: ' + label);
-    console.log('value: ' + value);
-    console.groupEnd();
-    /* eslint-enable */
-  }
-
   window.ga('send', 'event', category, action, label, value);
-};
-
-/**
- * Whining helper
- * @param  {String} message
- */
-var warn = function warn() {
-  for (var _len = arguments.length, message = Array(_len), _key = 0; _key < _len; _key++) {
-    message[_key] = arguments[_key];
-  }
-
-  /* eslint-disable */
-  console.warn('[VueAnalytics] ' + message.join(' '));
-  /* eslint-enable */
-};
-
-/**
- * Google Analytics script loader
- * it auto adds Google Analytics script without needs to modify the HTML page.
- * @param  {String} id Google Analytics ID
- * @param  {Object} options
- * @return {Promise}
- */
-var loadScript = function loadScript(id) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  return new Promise(function (resolve, reject) {
-    var script = document.createElement('script');
-    var prior = document.getElementsByTagName('script')[0];
-
-    script.async = 1;
-    prior.parentNode.insertBefore(script, prior);
-
-    script.onload = script.onreadystatechange = function (_, isAbort) {
-      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
-        script.onload = script.onreadystatechange = null;
-        script = undefined;
-
-        if (isAbort) {
-          reject({ error: true });
-          return;
-        }
-
-        window.ga('create', id, 'auto', options);
-        window.ga('send', 'pageview');
-
-        resolve({ success: true, id: id });
-      }
-    };
-
-    script.src = 'https://www.google-analytics.com/analytics.js';
-  });
-};
-
-/**
- * Returns if a string exists in the array of routes
- * @param  {String} name
- * @return {Boolean}
- */
-var exists = function exists(name) {
-  return !!(config.ignoreRoutes.length && config.ignoreRoutes.indexOf(name) !== -1);
 };
 
 /**
@@ -184,64 +218,7 @@ var autoTracking = function (router) {
   });
 };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-var set$$1 = function () {
-  if (typeof window.ga === 'undefined') {
-    return;
-  }
-
-  for (var _len = arguments.length, data = Array(_len), _key = 0; _key < _len; _key++) {
-    data[_key] = arguments[_key];
-  }
-
-  if (!data.length) {
-    return;
-  }
-
-  if (_typeof(data[0]) === 'object' && data[0].constructor === Object) {
-    /* eslint-disable */
-    console.groupCollapsed('[VueAnalytics] Set');
-
-    var params = data[0];
-    for (var key in params) {
-      console.log(key + ': ' + params[key]);
-    }
-
-    console.groupEnd();
-    /* eslint-enable */
-
-    // Use the ga.set with an object literal
-    window.ga('set', params);
-
-    return;
-  }
-
-  if (data.length < 2 || typeof data[0] !== 'string' && typeof data[1] !== 'string') {
-    warn('$ga.set needs a field name and a field value, or you can pass an object literal');
-    return;
-  }
-
-  /* eslint-disable */
-  console.groupCollapsed('[VueAnalytics] Set');
-  console.log('Field name: ' + data[0]);
-  console.log('Field value: ' + data[1]);
-  console.groupEnd();
-  /* eslint-enable */
-
-  // Use ga.set with field name and field value
-  window.ga('set', data[0], data[1]);
-};
-
-/**
- * With default configurationsm it loads Google Analytics script and start autoTracking
- * @param  {VueRouter} router
- */
-var init = function init(router, callback) {
+var init = function (router, callback) {
   if (config.manual) {
     return;
   }
@@ -252,13 +229,7 @@ var init = function init(router, callback) {
     return;
   }
 
-  var options = {};
-
-  if (config.userId) {
-    options.userId = config.userId;
-  }
-
-  loadScript(config.id, options).then(function (response) {
+  loadScript().then(function (response) {
     if (response.error) {
       warn('Ops! Could\'t load the Google Analytics script');
       return;
