@@ -192,7 +192,7 @@ You can find documentation about `trace` and `sendHitTask` [here](https://develo
 ```js
 Vue.use(VueAnalytics, {
   debug: {
-  	enable: true,
+  	enabled: true,
   	trace: false,
   	sendHitTask: true
   }
