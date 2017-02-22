@@ -1,4 +1,3 @@
-import merge from 'lodash.merge'
 import { warn } from './utils'
 
 /**
@@ -15,6 +14,20 @@ let config = {
   userId: null,
   manual: false,
   ignoreRoutes: []
+}
+
+/**
+ * Merges two objects
+ * @param  {Object} obj
+ * @param  {Object} src
+ * @return {Object}
+ */
+const merge = function (obj, src) {
+  Object.keys(src).forEach(function (key) {
+    obj[key] = src[key]
+  })
+
+  return obj
 }
 
 /**

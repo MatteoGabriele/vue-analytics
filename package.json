@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-analytics/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/MatteoGabriele/vue-analytics#readme",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
@@ -57,7 +57,5 @@
     "rollup-plugin-uglify": "^1.0.1",
     "webpack": "^1.13.2"
   },
-  "dependencies": {
-    "lodash.merge": "^4.6.0"
-  }
+  "dependencies": {}
 }
