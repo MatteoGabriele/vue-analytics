@@ -1,15 +1,13 @@
 /*!
- * vue-analytics v2.3.0
+ * vue-analytics v2.3.1
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('lodash.merge')) :
-  typeof define === 'function' && define.amd ? define(['lodash.merge'], factory) :
-  (global.VueAnalytics = factory(global.merge));
-}(this, (function (merge) { 'use strict';
-
-merge = 'default' in merge ? merge['default'] : merge;
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.VueAnalytics = factory());
+}(this, (function () { 'use strict';
 
 /**
  * Whining helper
@@ -48,6 +46,20 @@ var config = {
   userId: null,
   manual: false,
   ignoreRoutes: []
+};
+
+/**
+ * Merges two objects
+ * @param  {Object} obj
+ * @param  {Object} src
+ * @return {Object}
+ */
+var merge = function merge(obj, src) {
+  Object.keys(src).forEach(function (key) {
+    obj[key] = src[key];
+  });
+
+  return obj;
 };
 
 /**
