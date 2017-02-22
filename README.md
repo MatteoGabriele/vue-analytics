@@ -2,9 +2,7 @@
 
 
 # vue-analytics
-Vue plugin to handle basic Google Analytics tracking: pages and events.
-
-Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+Vue plugin for Google Analytics.
 
 ## Installation
 
@@ -66,6 +64,9 @@ export default {
   }
 }
 ```
+
+Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+
 
 ## Google Analytics script loaded callback
 
@@ -192,7 +193,7 @@ You can find documentation about `trace` and `sendHitTask` [here](https://develo
 ```js
 Vue.use(VueAnalytics, {
   debug: {
-  	enable: true,
+  	enabled: true,
   	trace: false,
   	sendHitTask: true
   }
