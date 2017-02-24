@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.3.1
+ * vue-analytics v2.3.2
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -32,6 +32,12 @@ var exists = function exists(name) {
   return !!(config.ignoreRoutes.length && config.ignoreRoutes.indexOf(name) !== -1);
 };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
 /**
  * Default configuration
  */
@@ -56,6 +62,11 @@ var config = {
  */
 var merge = function merge(obj, src) {
   Object.keys(src).forEach(function (key) {
+    if (obj[key] && _typeof(obj[key]) === 'object') {
+      merge(obj[key], src[key]);
+      return;
+    }
+
     obj[key] = src[key];
   });
 
@@ -77,13 +88,7 @@ var updateConfig = function updateConfig(params) {
   return merge(config, params);
 };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-var set$$1 = function () {
+var set$1 = function () {
   if (typeof window.ga === 'undefined') {
     return;
   }
@@ -144,7 +149,7 @@ var loadScript = function () {
         window.ga('create', config.id, 'auto', options);
 
         if (!config.debug.sendHitTask) {
-          set$$1('sendHitTask', null);
+          set$1('sendHitTask', null);
         }
 
         window.ga('send', 'pageview');
@@ -270,7 +275,7 @@ var install = function install(Vue) {
 
   init(router, options.onAnalyticsReady);
 
-  var features = { trackEvent: trackEvent, trackPage: trackPage, set: set$$1 };
+  var features = { trackEvent: trackEvent, trackPage: trackPage, set: set$1 };
   Vue.$ga = features;
   Vue.prototype.$ga = features;
 };
