@@ -28,7 +28,7 @@ Vue.use(VueAnalytics, { id })
 
 It's only possible to track events and pages.
 
-`trackEvent` and `trackPage` methods are available in the Vue instance
+`trackEvent`, `trackPage` and `trackTime` methods are available in the Vue instance
 
 ```js
 /**
@@ -47,6 +47,15 @@ Vue.$ga.trackPage('/home')
  * @param  {Number} [value=0]
  */
 Vue.$ga.trackEvent('share', 'click', 'facebook')
+
+/**
+ * Time tracking
+ * @param  {String} category
+ * @param  {String} variable
+ * @param  {Number} value
+ * @param  {String} [label='']
+ */
+Vue.$ga.trackTime('JS Dependencies', 'load', 3549)
 ```
 
 and also in the component scope itself
@@ -65,7 +74,7 @@ export default {
 }
 ```
 
-Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages) and [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages), [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) and [timings](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings)
 
 
 ## Google Analytics script loaded callback
