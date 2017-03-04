@@ -2,6 +2,7 @@ import { updateConfig } from './config'
 import loadScript from './loadScript'
 import trackPage from './track/page'
 import trackEvent from './track/event'
+import trackTime from './track/time'
 import autoTracking from './track/autoTracking'
 import set from './set'
 import init from './init'
@@ -19,9 +20,9 @@ const install = function (Vue, options = {}) {
 
   init(router, options.onAnalyticsReady)
 
-  const features = { trackEvent, trackPage, set }
-  Vue.$ga = features
-  Vue.prototype.$ga = features
+  const features = { trackEvent, trackPage, trackTime, set }
+  
+  Vue.prototype.$ga = Vue.$ga = features
 }
 
 export default {
