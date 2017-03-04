@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v2.3.2
+ * vue-analytics v2.4.0
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -201,6 +201,23 @@ var trackEvent = function (category, action) {
 };
 
 /**
+ * Time tracking
+ * @param  {String} category
+ * @param  {String} variable
+ * @param  {Number} value
+ * @param  {String} [label='']
+ */
+var trackTime = function (category, variable, value) {
+  var label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+  if (typeof window.ga === 'undefined') {
+    return;
+  }
+
+  window.ga('send', 'timing', category, variable, value, label);
+};
+
+/**
  * Enable route autoTracking page
  * @param  {VueRouter} router
  */
@@ -275,9 +292,9 @@ var install = function install(Vue) {
 
   init(router, options.onAnalyticsReady);
 
-  var features = { trackEvent: trackEvent, trackPage: trackPage, set: set$1 };
-  Vue.$ga = features;
-  Vue.prototype.$ga = features;
+  var features = { trackEvent: trackEvent, trackPage: trackPage, trackTime: trackTime, set: set$1 };
+
+  Vue.prototype.$ga = Vue.$ga = features;
 };
 
 var index = {
