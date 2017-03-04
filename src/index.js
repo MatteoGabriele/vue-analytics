@@ -21,7 +21,7 @@ const install = function (Vue, options = {}) {
   init(router, options.onAnalyticsReady)
 
   const features = { trackEvent, trackPage, trackTime, set }
-  
+
   Vue.prototype.$ga = Vue.$ga = features
 }
 

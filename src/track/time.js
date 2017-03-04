@@ -6,9 +6,9 @@
  * @param  {String} [label='']
  */
 export default function (category, variable, value, label = '') {
-    if (typeof window.ga === 'undefined') {
-        return
-    }
+  if (typeof window.ga === 'undefined') {
+    return
+  }
 
-    window.ga('send', 'timing', category, variable, value, label)
+  window.ga('send', 'timing', category, variable, value, label)
 }
