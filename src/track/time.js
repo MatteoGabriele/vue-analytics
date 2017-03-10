@@ -1,3 +1,6 @@
+import config from '../config'
+import { getName } from '../utils'
+
 /**
  * Time tracking
  * @param  {String} category
@@ -10,5 +13,7 @@ export default function (category, variable, value, label = '') {
     return
   }
 
-  window.ga('send', 'timing', category, variable, value, label)
+  [].concat(config.id).forEach(function (id) {
+    window.ga(`${getName(id)}.send`, 'timing', category, variable, value, label)
+  })
 }

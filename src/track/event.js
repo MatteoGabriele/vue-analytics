@@ -1,3 +1,6 @@
+import { getName } from '../utils'
+import config from '../config'
+
 /**
  * Event tracking
  * @param  {String} category
@@ -10,5 +13,7 @@ export default function (category, action, label = '', value = 0) {
     return
   }
 
-  window.ga('send', 'event', category, action, label, value)
+  [].concat(config.id).forEach(function (id) {
+    window.ga(`${getName(id)}.send`, 'event', category, action, label, value)
+  })
 }

@@ -57,5 +57,7 @@
     "rollup-plugin-uglify": "^1.0.1",
     "webpack": "^1.13.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "load-script": "^1.0.0"
+  }
 }

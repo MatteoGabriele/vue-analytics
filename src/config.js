@@ -1,4 +1,4 @@
-import { warn } from './utils'
+import { warn, merge } from './utils'
 
 /**
  * Default configuration
@@ -14,25 +14,6 @@ let config = {
   userId: null,
   manual: false,
   ignoreRoutes: []
-}
-
-/**
- * Merges two objects
- * @param  {Object} obj
- * @param  {Object} src
- * @return {Object}
- */
-const merge = function (obj, src) {
-  Object.keys(src).forEach(function (key) {
-    if (obj[key] && typeof obj[key] === 'object') {
-      merge(obj[key], src[key])
-      return
-    }
-
-    obj[key] = src[key]
-  })
-
-  return obj
 }
 
 /**

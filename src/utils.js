@@ -18,3 +18,26 @@ export const warn = function (...message) {
 export const exists = function (name) {
   return !!(config.ignoreRoutes.length && config.ignoreRoutes.indexOf(name) !== -1)
 }
+
+/**
+ * Merges two objects
+ * @param  {Object} obj
+ * @param  {Object} src
+ * @return {Object}
+ */
+export const merge = function (obj, src) {
+  Object.keys(src).forEach(function (key) {
+    if (obj[key] && typeof obj[key] === 'object') {
+      merge(obj[key], src[key])
+      return
+    }
+
+    obj[key] = src[key]
+  })
+
+  return obj
+}
+
+export const getName = function (value) {
+  return value.replace(/-/gi, '')
+}

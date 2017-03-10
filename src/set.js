@@ -1,4 +1,5 @@
-import { warn } from './utils'
+import { warn, getName } from './utils'
+import config from './config'
 
 export default function (...data) {
   if (typeof window.ga === 'undefined') {
@@ -22,5 +23,7 @@ export default function (...data) {
   }
 
   // Use ga.set with field name and field value
-  window.ga('set', data[0], data[1])
+  [].concat(config.id).forEach(function (id) {
+    window.ga(`${getName(id)}.set`, data[0], data[1])
+  })
 }
