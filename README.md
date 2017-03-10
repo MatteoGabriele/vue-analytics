@@ -16,11 +16,9 @@ npm install vue-analytics
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
-// your Google Analytcs tracking ID
-const id = 'UA-XXX-X'
-
-Vue.use(VueAnalytics, { id })
-
+Vue.use(VueAnalytics, { 
+  id: 'UA-XXX-X' 
+})
 ```
 
 
@@ -76,6 +74,19 @@ export default {
 
 Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages), [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) and [timings](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings)
 
+## Multiple Accounts
+
+It is possible to track sending hints to multiple accounts, just passing an array strings
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, { 
+  id: ['UA-XXX-X', 'UA-ZZZ-Z'] 
+})
+
+```
 
 ## Google Analytics script loaded callback
 
@@ -206,82 +217,6 @@ Vue.use(VueAnalytics, {
   	trace: false,
   	sendHitTask: true
   }
-})
-```
-
-## Go manual!
-
-You can disable auto-tracking and the auto-loading of the Google Analytics script just setting `manual` to `true`
-
-```js
-Vue.use(VueAnalytics, {
-  manual: true
-})
-```
-
-With this setup, the plugin only exposes the tracking methods and few helpers, so you have to manually load the script tag from Google, add the tracking ID to the Google snippet and start tracking pages manually.
-
-#### Load Google Analytcs script manually
-
-You can obviously load your google script and snippet in the body tag but you can also still use the `loadScript` method which requires the tracking ID.
-
-```js
-import VueAnalytics, { loadScript } from 'vue-analytics'
-
-Vue.use(VueAnalytics)
-
-const id = 'UA-XXX-X'
-
-loadScript(id).then((response) => {
-  if (response.error) {
-    // couldn't load the Google script
-    return
-  }
-
-  // all fine!
-})
-```
-
-#### Start auto-tracking manually
-
-It is also possible to manually start auto-tracking, but you need to pass to the router instance as a parameter
-
-```js
-import Vue from 'vue'
-import VueAnalytics, { loadScript, autoTracking } from 'vue-analytics'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  routes: [
-    {
-      name: 'home',
-      path: '/',
-      component: {
-        template: '<div>home page!</div>'
-      }
-    },
-    {
-      name: 'about',
-      path: '/about',
-      component: {
-        template: '<div>about page!</div>'
-      }
-    }
-  ]
-})
-
-Vue.use(VueAnalytics)
-
-const id = 'UA-XXX-X'
-
-loadScript(id).then((response) => {
-  if (response.error) {
-    return
-  }
-
-  autoTracking(router)
 })
 ```
 
