@@ -1,4 +1,4 @@
-import { warn, merge } from './utils'
+import { merge } from './utils'
 
 /**
  * Default configuration
@@ -12,7 +12,6 @@ let config = {
   autoTracking: true,
   id: null,
   userId: null,
-  manual: false,
   ignoreRoutes: []
 }
 
@@ -22,12 +21,6 @@ let config = {
  * @return {Object}
  */
 export const updateConfig = function (params) {
-  // Until v3.0.0 check for `debug` old setup
-  if (typeof params.debug === 'boolean') {
-    const url = 'https://github.com/MatteoGabriele/vue-analytics#debug'
-    warn('Please use the new debug setup', url)
-  }
-
   return merge(config, params)
 }
 

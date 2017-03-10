@@ -2,7 +2,6 @@ import { updateConfig } from './config'
 import trackPage from './track/page'
 import trackEvent from './track/event'
 import trackTime from './track/time'
-import autoTracking from './track/autoTracking'
 import set from './set'
 import init from './init'
 
@@ -25,6 +24,5 @@ const install = function (Vue, options = {}) {
 }
 
 export default {
-  install,
-  autoTracking
+  install
 }
