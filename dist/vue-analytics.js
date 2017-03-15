@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v3.0.0
+ * vue-analytics v3.0.1
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -236,24 +236,32 @@ var init = function (router, callback) {
       callback();
     }
 
-    if (config.debug.enabled) {
-      window.ga_debug = {
-        trace: config.debug.trace
-      };
-    }
+    var poll = setInterval(function () {
+      if (!window.ga) {
+        return;
+      }
 
-    [].concat(config.id).forEach(function (id) {
-      options['name'] = id.replace(/-/g, '');
-      window.ga('create', id, 'auto', options);
-    });
+      clearInterval(poll);
 
-    if (!config.debug.sendHitTask) {
-      set$1('sendHitTask', null);
-    }
+      if (config.debug.enabled) {
+        window.ga_debug = {
+          trace: config.debug.trace
+        };
+      }
 
-    window.ga('send', 'pageview');
+      [].concat(config.id).forEach(function (id) {
+        options['name'] = id.replace(/-/g, '');
+        window.ga('create', id, 'auto', options);
+      });
 
-    autoTracking(router);
+      if (!config.debug.sendHitTask) {
+        set$1('sendHitTask', null);
+      }
+
+      window.ga('send', 'pageview');
+
+      autoTracking(router);
+    }, 10);
   });
 };
 
