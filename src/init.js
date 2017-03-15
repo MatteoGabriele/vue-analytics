@@ -29,23 +29,31 @@ export default function (router, callback) {
       callback()
     }
 
-    if (config.debug.enabled) {
-      window.ga_debug = {
-        trace: config.debug.trace
+    const poll = setInterval(function () {
+      if (!window.ga) {
+        return
       }
-    }
 
-    [].concat(config.id).forEach(function (id) {
-      options['name'] = id.replace(/-/g, '')
-      window.ga('create', id, 'auto', options)
-    })
+      clearInterval(poll)
 
-    if (!config.debug.sendHitTask) {
-      set('sendHitTask', null)
-    }
+      if (config.debug.enabled) {
+        window.ga_debug = {
+          trace: config.debug.trace
+        }
+      }
 
-    window.ga('send', 'pageview')
+      [].concat(config.id).forEach(function (id) {
+        options['name'] = id.replace(/-/g, '')
+        window.ga('create', id, 'auto', options)
+      })
 
-    autoTracking(router)
+      if (!config.debug.sendHitTask) {
+        set('sendHitTask', null)
+      }
+
+      window.ga('send', 'pageview')
+
+      autoTracking(router)
+    }, 10)
   })
 }
