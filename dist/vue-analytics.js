@@ -1,5 +1,5 @@
 /*!
- * vue-analytics v3.0.1
+ * vue-analytics v3.0.2
  * (c) 2017 Matteo Gabriele
  * Released under the ISC License.
  */
@@ -232,10 +232,6 @@ var init = function (router, callback) {
       return;
     }
 
-    if (callback && typeof callback === 'function') {
-      callback();
-    }
-
     var poll = setInterval(function () {
       if (!window.ga) {
         return;
@@ -253,6 +249,10 @@ var init = function (router, callback) {
         options['name'] = id.replace(/-/g, '');
         window.ga('create', id, 'auto', options);
       });
+
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
 
       if (!config.debug.sendHitTask) {
         set$1('sendHitTask', null);
