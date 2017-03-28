@@ -25,10 +25,6 @@ export default function (router, callback) {
       return
     }
 
-    if (callback && typeof callback === 'function') {
-      callback()
-    }
-
     const poll = setInterval(function () {
       if (!window.ga) {
         return
@@ -46,6 +42,10 @@ export default function (router, callback) {
         options['name'] = id.replace(/-/g, '')
         window.ga('create', id, 'auto', options)
       })
+
+      if (callback && typeof callback === 'function') {
+        callback()
+      }
 
       if (!config.debug.sendHitTask) {
         set('sendHitTask', null)
