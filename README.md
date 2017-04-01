@@ -16,17 +16,12 @@ npm install vue-analytics
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
-Vue.use(VueAnalytics, { 
-  id: 'UA-XXX-X' 
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X'
 })
 ```
 
-
 ## Tracking methods
-
-It's only possible to track events and pages.
-
-`trackEvent`, `trackPage` and `trackTime` methods are available in the Vue instance
 
 ```js
 /**
@@ -35,7 +30,7 @@ It's only possible to track events and pages.
  * @param  {String} title
  * @param  {String} location
  */
-Vue.$ga.trackPage('/home')
+Vue.$ga.trackPage('/home', 'Home page', window.location.href)
 
 /**
  * Event tracking
@@ -54,6 +49,19 @@ Vue.$ga.trackEvent('share', 'click', 'facebook')
  * @param  {String} [label='']
  */
 Vue.$ga.trackTime('JS Dependencies', 'load', 3549)
+
+
+/**
+ * Updating tracker data
+ * @param {any} data
+ */
+Vue.$ga.set('sendHitTask', null)
+
+/**
+ * Use the require method
+ * @type {any}
+ */
+Vue.$ga.require('GTM-XXXXXXX')
 ```
 
 and also in the component scope itself
@@ -72,7 +80,12 @@ export default {
 }
 ```
 
-Here the documentation about [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages), [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) and [timings](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings)
+Here the documentation about: 
+
+- [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages)
+- [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+- [timings](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings)
+- [set](https://developers.google.com/analytics/devguides/collection/analyticsjs/accessing-trackers)
 
 ## Multiple Accounts
 
@@ -82,8 +95,8 @@ It is possible to track sending hints to multiple accounts, just passing an arra
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
-Vue.use(VueAnalytics, { 
-  id: ['UA-XXX-X', 'UA-ZZZ-Z'] 
+Vue.use(VueAnalytics, {
+  id: ['UA-XXX-X', 'UA-ZZZ-Z']
 })
 
 ```
@@ -96,6 +109,13 @@ Vue.use(VueAnalytics, {
     // here Google Analaytics is ready to track!
   }
 })
+```
+
+## Custom query
+If the feature is not adde yet, but you need to send specific events or values, just use the `query` method and do it manually.
+
+```js
+Vue.$ga.query('send', 'event', 'facebook', 'click', 'something')
 ```
 
 ## Auto-tracking
@@ -179,11 +199,11 @@ or in your component scope
 
 ```js
 export default {
-	methods: {
-		onClick () {
-			this.$ga.set(fieldName, fieldValue)
-		}
-	}
+  methods: {
+    onClick () {
+      this.$ga.set(fieldName, fieldValue)
+    }
+  }
 }
 ```
 
@@ -213,9 +233,9 @@ You can find documentation about `trace` and `sendHitTask` [here](https://develo
 ```js
 Vue.use(VueAnalytics, {
   debug: {
-  	enabled: true,
-  	trace: false,
-  	sendHitTask: true
+    enabled: true,
+    trace: false,
+    sendHitTask: true
   }
 })
 ```

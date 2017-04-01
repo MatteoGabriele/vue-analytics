@@ -38,6 +38,10 @@ export const merge = function (obj, src) {
   return obj
 }
 
-export const getName = function (value) {
+export function getName (value) {
   return value.replace(/-/gi, '')
+}
+
+export function getListId () {
+  return [].concat(config.id)
 }

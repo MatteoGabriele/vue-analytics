@@ -1,6 +1,10 @@
-import { warn, getName } from '../utils'
-import config from '../config'
+import ga from '../ga'
+import { warn } from '../utils'
 
+/**
+ * Updating tracker data
+ * @param {any} data
+ */
 export default function set (...data) {
   if (typeof window.ga === 'undefined') {
     return
@@ -12,8 +16,7 @@ export default function set (...data) {
 
   if (typeof data[0] === 'object' && data[0].constructor === Object) {
     // Use the ga.set with an object literal
-    window.ga('set', data[0])
-
+    ga('set', data[0])
     return
   }
 
@@ -23,7 +26,5 @@ export default function set (...data) {
   }
 
   // Use ga.set with field name and field value
-  [].concat(config.id).forEach(function (id) {
-    window.ga(`${getName(id)}.set`, data[0], data[1])
-  })
+  ga('set', data[0], data[1])
 }

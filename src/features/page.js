@@ -1,5 +1,4 @@
-import { getName } from '../utils'
-import config from '../config'
+import ga from '../ga'
 
 /**
  * Page tracking
@@ -8,11 +7,5 @@ import config from '../config'
  * @param  {String} location
  */
 export default function page (page, title = '', location = '') {
-  if (typeof window.ga === 'undefined') {
-    return
-  }
-
-  [].concat(config.id).forEach(function (id) {
-    window.ga(`${getName(id)}.send`, 'pageview', { page, title, location })
-  })
+  ga('send', 'pageview', { page, title, location })
 }

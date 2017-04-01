@@ -1,3 +1,5 @@
+import ga from '../ga'
+
 /**
  * Plain access to the GA
  * with the query method is possible to pass everything.
@@ -5,9 +7,5 @@
  * @param  {any} args
  */
 export default function query (...args) {
-  if (typeof window.ga === 'undefined') {
-    return
-  }
-
-  window.ga(...args)
+  ga(...args)
 }

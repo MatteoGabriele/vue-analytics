@@ -1,5 +1,4 @@
-import config from '../config'
-import { getName } from '../utils'
+import ga from '../ga'
 
 /**
  * Time tracking
@@ -9,11 +8,5 @@ import { getName } from '../utils'
  * @param  {String} [label='']
  */
 export default function time (category, variable, value, label = '') {
-  if (typeof window.ga === 'undefined') {
-    return
-  }
-
-  [].concat(config.id).forEach(function (id) {
-    window.ga(`${getName(id)}.send`, 'timing', category, variable, value, label)
-  })
+  ga('send', 'timing', category, variable, value, label)
 }

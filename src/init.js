@@ -1,5 +1,6 @@
 import config from './config'
-import { getName, warn } from './utils'
+import { getName, getListId, warn } from './utils'
+import ga from './ga'
 import features from './features/index'
 import loadScript from 'load-script'
 
@@ -37,11 +38,19 @@ export default function init (router, callback) {
         }
       }
 
-      [].concat(config.id).forEach(function (id) {
-        options['name'] = getName(id)
+      const ids = getListId()
+      ids.forEach(function (id) {
+        if (ids.length > 1) {
+          // we need to register the name used by the ga methods so that
+          // when a method is used Google knows which account did it
+          options['name'] = getName(id)
+        }
+
         window.ga('create', id, 'auto', options)
       })
 
+      // the callback is fired when window.ga is available and before any other hit is sent
+      // see MatteoGabriele/vue-analytics/issues/20
       if (callback && typeof callback === 'function') {
         callback()
       }
@@ -50,7 +59,8 @@ export default function init (router, callback) {
         features.set('sendHitTask', null)
       }
 
-      window.ga('send', 'pageview')
+      // send the first pageview hit
+      ga('send', 'pageview')
 
       features.autoTracking(router)
     }, 10)
