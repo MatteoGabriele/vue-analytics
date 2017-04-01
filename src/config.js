@@ -20,7 +20,7 @@ let config = {
  * @param  {Object} params
  * @return {Object}
  */
-export const updateConfig = function (params) {
+export function updateConfig (params) {
   return merge(config, params)
 }
 

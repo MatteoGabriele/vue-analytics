@@ -8,7 +8,7 @@ import config from '../config'
  * @param  {String} [label='']
  * @param  {Number} [value=0]
  */
-export default function (category, action, label = '', value = 0) {
+export default function events (category, action, label = '', value = 0) {
   if (typeof window.ga === 'undefined') {
     return
   }

@@ -1,16 +1,14 @@
 import { updateConfig } from './config'
-import trackPage from './track/page'
-import trackEvent from './track/event'
-import trackTime from './track/time'
-import set from './set'
+import features from './features/index'
 import init from './init'
+import { getName } from './utils'
 
 /**
  * Vue installer
  * @param  {Vue instance} Vue
  * @param  {Object} [options={}]
  */
-const install = function (Vue, options = {}) {
+function install (Vue, options = {}) {
   const { router } = options
 
   delete options.router
@@ -18,11 +16,7 @@ const install = function (Vue, options = {}) {
 
   init(router, options.onAnalyticsReady)
 
-  const features = { trackEvent, trackPage, trackTime, set }
-
   Vue.prototype.$ga = Vue.$ga = features
 }
 
-export default {
-  install
-}
+export default { install, getName }

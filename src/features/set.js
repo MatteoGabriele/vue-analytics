@@ -1,7 +1,7 @@
-import { warn, getName } from './utils'
-import config from './config'
+import { warn, getName } from '../utils'
+import config from '../config'
 
-export default function (...data) {
+export default function set (...data) {
   if (typeof window.ga === 'undefined') {
     return
   }

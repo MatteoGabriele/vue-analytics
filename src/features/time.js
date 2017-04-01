@@ -8,7 +8,7 @@ import { getName } from '../utils'
  * @param  {Number} value
  * @param  {String} [label='']
  */
-export default function (category, variable, value, label = '') {
+export default function time (category, variable, value, label = '') {
   if (typeof window.ga === 'undefined') {
     return
   }

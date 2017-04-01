@@ -1,10 +1,9 @@
 import config from './config'
-import { warn } from './utils'
-import set from './set'
-import autoTracking from './track/autoTracking'
+import { getName, warn } from './utils'
+import features from './features/index'
 import loadScript from 'load-script'
 
-export default function (router, callback) {
+export default function init (router, callback) {
   if (config.manual) {
     return
   }
@@ -39,7 +38,7 @@ export default function (router, callback) {
       }
 
       [].concat(config.id).forEach(function (id) {
-        options['name'] = id.replace(/-/g, '')
+        options['name'] = getName(id)
         window.ga('create', id, 'auto', options)
       })
 
@@ -48,12 +47,12 @@ export default function (router, callback) {
       }
 
       if (!config.debug.sendHitTask) {
-        set('sendHitTask', null)
+        features.set('sendHitTask', null)
       }
 
       window.ga('send', 'pageview')
 
-      autoTracking(router)
+      features.autoTracking(router)
     }, 10)
   })
 }

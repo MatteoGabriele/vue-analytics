@@ -7,7 +7,7 @@ import config from '../config'
  * @param  {String} title
  * @param  {String} location
  */
-export default function (page, title = '', location = '') {
+export default function page (page, title = '', location = '') {
   if (typeof window.ga === 'undefined') {
     return
   }

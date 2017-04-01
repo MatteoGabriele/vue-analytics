@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "webpack --config config/dev.js -w",
-    "build": "node config/build.js"
+    "build": "node config/build.js",
+    "prepublish": "node config/build.js"
   },
   "keywords": [
     "Google",
@@ -22,9 +23,7 @@
   ],
   "main": "dist/vue-analytics.js",
   "files": [
-    "dist/vue-analytics.js",
-    "dist/vue-analytics.min.js",
-    "src"
+    "dist"
   ],
   "author": {
     "name": "Matteo Gabriele",
