@@ -4,6 +4,9 @@
 # vue-analytics
 Vue plugin for Google Analytics.
 
+## Requirements
+Vue ^2.0.0
+
 ## Installation
 
 ```shell
@@ -119,6 +122,7 @@ Vue.$ga.query('send', 'event', 'facebook', 'click', 'something')
 ```
 
 ## Auto-tracking
+> requires vue-router ^2.0.0
 
 Auto-tracking is enabled by default and it will load the Google Analytics script and start tracking every route change.
 
