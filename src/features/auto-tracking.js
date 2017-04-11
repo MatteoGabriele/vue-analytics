@@ -1,6 +1,7 @@
 import config from '../config'
 import { warn, exists } from '../utils'
 import trackPage from './page'
+import set from './set'
 
 /**
  * Enable route autoTracking page
@@ -30,6 +31,7 @@ export default function autoTracking (router) {
       return
     }
 
+    set('page', path)
     trackPage(path, name, window.location.href)
   })
 }
