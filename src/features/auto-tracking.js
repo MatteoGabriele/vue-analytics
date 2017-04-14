@@ -19,19 +19,17 @@ export default function autoTracking (router) {
   }
 
   // Track the first page when the user lands on it
-  const route = router.currentRoute
-
-  if (!exists(route.name)) {
-    trackPage(route.path, route.name, window.location.href)
+  if (!exists(router.currentRoute.name)) {
+    trackPage(router)
   }
 
   // Track all other pages
-  router.afterEach(function ({ path, name }) {
+  router.afterEach(function ({ name, path }) {
     if (exists(name)) {
       return
     }
 
     set('page', path)
-    trackPage(path, name, window.location.href)
+    trackPage(router)
   })
 }
