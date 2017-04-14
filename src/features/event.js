@@ -2,11 +2,19 @@ import ga from '../ga'
 
 /**
  * Event tracking
- * @param  {String} category
- * @param  {String} action
- * @param  {String} [label='']
- * @param  {Number} [value=0]
+ * @param  {any} args
+ * @example
+ * Arguments as single parameters
+ * $ga.trackEvent('category', 'action', 'label', 'value')
+ *
+ * Arguments as object
+ * $ga.trackEvent({
+ *  eventCategory: 'lorem ipsum',
+ *  eventAction: 'dolor',
+ *  eventLabel: 'sit',
+ *  eventValue: 1
+ * })
  */
-export default function events (category, action, label = '', value = 0) {
-  ga('send', 'event', category, action, label, value)
+export default function events (...args) {
+  ga('send', 'event', ...args)
 }

@@ -2,11 +2,17 @@ import ga from '../ga'
 
 /**
  * Time tracking
- * @param  {String} category
- * @param  {String} variable
- * @param  {Number} value
- * @param  {String} [label='']
+ * @param  {any} args
+ * @example
+ * $ga.trackTime('category', 'variable', 1, 'label')
+ *
+ * $ga.trackTime({
+ *  timingCategory: 'category',
+ *  timingVar: 'variable',
+ *  timingValue: 1,
+ *  timingLabel: 'label'
+ * })
  */
-export default function time (category, variable, value, label = '') {
-  ga('send', 'timing', category, variable, value, label)
+export default function time (...args) {
+  ga('send', 'timing', ...args)
 }
