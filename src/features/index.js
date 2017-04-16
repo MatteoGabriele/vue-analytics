@@ -1,19 +1,21 @@
 import autoTrackPage from './page.auto'
-import trackPage from './page'
-import trackEvent from './event'
-import trackTime from './time'
+import autoTrackException from './exception.auto'
+import page from './page'
+import event from './event'
+import time from './time'
 import set from './set'
 import query from './query'
-import trackException from './exception'
-import autoTrackException from './exception.auto'
+import exception from './exception'
+import social from './social'
 
 export default {
   autoTrackPage,
-  trackPage,
-  trackEvent,
-  trackTime,
-  trackException,
   autoTrackException,
+  social,
+  page,
+  event,
+  time,
+  exception,
   set,
   query
 }

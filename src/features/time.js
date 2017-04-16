@@ -4,9 +4,9 @@ import ga from '../ga'
  * Time tracking
  * @param  {any} args
  * @example
- * $ga.trackTime('category', 'variable', 1, 'label')
+ * $ga.time('category', 'variable', 1, 'label')
  *
- * $ga.trackTime({
+ * $ga.time({
  *  timingCategory: 'category',
  *  timingVar: 'variable',
  *  timingValue: 1,

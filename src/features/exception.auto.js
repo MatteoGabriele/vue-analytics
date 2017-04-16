@@ -1,7 +1,7 @@
 import config from '../config'
 import exception from './exception'
 
-export default function exceptionAutoTracking () {
+export default function autoTrackException () {
   if (!config.exception.auto) {
     return
   }
