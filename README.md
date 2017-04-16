@@ -14,7 +14,7 @@ Vue ^2.0.0
   - [Enable page auto tracking](#enable-page-auto-tracking)
   - [Ignore routes](#ignore-routes-on-page-auto-tracking)
 - [Event tracking](#event-tracking)
-- [User timings](#user-timing)
+- [User timings](#user-timings)
 - [Exception tracking](#exception-tracking)
   - [Enable exception auto tracking](#enable-exception-auto-tracking) 
 - [Require](#require)
