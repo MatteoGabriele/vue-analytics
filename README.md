@@ -7,6 +7,26 @@ Vue plugin for Google Analytics.
 ## Requirements
 Vue ^2.0.0
 
+## User guide
+- [Installation](#installation)
+- [Usage](#usage)
+- [Page tracking](#page-tracking)
+  - [Enable page auto tracking](#enable-page-auto-tracking)
+  - [Ignore routes](#ignore-routes)
+- [Event tracking]()
+- [Time tracking]()
+- [Exception tracking]()
+  - [Enable/disable exception auto tracking]() 
+- [Require]()
+- [Set]()
+- [User explorer report]()
+- [Track multiple accounts]()
+- [Script load callback]()
+- [Custom actions]()
+- [Debug]()
+- [Install Google Analytics plugins]()
+- [Issues or feature requests]()
+
 ## Installation
 
 ```shell
@@ -24,223 +44,60 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-## Tracking methods
+## Page tracking
+
+Page tracking is the most used feature of Google Analytics and you can try different way of doing it
+
+The standard way is just passing the current page path
 
 ```js
-/**
- * Page tracking
- * @param  {String} page
- * @param  {String} title
- * @param  {String} location
- */
-Vue.$ga.trackPage('/home', 'Home page', window.location.href)
-
-/**
- * Event tracking
- * @param  {String} category
- * @param  {String} action
- * @param  {String} [label='']
- * @param  {Number} [value=0]
- */
-Vue.$ga.trackEvent('share', 'click', 'facebook')
-
-/**
- * Time tracking
- * @param  {String} category
- * @param  {String} variable
- * @param  {Number} value
- * @param  {String} [label='']
- */
-Vue.$ga.trackTime('JS Dependencies', 'load', 3549)
-
-
-/**
- * Updating tracker data
- * @param {any} data
- */
-Vue.$ga.set('sendHitTask', null)
-
-/**
- * Use the require method
- * @type {any}
- */
-Vue.$ga.require('GTM-XXXXXXX')
+this.$ga.page('/')
 ```
 
-and also in the component scope itself
+or passing a more complex object
 
 ```js
-export default {
-  mounted () {
-    this.$ga.trackPage('/home')
-  },
-
-  methods: {
-    onShareButtonClick () {
-      this.$ga.trackEvent('share', 'click', 'facebook')
-    }
-  }
-}
-```
-
-Here the documentation about: 
-
-- [pageview](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages)
-- [events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
-- [timings](https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings)
-- [set](https://developers.google.com/analytics/devguides/collection/analyticsjs/accessing-trackers)
-
-## Multiple Accounts
-
-It is possible to track sending hints to multiple accounts, just passing an array strings
-
-```js
-import Vue from 'vue'
-import VueAnalytics from 'vue-analytics'
-
-Vue.use(VueAnalytics, {
-  id: ['UA-XXX-X', 'UA-ZZZ-Z']
-})
-
-```
-
-## Google Analytics script loaded callback
-
-```js
-Vue.use(VueAnalytics, {
-  onAnalyticsReady () {
-    // here Google Analaytics is ready to track!
-  }
+this.$ga.page({
+  page: '/',
+  title: 'Home page',
+  location: window.location.href
 })
 ```
 
-## Custom query
-If the feature is not adde yet, but you need to send specific events or values, just use the `query` method and do it manually.
+or you can even directly pass the VueRouter instance scoped in your component and the plugin will automatically detect which one is the current route name, path and location
 
 ```js
-Vue.$ga.query('send', 'event', 'facebook', 'click', 'something')
+this.$ga.page(this.$router)
 ```
 
-## Auto-tracking
-> requires vue-router ^2.0.0
 
-Auto-tracking is enabled by default and it will load the Google Analytics script and start tracking every route change.
+### Enable page auto tracking
 
-To be able to work properly the route object needs to have a `name` and a `path`
+The most easy way to track your single page application, is to pass the VueRouter instance to the plugin and let it handle everything for you
 
 ```js
 import Vue from 'vue'
-import VueAnalytics from 'vue-analytics'
 import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
+import VueAnalytics from 'vue-analytics'
 
 const router = new VueRouter({
-  routes: [
-    {
-      name: 'home',
-      path: '/',
-      component: {
-        template: '<div>home page!</div>'
-      }
-    },
-    {
-      name: 'about',
-      path: '/about',
-      component: {
-        template: '<div>about page!</div>'
-      }
-    }
-  ]
+  router: // your routes
 })
 
-// your Google Analytcs tracking ID
-const id = 'UA-XXX-X'
-
-Vue.use(VueAnalytics, { id, router })
-
-```
-
-**If you only need to track your routes, this is everything you need to do!**
-
-#### Disable auto-tracking
-
-```js
 Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
-  autoTracking: false
+  router
 })
 ```
 
 #### Ignore routes
 
-Auto-tracking tracks every route in you router instance, but if needed, it's possible to pass an array of route names that we don't want to track
-
-
-```js
-Vue.use(VueAnalytics, {
-  id: 'UA-XXX-X',
-  router: router
-  ignoreRoutes: ['home']
-})
-```
-
-## Set
-
-Sets a single field and value pair or a group of field/value pairs on a tracker object.
-
-Read more about Googla analytics [set](https://developers.google.com/analytics/devguides/collection/analyticsjs/command-queue-reference#set) method
-
-```js
-Vue.$ga.set(fieldName, fieldValue)
-
-// also possible to pass an object literal
-Vue.$ga.set({ fieldName, fieldName })
-
-```
-
-or in your component scope
-
-```js
-export default {
-  methods: {
-    onClick () {
-      this.$ga.set(fieldName, fieldValue)
-    }
-  }
-}
-```
-
-## User Explorer report
-
-Add the `userId` on first load just passing it in the options object
+To disable auto tracking for specific routes, you need to pass an array of names of routes to the plugin options
 
 ```js
 Vue.use(VueAnalytics, {
-  id: 'UA-XXX-X',
-  userId: 'xxx'
-})
-```
-
-**it is also possible to set the `userId` in runtime using the `set` method**
-
-
-## Debug
-
-Implements Google Analaytics debug library.
-
-You can find documentation about `trace` and `sendHitTask` [here](https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging)
-
-**Please remember that it is for debug only. The file size of analytics_debug.js is way larger than analytics.js**
-
-
-```js
-Vue.use(VueAnalytics, {
-  debug: {
-    enabled: true,
-    trace: false,
-    sendHitTask: true
-  }
+  router,
+  ignoreRoutes: ['home', 'contacts']
 })
 ```
 
