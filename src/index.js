@@ -14,7 +14,7 @@ function install (Vue, options = {}) {
   delete options.router
   updateConfig(options)
 
-  init(router, options.onAnalyticsReady)
+  init(router, options.onReady)
 
   Vue.prototype.$ga = Vue.$ga = features
 }

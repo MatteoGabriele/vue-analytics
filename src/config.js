@@ -9,10 +9,10 @@ let config = {
     trace: false,
     sendHitTask: true
   },
-  exception: {
-    auto: false
+  autoTracking: {
+    exception: false,
+    page: true
   },
-  autoTracking: true,
   id: null,
   userId: null,
   ignoreRoutes: []

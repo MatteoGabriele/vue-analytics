@@ -2,7 +2,7 @@ import config from '../config'
 import exception from './exception'
 
 export default function autoTrackException () {
-  if (!config.exception.auto) {
+  if (!config.autoTracking.exception) {
     return
   }
 
