@@ -39,6 +39,7 @@ export default function init (router, callback) {
       }
 
       const ids = getListId()
+
       ids.forEach(function (id) {
         if (ids.length > 1) {
           // we need to register the name used by the ga methods so that
@@ -62,7 +63,8 @@ export default function init (router, callback) {
       // send the first pageview hit
       ga('send', 'pageview')
 
-      features.autoTracking(router)
+      features.autoTrackException()
+      features.autoTrackPage(router)
     }, 10)
   })
 }

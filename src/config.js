@@ -9,6 +9,9 @@ let config = {
     trace: false,
     sendHitTask: true
   },
+  exception: {
+    auto: false
+  },
   autoTracking: true,
   id: null,
   userId: null,

@@ -7,10 +7,10 @@ import set from './set'
  * Enable route autoTracking page
  * @param  {VueRouter} router
  */
-export default function autoTracking (router) {
+export default function pageAutoTracking (router) {
   if (config.manual && !router && config.autoTracking) {
     const url = 'https://github.com/MatteoGabriele/vue-analytics#auto-tracking'
-    warn('auto-tracking doesn\'t work without a router instance.', url)
+    warn('page auto-tracking doesn\'t work without a router instance.', url)
     return
   }
 
