@@ -7,6 +7,7 @@ import set from './set'
 import query from './query'
 import exception from './exception'
 import social from './social'
+import gaRequire from './require'
 
 export default {
   autoTrackPage,
@@ -17,5 +18,10 @@ export default {
   time,
   exception,
   set,
-  query
+  query,
+
+  // require is already a used keyword in javascript
+  // need to pass it in a different way or could export
+  // the wrong function
+  require: gaRequire
 }
