@@ -2,7 +2,9 @@ import ga from '../ga'
 
 /**
  * Social interactions
- * @param  {Object} args
+ * @param  {any} args
+ * $ga.social('Facebook', 'like', http://myownpersonaldomain.com)
+ *
  * $ga.social({
  *  socialNetwork: 'Facebook',
  *  socialAction: 'like',
