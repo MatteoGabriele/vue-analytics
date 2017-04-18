@@ -240,7 +240,7 @@ You can use social interaction analytics to measure the number of times users cl
 is possible to impletement this feature passing parameters in this exact order
 
 ```js
-this.$ga.social('Facebook', 'like', http://myownpersonaldomain.com)
+this.$ga.social('Facebook', 'like', 'http://myownpersonaldomain.com')
 ```
 
 also possible to pass an object literal
