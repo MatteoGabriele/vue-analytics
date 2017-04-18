@@ -1,5 +1,5 @@
 import config from '../config'
-import { warn, exists } from '../utils'
+import { exists } from '../utils'
 import page from './page'
 import set from './set'
 
@@ -8,12 +8,6 @@ import set from './set'
  * @param  {VueRouter} router
  */
 export default function autoTrackPage (router) {
-  if (!router && config.autoTracking.page) {
-    const url = 'https://github.com/MatteoGabriele/vue-analytics#auto-tracking'
-    warn('page auto-tracking doesn\'t work without a router instance.', url)
-    return
-  }
-
   if (!config.autoTracking.page || !router) {
     return
   }
