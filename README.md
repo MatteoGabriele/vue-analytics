@@ -2,7 +2,7 @@
 
 
 # vue-analytics
-Vue plugin for Google Analytics.
+Vue plugin for Google Analytics: **1.60kb** of love :rocket:
 
 ## Requirements
 Vue ^2.0.0
