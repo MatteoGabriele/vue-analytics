@@ -21,7 +21,7 @@ export default function init (router, callback) {
 
   loadScript(source, function (error, script) {
     if (error) {
-      warn('Ops! Could\'t load the Google Analytics script')
+      warn('Ops! Is not possible to load Google Analytics script')
       return
     }
 
