@@ -1,15 +1,40 @@
 import ga from '../ga'
 import { warn } from '../utils'
 
+/**
+ * Returns a querystring from an object
+ * @param  {Object} query
+ * @return {String}
+ */
+function getQueryString (query) {
+  return Object.keys(query).reduce(function (queryString, param, index, collection) {
+    queryString += `${param}=${query[param]}`
+
+    if (index < (collection.length - 1)) {
+      queryString += '&'
+    }
+
+    return queryString
+  }, '?')
+}
+
+/**
+ * Returns pageview data from VueRouter instance
+ * @param  {VueRouter} router
+ * @param  {any} args
+ * @return {Object}
+ */
 function getDataFromRouter (router, args) {
   if (!router) {
     warn('Is not possible to track the current route without VueRouter installed')
     return
   }
 
+  const route = router.currentRoute
+
   let params = {
-    page: router.currentRoute.path,
-    title: router.currentRoute.name,
+    page: route.path + getQueryString(route.query),
+    title: route.name,
     location: window.location.href
   }
 
@@ -23,19 +48,6 @@ function getDataFromRouter (router, args) {
 /**
  * Page tracking
  * @param  {any} args
- * @example
- * $ga.page('/home')
- *
- * $ga.page(this.$router, {
- *  hitCallback () { //done }
- * })
- *
- * $ga.page({
- *  page: '/home',
- *  title: 'home page',
- *  location: window.location.href,
- *  hitCallback () { // done }
- * })
  */
 export default function page (...args) {
   const value = args[0]
