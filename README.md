@@ -14,6 +14,7 @@ Vue ^2.0.0
   - [Enable page auto tracking](#enable-page-auto-tracking)
   - [Disable pageview hit on page load](#disable-pageview-hit-on-page-load)
   - [Ignore routes](#ignore-routes-on-page-auto-tracking)
+  - [Auto track with custom data](#auto-track-with-custom-data)
 - [Event tracking](#event-tracking)
 - [User timings](#user-timings)
 - [Exception tracking](#exception-tracking)
@@ -117,6 +118,20 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+### Disable page auto tracking
+
+To disable auto tracking we can just remove the VueRouter instance, but if you need to track only in specific environment or situations, it is also possible to disable page auto tracking like so
+
+```js
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  router,
+  autoTracking: {
+    page: false
+  }
+})
+```
+
 ### Ignore routes on page auto tracking
 
 To disable auto tracking for specific routes, you need to pass an array of names of routes to the plugin options
@@ -128,16 +143,24 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-### Disable page auto tracking
+### Auto track with custom data
 
-To disable auto tracking we can just remove the VueRouter instance, but if you need to track only in specific environment or situations, it is also possible to disable page auto tracking like so
+When auto-tracking is possible to pass a function with a custom object shape to use as a tracker.
+
+The `pageViewTemplate` passes the current route as parameter
 
 ```js
 Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
   router,
   autoTracking: {
-    page: false
+    pageviewTemplate: function (route) {
+      return {
+        path: route.path,
+        title: document.title,
+        location: window.location.href
+      }
+    }
   }
 })
 ```

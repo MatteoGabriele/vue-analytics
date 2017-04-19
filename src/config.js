@@ -12,7 +12,8 @@ let config = {
   autoTracking: {
     exception: false,
     page: true,
-    pageviewOnLoad: true
+    pageviewOnLoad: true,
+    pageviewTemplate: null
   },
   id: null,
   userId: null,

@@ -12,11 +12,13 @@ export default function autoTrackPage (router) {
     return
   }
 
-  // Track the first page when the user lands on it
   const { currentRoute } = router
+  const pageviewProxyFn = config.autoTracking.pageviewTemplate
+  const pageviewTemplate = pageviewProxyFn ? pageviewProxyFn(currentRoute) : router
+
   if (!exists(currentRoute.name) && config.autoTracking.pageviewOnLoad) {
     set('page', currentRoute.path)
-    page(router)
+    page(pageviewTemplate)
   }
 
   // Track all other pages
@@ -26,6 +28,6 @@ export default function autoTrackPage (router) {
     }
 
     set('page', path)
-    page(router)
+    page(pageviewTemplate)
   })
 }
