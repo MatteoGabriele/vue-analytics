@@ -1,6 +1,5 @@
 import config from './config'
 import { getName, getListId, warn } from './utils'
-import ga from './ga'
 import features from './features/index'
 import loadScript from 'load-script'
 
@@ -59,9 +58,6 @@ export default function init (router, callback) {
       if (!config.debug.sendHitTask) {
         features.set('sendHitTask', null)
       }
-
-      // send the first pageview hit
-      ga('send', 'pageview')
 
       features.autoTrackException()
       features.autoTrackPage(router)

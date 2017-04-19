@@ -14,7 +14,7 @@ export default function autoTrackPage (router) {
 
   // Track the first page when the user lands on it
   const { currentRoute } = router
-  if (!exists(currentRoute.name)) {
+  if (!exists(currentRoute.name) && config.autoTracking.pageviewOnLoad) {
     set('page', currentRoute.path)
     page(router)
   }
