@@ -1,7 +1,7 @@
 import { updateConfig } from './config'
 import features from './features/index'
 import init from './init'
-import { getName } from './utils'
+import { generateMethodName } from './utils'
 
 /**
  * Vue installer
@@ -19,4 +19,4 @@ function install (Vue, options = {}) {
   Vue.prototype.$ga = Vue.$ga = features
 }
 
-export default { install, getName }
+export default { install, generateMethodName }

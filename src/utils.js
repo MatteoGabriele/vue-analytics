@@ -45,3 +45,8 @@ export function getName (value) {
 export function getListId () {
   return [].concat(config.id)
 }
+
+export function generateMethodName (method, id) {
+  const domain = getName(id)
+  return getListId().length > 1 ? `${domain}.${method}` : method
+}
