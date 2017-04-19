@@ -12,6 +12,7 @@ Vue ^2.0.0
 - [Usage](#usage)
 - [Page tracking](#page-tracking)
   - [Enable page auto tracking](#enable-page-auto-tracking)
+  - [Disable pageview hit on page load](#disable-pageview-hit-on-page-load)
   - [Ignore routes](#ignore-routes-on-page-auto-tracking)
 - [Event tracking](#event-tracking)
 - [User timings](#user-timings)
@@ -91,6 +92,28 @@ const router = new VueRouter({
 Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
   router
+})
+```
+
+### Disable pageview hit on page load
+
+Page auto tracking sends a pageview event on page load, but it is possible to disable that 
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
+
+const router = new VueRouter({
+  router: // your routes
+})
+
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  router,
+  autoTracking: {
+    pageviewOnLoad: false
+  }
 })
 ```
 
