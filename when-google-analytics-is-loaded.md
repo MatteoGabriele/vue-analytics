@@ -12,7 +12,5 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-## 
-
 
 

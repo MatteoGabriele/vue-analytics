@@ -8,7 +8,6 @@ this.$ga.query(...)
 
 if you need more interaction or you want to add specific features, please add an issue on the repo or make a pull request
 
-## 
 
 
 

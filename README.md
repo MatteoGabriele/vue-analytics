@@ -25,7 +25,7 @@ Vue ^2.0.0
 * [Social interactions](/social-interactions.md)
 * [User explorer report](/user-explorer.md)
 * [Track multiple accounts](/track-multiple-accounts.md)
-* [Analaytics script callback](/analytics-script-callback.md)
+* [Analaytics script callback](/when-google-analytics-is-loaded.md)
 * [Custom methods](/custom-methods.md)
 * [Debug](/debug.md)
 
