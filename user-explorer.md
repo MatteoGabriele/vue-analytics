@@ -9,5 +9,5 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-**it is also possible to set the **`userId`** in runtime using the **`set`** method**
+**it is also possible to set the **`userId`** in runtime using the **[**set**](/set.md)** method**
 
