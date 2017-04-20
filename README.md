@@ -10,7 +10,7 @@ Vue ^2.0.0
 
 ## User guide
 
-* [Get started](/get-started.md)
+* [Get started](/installation.md)
 * [Page tracking](/page-tracking.md)
   * [Enable page auto tracking](/page-tracking.md#enable-page-auto-tracking)
   * [Disable pageview hit on page load](/page-tracking.md#disable-pageview-hit-on-page-load)
