@@ -11,7 +11,7 @@
 * [Social interactions](social-interactions.md)
 * [User explorer](user-explorer.md)
 * [Track multiple accounts](track-multiple-accounts.md)
-* [Is Analytics loaded?](when-google-analytics-is-loaded.md)
+* [Analytics script callback](when-google-analytics-is-loaded.md)
 * [Custom methods](custom-methods.md)
 * [Debug](debug.md)
 
