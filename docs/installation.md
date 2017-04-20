@@ -1,10 +1,4 @@
-## Installation
-
-```shell
-npm install vue-analytics
-```
-
-## Usage
+## Get started
 
 ```js
 import Vue from 'vue'
