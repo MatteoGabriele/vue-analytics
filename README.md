@@ -8,6 +8,12 @@ Vue plugin for Google Analytics: **1.60kb** of love
 
 Vue ^2.0.0
 
+## Installation
+
+```shell
+npm install vue-analytics
+```
+
 ## User guide
 
 * [Get started](/docs/installation.md)
