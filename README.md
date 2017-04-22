@@ -1,5 +1,5 @@
 <p align="center">
-<img src="http://i.imgur.com/whvHAT6.png" width="140" />
+<img src="http://i.imgur.com/whvHAT6.png" width="180" />
 <br>
 <br>
 <a href="https://badge.fury.io/js/vue-analytics">
