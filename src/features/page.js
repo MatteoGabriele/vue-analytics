@@ -7,7 +7,7 @@ import { warn } from '../utils'
  * @return {String}
  */
 function getQueryString (query) {
-  return Object.keys(query).reduce(function (queryString, param, index, collection) {
+  const queryString = Object.keys(query).reduce(function (queryString, param, index, collection) {
     queryString += `${param}=${query[param]}`
 
     if (index < (collection.length - 1)) {
@@ -16,6 +16,8 @@ function getQueryString (query) {
 
     return queryString
   }, '?')
+
+  return queryString === '?' ? '' : queryString
 }
 
 /**
