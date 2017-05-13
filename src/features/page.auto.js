@@ -3,8 +3,16 @@ import { exists } from '../utils'
 import page from './page'
 import set from './set'
 
-function template (proxy, router) {
-  return proxy ? proxy(router.currentRoute) : router
+function trackRoute (proxy, router) {
+  const { currentRoute } = router
+  const template = proxy ? proxy(router.currentRoute) : router
+
+  if (exists(currentRoute.name)) {
+    return
+  }
+
+  set('page', currentRoute.path)
+  page(template, router)
 }
 
 /**
@@ -16,21 +24,12 @@ export default function autoTrackPage (router) {
     return
   }
 
-  const { currentRoute } = router
   const pageviewProxyFn = config.autoTracking.pageviewTemplate
 
-  if (!exists(currentRoute.name) && config.autoTracking.pageviewOnLoad) {
-    set('page', currentRoute.path)
-    page(template(pageviewProxyFn, router))
+  if (config.autoTracking.pageviewOnLoad) {
+    trackRoute(pageviewProxyFn, router)
   }
 
   // Track all other pages
-  router.afterEach(function ({ name, path }) {
-    if (exists(name)) {
-      return
-    }
-
-    set('page', path)
-    page(template(pageviewProxyFn, router))
-  })
+  router.afterEach(() => trackRoute(pageviewProxyFn, router))
 }
