@@ -114,7 +114,15 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-## 
+### Global hit tracking callback
 
+To enable a callback for each pageview, add a `hitCallback` method to your configuration. If a callback is supplied to your `this.$ga.page` call, it will override the global hit callback.
 
-
+```js
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  hitCallback: function () {
+    console.log('Page tracked!')
+  }
+})
+```

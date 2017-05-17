@@ -1,4 +1,5 @@
 import ga from '../ga'
+import config from '../config'
 import { warn } from '../utils'
 
 /**
@@ -40,6 +41,10 @@ function getDataFromRouter (router, args) {
     location: window.location.href
   }
 
+  if (config.hitCallback) {
+    params.hitCallback = config.hitCallback
+  }
+
   if (typeof args[1] === 'function') {
     params.hitCallback = args[1]
   }
@@ -54,9 +59,27 @@ function getDataFromRouter (router, args) {
 export default function page (...args) {
   const value = args[0]
 
-  if (value.constructor.name === 'VueRouter') {
+  if (value && value.constructor.name === 'VueRouter') {
     ga('send', 'pageview', getDataFromRouter(value, args))
     return
+  }
+
+  // If there is no first argument, convert it
+  //   to an empty object.
+  if (!value) {
+    args[0] = {}
+  }
+
+  // If the page is just a string, convert it
+  //   to an object.
+  else if (value.constructor.name === 'String') {
+    args[0] = { page: value }
+  }
+
+  // Add the hitCallback if one is not specified
+  //   explicitly.
+  if (config.hitCallback && !args[0].hitCallback) {
+    args[0].hitCallback = config.hitCallback
   }
 
   ga('send', 'pageview', ...args)
