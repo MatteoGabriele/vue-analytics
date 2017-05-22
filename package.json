@@ -29,7 +29,7 @@
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-analytics/issues"
   },
