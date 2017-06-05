@@ -105,7 +105,7 @@ Vue.use(VueAnalytics, {
   autoTracking: {
     pageviewTemplate: function (route) {
       return {
-        path: route.path,
+        page: route.path,
         title: document.title,
         location: window.location.href
       }
