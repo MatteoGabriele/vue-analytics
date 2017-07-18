@@ -31,5 +31,10 @@ export default function autoTrackPage (router) {
   }
 
   // Track all other pages
-  router.afterEach(() => trackRoute(pageviewProxyFn, router))
+  router.afterEach(() => {
+    setTimeout(() => {
+      // https://github.com/MatteoGabriele/vue-analytics/issues/44
+      trackRoute(pageviewProxyFn, router)
+    }, 0)
+  })
 }
