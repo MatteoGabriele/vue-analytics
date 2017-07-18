@@ -14,7 +14,7 @@ export default function init (router, callback) {
     return
   }
 
-  const options = config.userId || {}
+  const options = config.userId ? { userId: config.userId } : {}
   const debugSource = config.debug.enabled ? '_debug' : ''
   const source = `https://www.google-analytics.com/analytics${debugSource}.js`
 
