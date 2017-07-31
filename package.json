@@ -7,9 +7,10 @@
     "url": "https://github.com/MatteoGabriele/vue-analytics"
   },
   "scripts": {
-    "dev": "webpack --config config/dev.js -w",
-    "build": "node config/build.js",
-    "prepublish": "node config/build.js"
+    "dev": "node ./config/scripts/dev.js",
+    "build": "node ./config/scripts/build.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "Google",
@@ -35,26 +36,15 @@
   },
   "homepage": "https://github.com/MatteoGabriele/vue-analytics#readme",
   "devDependencies": {
-    "babel-core": "^6.17.0",
-    "babel-eslint": "^7.0.0",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-syntax-async-functions": "^6.13.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-stage-2": "^6.17.0",
-    "babel-register": "^6.16.3",
-    "eslint": "^3.8.1",
-    "eslint-config-standard": "^6.2.0",
-    "eslint-friendly-formatter": "^2.0.6",
-    "eslint-import-resolver-webpack": "^0.6.0",
-    "eslint-loader": "^1.6.0",
-    "eslint-plugin-promise": "^3.3.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "rollup": "^0.39.2",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-uglify": "^1.0.1",
-    "webpack": "^1.13.2"
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-blue": "^1.0.0-beta.29",
+    "compression-webpack-plugin": "^0.4.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "jest": "^20.0.0",
+    "ora": "^1.2.0",
+    "webpack": "^3.4.1",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "load-script": "^1.0.0"

@@ -1,3 +1,5 @@
-node_modules
-etc
-dist
+dist/
+node_modules/
+.DS_Store
+npm-debug.log
+yarn-error.log
