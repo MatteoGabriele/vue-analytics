@@ -17,7 +17,8 @@ let config = {
   },
   id: null,
   userId: null,
-  ignoreRoutes: []
+  ignoreRoutes: [],
+  linkers: []
 }
 
 /**

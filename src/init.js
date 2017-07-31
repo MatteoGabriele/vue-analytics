@@ -14,9 +14,18 @@ export default function init (router, callback) {
     return
   }
 
-  const options = config.userId ? { userId: config.userId } : {}
+  let options = {}
+  const hasLinkers = config.linkers.length > 0
   const debugSource = config.debug.enabled ? '_debug' : ''
   const source = `https://www.google-analytics.com/analytics${debugSource}.js`
+
+  if (config.userId) {
+    options = { ...options, userId: config.userId }
+  }
+
+  if (hasLinkers) {
+    options = { ...options, allowLinker: true }
+  }
 
   loadScript(source, function (error, script) {
     if (error) {
@@ -47,6 +56,11 @@ export default function init (router, callback) {
         }
 
         window.ga('create', id, 'auto', options)
+
+        if (hasLinkers) {
+          window.ga('require', 'linker')
+          window.ga('linker:autoLink', config.linkers)
+        }
       })
 
       // the callback is fired when window.ga is available and before any other hit is sent
