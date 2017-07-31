@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "node ./config/scripts/dev.js",
     "build": "node ./config/scripts/build.js",
+    "prepublish": "node ./config/scripts/build.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
