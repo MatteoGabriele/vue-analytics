@@ -27,6 +27,7 @@ Vue ^2.0.0
   * [Disable pageview hit on page load](/docs/page-tracking.md#disable-pageview-hit-on-page-load)
   * [Ignore routes](/docs/page-tracking.md#ignore-routes-on-page-auto-tracking)
   * [Auto track with custom data](/docs/page-tracking.md#auto-track-with-custom-data)
+* [Cross-domain tracking](/docs/cross-domain-tracking.md)
 * [Event tracking](/docs/event-tracking.md)
 * [User timings](/docs/user-timings.md#user-timings)
 * [Exception tracking](/docs/exception-tracking.md)
