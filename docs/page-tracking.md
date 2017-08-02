@@ -103,7 +103,7 @@ Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
   router,
   autoTracking: {
-    pageviewTemplate: function (route) {
+    pageviewTemplate (route) {
       return {
         page: route.path,
         title: document.title,
