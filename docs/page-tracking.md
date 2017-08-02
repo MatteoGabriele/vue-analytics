@@ -28,7 +28,7 @@ Google Analytics docs: [page tracking](https://developers.google.com/analytics/d
 
 ### Enable page auto tracking
 
-The most easy way to track your single page application, is to pass the VueRouter instance to the plugin and let it handle everything for you
+The most easy way to track your application, is to pass the VueRouter instance to the plugin and let it handle everything for you
 
 ```js
 import Vue from 'vue'
