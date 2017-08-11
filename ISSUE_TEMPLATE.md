@@ -14,11 +14,9 @@ Tell us what actually happens.
 
 ### Environment
 
-Run these commands in the project folder and fill in their results:
+Run this command in the project folder and fill in their results:
 
-1. `npm ls vue-analytics`: 
-2. `node -v`: 
-3. `npm -v`:
+`npm ls vue-analytics`: 
 
 Then, specify:
 
