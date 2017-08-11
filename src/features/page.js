@@ -54,7 +54,7 @@ function getDataFromRouter (router, args) {
 export default function page (...args) {
   const value = args[0]
 
-  if (value.constructor.name === 'VueRouter') {
+  if ('currentRoute' in value) {
     ga('send', 'pageview', getDataFromRouter(value, args))
     return
   }
