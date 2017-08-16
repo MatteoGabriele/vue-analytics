@@ -1,5 +1,5 @@
 import config from './config'
-import { getName, getListId, warn } from './utils'
+import { getName, getListId, warn, onAnalyticsReady } from './utils'
 import features from './features/index'
 import loadScript from 'load-script'
 
@@ -33,13 +33,7 @@ export default function init (router, callback) {
       return
     }
 
-    const poll = setInterval(function () {
-      if (!window.ga) {
-        return
-      }
-
-      clearInterval(poll)
-
+    onAnalyticsReady().then(() => {
       if (config.debug.enabled) {
         window.ga_debug = {
           trace: config.debug.trace
@@ -75,6 +69,6 @@ export default function init (router, callback) {
 
       features.autoTrackException()
       features.autoTrackPage(router)
-    }, 10)
+    })
   })
 }

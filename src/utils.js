@@ -50,3 +50,17 @@ export function generateMethodName (method, id) {
   const domain = getName(id)
   return getListId().length > 1 ? `${domain}.${method}` : method
 }
+
+export const onAnalyticsReady = () => {
+  return new Promise((resolve, reject) => {
+    const poll = setInterval(() => {
+      if (!window.ga) {
+        return
+      }
+
+      clearInterval(poll)
+
+      resolve()
+    }, 10)
+  })
+}

@@ -1,7 +1,7 @@
 import { updateConfig } from './config'
 import features from './features/index'
 import init from './init'
-import { generateMethodName } from './utils'
+import { generateMethodName, onAnalyticsReady } from './utils'
 
 /**
  * Vue installer
@@ -19,4 +19,8 @@ function install (Vue, options = {}) {
   Vue.prototype.$ga = Vue.$ga = features
 }
 
-export default { install, generateMethodName }
+export default {
+  install,
+  generateMethodName,
+  onScriptLoaded: onAnalyticsReady
+}
