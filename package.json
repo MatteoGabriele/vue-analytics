@@ -15,6 +15,11 @@
     "test:watch": "jest --watch",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "keywords": [
     "Google",
     "google",
