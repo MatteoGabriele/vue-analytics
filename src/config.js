@@ -1,33 +1,26 @@
 import { merge } from './utils'
 
-/**
- * Default configuration
- */
 let config = {
+  id: null,
+  fields: {},
+  linkers: [],
+  autoTracking: {
+    exception: false,
+    page: true
+  },
   debug: {
     enabled: false,
     trace: false,
     sendHitTask: true
   },
-  autoTracking: {
-    exception: false,
-    page: true,
-    pageviewOnLoad: true,
-    pageviewTemplate: null
-  },
-  id: null,
-  userId: null,
-  ignoreRoutes: [],
-  linkers: []
+  beforeFirstHit: () => {},
+  ready: () => {}
 }
 
-/**
- * Returns the new configuation object
- * @param  {Object} params
- * @return {Object}
- */
-export function updateConfig (params) {
-  return merge(config, params)
+export function update (params) {
+  merge(config, params)
 }
+
+export const getId = () => [].concat(config.id)
 
 export default config

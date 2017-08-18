@@ -1,26 +1,21 @@
-import { updateConfig } from './config'
-import features from './features/index'
-import init from './init'
-import { generateMethodName, onAnalyticsReady } from './utils'
+import bootstrap from './bootstrap'
+import * as config from './config'
+import { onAnalyticsReady } from './utils'
 
-/**
- * Vue installer
- * @param  {Vue instance} Vue
- * @param  {Object} [options={}]
- */
-function install (Vue, options = {}) {
-  const { router } = options
+export default function install (Vue, options = {}) {
+  const libContext = require.context('./lib', true, /\.js/)
 
-  delete options.router
-  updateConfig(options)
+  Vue.prototype.$ga = Vue.$ga = libContext.keys()
+    .reduce((paths, path) => {
+      const name = path.replace(/\.js/, '').replace('./', '')
+      return Object.assign(paths, {
+        [name]: libContext(path).default
+      })
+    }, {})
 
-  init(router, options.onReady)
+  config.update(options)
 
-  Vue.prototype.$ga = Vue.$ga = features
+  bootstrap()
 }
 
-export default {
-  install,
-  generateMethodName,
-  onScriptLoaded: onAnalyticsReady
-}
+export { onAnalyticsReady }
