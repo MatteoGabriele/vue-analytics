@@ -1,0 +1,4 @@
+{
+  "presets": ["blue"],
+  "plugins": ["transform-runtime"]
+}
