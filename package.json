@@ -11,8 +11,8 @@
     "dev": "node ./config/scripts/dev.js",
     "build": "node ./config/scripts/build.js",
     "prepublish": "node ./config/scripts/build.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --config ./jest.config.js",
+    "test:watch": "jest --config ./jest.config.js --watch --verbose",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "config": {
@@ -46,16 +46,19 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-blue": "^1.0.0-beta.29",
+    "blue-jest": "^1.5.0",
     "commitizen": "^2.9.6",
     "compression-webpack-plugin": "^0.4.0",
     "cz-conventional-changelog": "2.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "jest": "^20.0.0",
     "ora": "^1.2.0",
+    "semantic-release": "^7.0.1",
+    "vue": "^2.4.2",
     "webpack": "^3.4.1",
-    "webpack-merge": "^4.1.0",
-    "semantic-release": "^7.0.1"
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "load-script": "^1.0.0"
