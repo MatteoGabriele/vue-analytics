@@ -11,7 +11,8 @@ let config = {
     exception: false,
     page: true,
     pageviewOnLoad: true,
-    pageviewTemplate: null
+    pageviewTemplate: null,
+    untracked: true
   },
 
   debug: {
@@ -23,7 +24,7 @@ let config = {
   beforeFirstHit: noop,
   ready: noop,
 
-  __untracked: []
+  untracked: []
 }
 
 export function update (params) {

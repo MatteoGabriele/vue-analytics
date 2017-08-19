@@ -5,13 +5,12 @@ import createTrackers from './create-trackers'
 import query from 'lib/query'
 import { startAutoTracking as pageAutoTracking } from 'lib/page'
 import { startAutoTracking as exceptionAutoTracking } from 'lib/exception'
-import { update } from './config'
 
 function trackUntracked () {
-  const untracked = config.__untracked
+  const { untracked, autoTracking } = config
   let utrackedLen = untracked.length
 
-  if (!utrackedLen) {
+  if (!utrackedLen || !autoTracking.untracked) {
     return
   }
 

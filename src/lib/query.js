@@ -1,19 +1,15 @@
-import { getId, update } from '../config'
+import config, { getId } from '../config'
 import { getMethod } from '../helpers'
-
-const untraked = []
 
 export default function query (method, ...args) {
   getId().forEach(function (id) {
     if (typeof window.ga === 'undefined') {
-      untraked.push({
+      config.untracked.push({
         method: getMethod(method, id),
         arguments: [...args]
       })
       return
     }
-
-    update({ __untracked: untraked })
 
     window.ga(getMethod(method, id), ...args)
   })
