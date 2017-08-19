@@ -1,7 +1,18 @@
+import query from 'lib/query'
+
 export function startAutoTracking () {
-  console.log('exception auto tracking enabled!')
+  if (!config.autoTracking.exception) {
+    return
+  }
+
+  window.onerror = function (error) {
+    exception(error.message || error)
+  }
 }
 
-export default function exception () {
-
+export default function exception (error, fatal = false) {
+  query('send', 'exception', {
+    exDescription: error,
+    exFatal: fatal
+  })
 }
