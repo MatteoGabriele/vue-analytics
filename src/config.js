@@ -1,12 +1,16 @@
-import { merge } from './utils'
+import { merge } from './helpers'
 
 let config = {
   id: null,
+  router: null,
   fields: {},
+  ignoreRoutes: [],
   linkers: [],
   autoTracking: {
     exception: false,
-    page: true
+    page: true,
+    pageviewOnLoad: true,
+    pageviewTemplate: null
   },
   debug: {
     enabled: false,
