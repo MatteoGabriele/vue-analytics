@@ -18,7 +18,9 @@ let config = {
     sendHitTask: true
   },
   beforeFirstHit: () => {},
-  ready: () => {}
+  ready: () => {},
+
+  __untracked: []
 }
 
 export function update (params) {

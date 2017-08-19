@@ -1,7 +1,5 @@
 import set from 'lib/set'
 import query from 'lib/query'
-import * as page from 'lib/page'
-import * as exception from 'lib/exception'
 import config, { getId } from './config'
 import { getTracker } from './helpers'
 
@@ -25,7 +23,4 @@ export default function createTrackers () {
   if (!config.debug.sendHitTask) {
     set('sendHitTask', null)
   }
-
-  page.startAutoTracking()
-  exception.startAutoTracking()
 }
