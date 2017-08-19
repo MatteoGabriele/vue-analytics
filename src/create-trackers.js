@@ -3,7 +3,7 @@ import query from 'lib/query'
 import * as page from 'lib/page'
 import * as exception from 'lib/exception'
 import config, { getId } from './config'
-import { getTracker } from './utils'
+import { getTracker } from './helpers'
 
 export default function createTrackers () {
   const ids = getId()

@@ -1,4 +1,6 @@
-import { getId } from './config'
+import config, { getId } from './config'
+
+export function noop () {}
 
 export function merge (obj, src) {
   Object.keys(src).forEach(function (key) {
@@ -35,5 +37,19 @@ export function getMethod (name, trackerId) {
     return `${domain}.${name}`
   }
 
-  return method
+  return name
+}
+
+export function getQueryString (queryMap) {
+  const queryString = Object.keys(queryMap)
+    .reduce(function (queryString, param, index, array) {
+      const isLast = index === (array.length - 1)
+      queryString += `${param}=${queryMap[param]}${isLast ? '' : '&'}`
+    }, '')
+
+  return (queryString === '') ? '' : '?' + queryString
+}
+
+export function isRouteIgnored (name) {
+  return config.ignoreRoutes.indexOf(name) !== -1
 }

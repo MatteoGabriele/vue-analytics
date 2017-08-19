@@ -1,6 +1,6 @@
 import bootstrap from './bootstrap'
 import * as config from './config'
-import { onAnalyticsReady } from './utils'
+import { onAnalyticsReady } from './helpers'
 
 export default function install (Vue, options = {}) {
   const libContext = require.context('./lib', true, /\.js/)

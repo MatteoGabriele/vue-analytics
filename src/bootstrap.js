@@ -1,5 +1,5 @@
 import loadScript from 'load-script'
-import { onAnalyticsReady } from './utils'
+import { onAnalyticsReady } from './helpers'
 import config from './config'
 import createTrackers from './create-trackers'
 
