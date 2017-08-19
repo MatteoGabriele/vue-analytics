@@ -1,4 +1,4 @@
-import { merge } from './helpers'
+import { merge, noop } from './helpers'
 
 let config = {
   id: null,
@@ -6,19 +6,22 @@ let config = {
   fields: {},
   ignoreRoutes: [],
   linkers: [],
+
   autoTracking: {
     exception: false,
     page: true,
     pageviewOnLoad: true,
     pageviewTemplate: null
   },
+
   debug: {
     enabled: false,
     trace: false,
     sendHitTask: true
   },
-  beforeFirstHit: () => {},
-  ready: () => {},
+
+  beforeFirstHit: noop,
+  ready: noop,
 
   __untracked: []
 }
