@@ -1,8 +1,12 @@
-import ga from '../ga'
+import { getId } from '../config'
+import { getMethod } from '../helpers'
 
-/**
- * Plain access to GoogleAnalytics api
- * It is possible to pass everything: mostly used when there's no implementation in the plugin api
- * @param  {any} args
- */
-export default ga
+export default function query (method, ...args) {
+  if (typeof window.ga === 'undefined') {
+    return
+  }
+
+  getId().forEach(function (id) {
+    window.ga(getMethod(method, id), ...args)
+  })
+}
