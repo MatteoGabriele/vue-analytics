@@ -22,15 +22,14 @@ export default function bootstrap () {
     }
 
     onAnalyticsReady().then(() => {
-      // add Google Analytics trackers
-      // we need to add trackers first to be able to track
+      // we first need to add trackers to be able to track
       // every other aspect of the application
       createTrackers()
       // add exceptions auto tracking
       exceptionAutoTracking()
       // add page auto tracking
       pageAutoTracking()
-      // track every untracked events
+      // track every untracked events before analytics was ready
       untracked()
       // trigger the plugin `ready` callback
       ready()
