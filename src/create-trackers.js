@@ -6,6 +6,12 @@ import { getTracker } from './helpers'
 export default function createTrackers () {
   const ids = getId()
 
+  if (config.debug.enabled) {
+    window.ga_debug = {
+      trace: config.debug.trace
+    }
+  }
+
   ids.forEach(function (id) {
     const name = getTracker(id)
     const options = ids.length > 1 ? { ...config.fields, name } : config.fields
