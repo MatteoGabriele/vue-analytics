@@ -2,24 +2,9 @@ import loadScript from 'load-script'
 import { onAnalyticsReady } from './helpers'
 import config from './config'
 import createTrackers from './create-trackers'
-import query from 'lib/query'
+import untracked from 'lib/untracked'
 import { startAutoTracking as pageAutoTracking } from 'lib/page'
 import { startAutoTracking as exceptionAutoTracking } from 'lib/exception'
-
-function trackUntracked () {
-  const { untracked, autoTracking } = config
-  let utrackedLen = untracked.length
-
-  if (!utrackedLen || !autoTracking.untracked) {
-    return
-  }
-
-  while (utrackedLen--) {
-    const item = untracked[utrackedLen]
-    query(item.method, ...item.arguments)
-    untracked.splice(utrackedLen, 1)
-  }
-}
 
 export default function bootstrap () {
   const { id, debug, ready } = config
@@ -46,7 +31,7 @@ export default function bootstrap () {
       // add page auto tracking
       pageAutoTracking()
       // track every untracked events
-      trackUntracked()
+      untracked()
       // trigger the plugin `ready` callback
       ready()
     })
