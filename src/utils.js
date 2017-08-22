@@ -51,10 +51,14 @@ export function generateMethodName (method, id) {
   return getListId().length > 1 ? `${domain}.${method}` : method
 }
 
+export function isSSR () {
+  return typeof window === 'undefined'
+}
+
 export const onAnalyticsReady = () => {
   return new Promise((resolve, reject) => {
     const poll = setInterval(() => {
-      if (!window.ga) {
+      if (isSSR() || !window.ga) {
         return
       }
 

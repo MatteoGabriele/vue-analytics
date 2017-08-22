@@ -1,5 +1,5 @@
 import ga from '../ga'
-import { warn } from '../utils'
+import { warn, isSSR } from '../utils'
 
 /**
  * Returns a querystring from an object
@@ -52,6 +52,10 @@ function getDataFromRouter (router, args) {
  * @param  {any} args
  */
 export default function page (...args) {
+  if (isSSR()) {
+    return
+  }
+
   const value = args[0]
 
   if (typeof value !== 'string' && 'currentRoute' in value) {
