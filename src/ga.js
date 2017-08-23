@@ -1,7 +1,8 @@
 import { getListId, generateMethodName } from './utils'
+import { isSSR } from './utils'
 
 export default function ga (method, ...args) {
-  if (typeof window.ga === 'undefined') {
+  if (isSSR() || typeof window.ga === 'undefined') {
     return
   }
 

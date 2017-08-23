@@ -1,8 +1,9 @@
 import config from '../config'
 import exception from './exception'
+import { isSSR } from '../utils'
 
 export default function autoTrackException () {
-  if (!config.autoTracking.exception) {
+  if (!config.autoTracking.exception || isSSR()) {
     return
   }
 

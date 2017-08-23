@@ -1,10 +1,10 @@
 import config from './config'
-import { getName, getListId, warn, onAnalyticsReady } from './utils'
+import { isSSR, getName, getListId, warn, onAnalyticsReady } from './utils'
 import features from './features/index'
 import loadScript from 'load-script'
 
 export default function init (router, callback) {
-  if (config.manual) {
+  if (isSSR()) {
     return
   }
 

@@ -1,12 +1,12 @@
 import ga from '../ga'
-import { warn } from '../utils'
+import { warn, isSSR } from '../utils'
 
 /**
  * Updating tracker data
  * @param {any} data
  */
 export default function set (...data) {
-  if (typeof window.ga === 'undefined') {
+  if (isSSR() || typeof window.ga === 'undefined') {
     return
   }
 
