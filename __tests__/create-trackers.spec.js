@@ -29,7 +29,20 @@ describe('create trackers', () => {
     })
   })
 
-  it ('should not send hit when sendHitTask is false', () => {
+  it ('should add linkers if list is not empty', function () {
+    mockUpdate({
+      id: 'UA-1234-1',
+      linkers: ['www.google.com', 'www.bing.com']
+    })
+
+    createTrackers()
+
+    expect(config.linkers).toHaveLength(2)
+    expect(window.ga).toBeCalledWith('require', 'linker')
+    expect(window.ga).toBeCalledWith('linker:autoLink', config.linkers)
+  })
+
+  it ('should set the sendHitTask property', () => {
     mockUpdate({
       id: 'UA-1234-1',
       debug: {
@@ -42,15 +55,18 @@ describe('create trackers', () => {
     expect(window.ga).toBeCalledWith('set', 'sendHitTask', null)
   })
 
-  it ('should add linkers', function () {
+  it ('should set the trace property if debug is enabled', () => {
     mockUpdate({
       id: 'UA-1234-1',
-      linkers: ['www.google.com', 'www.bing.com']
+      debug: {
+        enabled: true,
+        trace: true
+      }
     })
 
     createTrackers()
 
-    expect(window.ga).toBeCalledWith('require', 'linker')
-    expect(window.ga).toBeCalledWith('linker:autoLink', config.linkers)
+    expect(config.debug.enabled).toEqual(true)
+    expect(window.ga_debug.trace).toEqual(true)
   })
 })
