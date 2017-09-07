@@ -42,7 +42,7 @@ describe('create trackers', () => {
     expect(window.ga).toBeCalledWith('linker:autoLink', config.linkers)
   })
 
-  it ('should set the sendHitTask property', () => {
+  it ('should stop sending hit if sendHitTask is set to false', () => {
     mockUpdate({
       id: 'UA-1234-1',
       debug: {
@@ -52,6 +52,7 @@ describe('create trackers', () => {
 
     createTrackers()
 
+    expect(config.debug.sendHitTask).toBe(false)
     expect(window.ga).toBeCalledWith('set', 'sendHitTask', null)
   })
 
@@ -66,7 +67,7 @@ describe('create trackers', () => {
 
     createTrackers()
 
-    expect(config.debug.enabled).toEqual(true)
-    expect(window.ga_debug.trace).toEqual(true)
+    expect(config.debug.enabled).toBe(true)
+    expect(window.ga_debug.trace).toBe(true)
   })
 })
