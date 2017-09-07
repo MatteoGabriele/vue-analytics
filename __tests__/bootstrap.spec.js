@@ -1,5 +1,3 @@
-jest.mock('load-script')
-
 import Vue from 'vue'
 import VueAnalytics, { onAnalyticsReady } from '../src/index'
 

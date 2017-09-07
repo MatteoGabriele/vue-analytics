@@ -7,9 +7,11 @@ export default function page (...args) {
   if (typeof args[0] !== 'string' && 'currentRoute' in args[0]) {
     const route = args[0].currentRoute
     const queryString = getQueryString(route.query)
+    const path = route.path + queryString
 
+    set('page', path)
     query('send', 'pageview', {
-      page: route.path + queryString,
+      page: path,
       title: route.name,
       location: window.location.href,
       ...(typeof args[1] === 'function') && { hitCallback: args[1] }

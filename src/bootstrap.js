@@ -24,14 +24,14 @@ export default function bootstrap () {
       // we first need to add trackers to be able to track
       // every other aspect of the application
       createTrackers()
+      // trigger the plugin `ready` callback right after the trackers
+      ready()
       // add exceptions auto tracking
       exceptionAutoTracking()
       // add page auto tracking
       pageAutoTracking()
       // track every untracked events before analytics was ready
       untracked()
-      // trigger the plugin `ready` callback
-      ready()
     })
   })
 }
