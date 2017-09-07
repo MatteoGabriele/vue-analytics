@@ -64,3 +64,10 @@ describe('getQueryString', () => {
     expect(queryString).toEqual('')
   })
 })
+
+describe('isRouteIgnored', () => {
+  it ('should return true if home route is added to ignoreRoutes list', () => {
+    mockUpdate({ id: 'UA-1234-5', ignoreRoutes: ['home'] })
+    expect(helpers.isRouteIgnored('home')).toBe(true)
+  })
+})
