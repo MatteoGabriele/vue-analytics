@@ -1,6 +1,7 @@
-import * as helpers from '../src/helpers'
+jest.mock('config')
 
-const id = 'UA-1234-5'
+import * as helpers from '../src/helpers'
+import config, { mockGetId, mockUpdate } from 'config'
 
 describe('noop', () => {
   it ('should be a function', () => {
@@ -25,9 +26,25 @@ describe('merge', () => {
   })
 })
 
+describe('getMethod', () => {
+  it ('should return the plain method name if single tracker', () => {
+    mockUpdate({ id: 'UA-1234-5' })
+
+    const method = helpers.getMethod('send', config.id)
+    expect(method).toEqual('send')
+  })
+
+  it ('should return the method name prepended with tracker name if multiple trackers', () => {
+    mockUpdate({ id: ['UA-1234-5', 'UA-1234-6'] })
+
+    const method = helpers.getMethod('send', 'UA-1234-5')
+    expect(method).toEqual('UA12345.send')
+  })
+})
+
 describe('getTracker', () => {
   it ('should return the tracking id without dashes', () => {
-    const tracker1 = helpers.getTracker(id)
+    const tracker1 = helpers.getTracker('UA-1234-5')
     expect(tracker1).toEqual('UA12345')
   })
 })
