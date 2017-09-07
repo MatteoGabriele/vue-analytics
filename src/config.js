@@ -38,7 +38,7 @@ export function reset () {
 }
 
 export function getId () {
-  return [].concat(config.id)
+  return !config.id ? [] : [].concat(config.id)
 }
 
 export default config
