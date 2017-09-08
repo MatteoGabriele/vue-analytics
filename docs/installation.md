@@ -14,6 +14,7 @@ Vue.use(VueAnalytics, {
   id: 'UA-XXX-X'
 })
 ```
-
-**It's possible to use the Analytics library using a Vue instance or accessing it directly in the scope of your component**
-
+### Important 
+A problem in the current release is the time between action fired and script loaded.
+In the next release I've introduced the untracked feature that will store event fired before Google script is properly loaded and then re-fired them as soon as window.ga is injected in your application.
+To avoid this issue please follow this [instructions](https://github.com/MatteoGabriele/vue-analytics/blob/master/docs/when-google-analytics-is-loaded.md)
