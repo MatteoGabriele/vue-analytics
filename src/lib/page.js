@@ -30,7 +30,6 @@ export function trackRoute (proxy, router) {
     return
   }
 
-  set('page', currentRoute.path)
   page(proxy ? proxy(currentRoute) : router)
 }
 
