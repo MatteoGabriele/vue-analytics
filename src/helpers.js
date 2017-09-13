@@ -21,7 +21,7 @@ export function getTracker (trackerId) {
 export function onAnalyticsReady () {
   return new Promise((resolve, reject) => {
     const poll = setInterval(() => {
-      if (!window.ga) {
+      if (typeof window === 'undefined' || !window.ga) {
         return
       }
 
