@@ -30,6 +30,7 @@ npm install vue-analytics
 ## User guide
 
 * [Get started](/docs/installation.md)
+* [Untracked hits](/docs/untracked-hits.md)
 * [Page tracking](/docs/page-tracking.md)
   * [Enable page auto tracking](/docs/page-tracking.md#enable-page-auto-tracking)
   * [Disable pageview hit on page load](/docs/page-tracking.md#disable-pageview-hit-on-page-load)

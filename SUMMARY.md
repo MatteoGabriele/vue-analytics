@@ -15,4 +15,5 @@
 * [Analytics script callback](docs/when-google-analytics-is-loaded.md)
 * [Custom methods](docs/custom-methods.md)
 * Cross-domain tracking
+* [Untracked hits](untracked-hits.md)
 

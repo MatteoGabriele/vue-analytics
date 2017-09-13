@@ -16,6 +16,7 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
+
 It is also possible to use the `onScriptLoaded` method, which returns a promise.
 
 ```js
@@ -28,3 +29,4 @@ const App = new Vue({ ... })
 onAnalyticsReady.then(() => {
   App.$mount('#app')
 })
+```
