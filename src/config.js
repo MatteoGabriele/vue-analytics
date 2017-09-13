@@ -1,6 +1,6 @@
 import { merge, noop } from './helpers'
 
-let config = {
+const defaultConfig = {
   id: null,
   router: null,
   fields: {},
@@ -27,10 +27,18 @@ let config = {
   untracked: []
 }
 
+let config = { ...defaultConfig }
+
 export function update (params) {
   merge(config, params)
 }
 
-export const getId = () => [].concat(config.id)
+export function reset () {
+  config = { ...defaultConfig }
+}
+
+export function getId () {
+  return !config.id ? [] : [].concat(config.id)
+}
 
 export default config

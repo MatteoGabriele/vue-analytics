@@ -3,15 +3,22 @@ import * as config from './config'
 import { onAnalyticsReady } from './helpers'
 
 export default function install (Vue, options = {}) {
-  const libContext = require.context('./lib', true, /\.js/)
-
-  Vue.prototype.$ga = Vue.$ga = libContext.keys()
-    .reduce((paths, path) => {
-      const name = path.replace(/\.js/, '').replace('./', '')
-      return Object.assign(paths, {
-        [name]: libContext(path).default
-      })
-    }, {})
+  Vue.prototype.$ga = Vue.$ga = [
+    'event',
+    'exception',
+    'page',
+    'query',
+    'require',
+    'set',
+    'social',
+    'time',
+    'untracked'
+  ].reduce((features, feature) => {
+    return {
+      ...features,
+      [feature]: require(`./lib/${feature}`).default
+    }
+  }, {})
 
   config.update(options)
 

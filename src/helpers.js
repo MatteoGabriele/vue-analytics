@@ -42,12 +42,13 @@ export function getMethod (name, trackerId) {
 
 export function getQueryString (queryMap) {
   const queryString = Object.keys(queryMap)
-    .reduce(function (queryString, param, index, array) {
-      const isLast = index === (array.length - 1)
-      queryString += `${param}=${queryMap[param]}${isLast ? '' : '&'}`
+    .reduce((string, key, index, keys) => {
+      const isLastKey = index === (keys.length - 1)
+      string += `${key}=${queryMap[key]}${isLastKey ? '' : '&'}`
+      return string
     }, '')
 
-  return (queryString === '') ? '' : '?' + queryString
+  return queryString !== '' ? `?${queryString}` : ''
 }
 
 export function isRouteIgnored (name) {
