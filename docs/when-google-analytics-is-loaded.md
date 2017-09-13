@@ -8,7 +8,10 @@ always remember that the debug version is more heavy than the production one and
 import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueAnalytics, {
-  onReady () {
+  beforeFirstHit () {
+    // this is right after the tracker and before every other hit to Google Analytics
+  },
+  ready () {
     // here Google Analaytics is ready to track!
   }
 })
@@ -19,12 +22,12 @@ I suggest to use this method and mount the application after the promise is reso
 **Unfortunately if the application starts tracking but the Analytics object is not yet ready, the plugin won't be able to work.**
 
 ```js
-import VueAnalytics from 'vue-analytics'
+import VueAnalytics, { onAnalyticsReady } from 'vue-analytics'
 
 Vue.use(VueAnalytics, { ... })
 
 const App = new Vue({ ... })
 
-VueAnalytics.onScriptLoaded().then(() => {
+onAnalyticsReady.then(() => {
   App.$mount('#app')
 })
