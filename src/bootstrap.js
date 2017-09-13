@@ -7,6 +7,10 @@ import { startAutoTracking as pageAutoTracking } from 'lib/page'
 import { startAutoTracking as exceptionAutoTracking } from 'lib/exception'
 
 export default function bootstrap () {
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const { id, debug, ready } = config
   const filename = debug.enabled ? 'analytics_debug.js' : 'analytics.js'
 
