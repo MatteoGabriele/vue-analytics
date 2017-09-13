@@ -29,41 +29,39 @@ window.ga = jest.fn()
 
 let $vm
 
-describe('page', () => {
-  beforeEach(done => {
-    Vue.use(VueRouter)
+beforeEach(done => {
+  Vue.use(VueRouter)
 
-    const router = new VueRouter({
-      mode: 'hash',
-      routes
-    })
-
-    Vue.use(VueAnalytics, {
-      id: 'UA-1234-5',
-      router
-    })
-
-    $vm = new Vue({
-      router,
-      render: (h) => h('router-view')
-    })
-
-    $vm.$mount()
-
-    Vue.nextTick(done)
+  const router = new VueRouter({
+    mode: 'hash',
+    routes
   })
 
-  it ('should track a page', () => {
-    $vm.$ga.page('/')
-
-    expect(window.ga).not.toBeCalledWith('set', 'page', '/')
-    expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+  Vue.use(VueAnalytics, {
+    id: 'UA-1234-5',
+    router
   })
 
-  it ('should set and track page with a VueRouter instance', () => {
-    $vm.$ga.page($vm.$router)
-
-    expect(window.ga).toBeCalledWith('set', 'page', '/')
-    expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+  $vm = new Vue({
+    router,
+    render: (h) => h('router-view')
   })
+
+  $vm.$mount()
+
+  Vue.nextTick(done)
+})
+
+it ('should track a page', () => {
+  $vm.$ga.page('/')
+
+  expect(window.ga).not.toBeCalledWith('set', 'page', '/')
+  expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+})
+
+it ('should set and track page with a VueRouter instance', () => {
+  $vm.$ga.page($vm.$router)
+
+  expect(window.ga).toBeCalledWith('set', 'page', '/')
+  expect(window.ga).toBeCalledWith('send', 'pageview', '/')
 })

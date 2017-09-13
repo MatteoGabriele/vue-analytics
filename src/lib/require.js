@@ -1,5 +1,10 @@
 import query from 'lib/query'
 
-export default function require (value) {
-  query('require', value)
+export default function require (...args) {
+  if (args.length == 2) {
+    query('require', args[0], args[1])
+    return
+  }
+
+  query('require', args[0])
 }
