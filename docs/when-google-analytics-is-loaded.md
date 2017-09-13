@@ -17,9 +17,6 @@ Vue.use(VueAnalytics, {
 })
 ```
 It is also possible to use the `onScriptLoaded` method, which returns a promise.
-I suggest to use this method and mount the application after the promise is resolved if you don't want to miss anything in your tracking plan.
-
-**Unfortunately if the application starts tracking but the Analytics object is not yet ready, the plugin won't be able to work.**
 
 ```js
 import VueAnalytics, { onAnalyticsReady } from 'vue-analytics'
