@@ -11,7 +11,10 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js'],
+    alias: {
+      lib: path.resolve(__dirname, '../src/lib')
+    }
   },
   module: {
     rules: [

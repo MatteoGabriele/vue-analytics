@@ -1,26 +1,28 @@
-import { updateConfig } from './config'
-import features from './features/index'
-import init from './init'
-import { generateMethodName, onAnalyticsReady } from './utils'
+import bootstrap from './bootstrap'
+import * as config from './config'
+import { onAnalyticsReady } from './helpers'
 
-/**
- * Vue installer
- * @param  {Vue instance} Vue
- * @param  {Object} [options={}]
- */
-function install (Vue, options = {}) {
-  const { router } = options
+export default function install (Vue, options = {}) {
+  Vue.prototype.$ga = Vue.$ga = [
+    'event',
+    'exception',
+    'page',
+    'query',
+    'require',
+    'set',
+    'social',
+    'time',
+    'untracked'
+  ].reduce((features, feature) => {
+    return {
+      ...features,
+      [feature]: require(`./lib/${feature}`).default
+    }
+  }, {})
 
-  delete options.router
-  updateConfig(options)
+  config.update(options)
 
-  init(router, options.onReady)
-
-  Vue.prototype.$ga = Vue.$ga = features
+  bootstrap()
 }
 
-export default {
-  install,
-  generateMethodName,
-  onScriptLoaded: onAnalyticsReady
-}
+export { onAnalyticsReady }

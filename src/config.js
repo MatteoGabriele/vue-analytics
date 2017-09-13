@@ -1,33 +1,44 @@
-import { merge } from './utils'
+import { merge, noop } from './helpers'
 
-/**
- * Default configuration
- */
-let config = {
+const defaultConfig = {
+  id: null,
+  router: null,
+  fields: {},
+  ignoreRoutes: [],
+  linkers: [],
+
+  autoTracking: {
+    exception: false,
+    page: true,
+    pageviewOnLoad: true,
+    pageviewTemplate: null,
+    untracked: true
+  },
+
   debug: {
     enabled: false,
     trace: false,
     sendHitTask: true
   },
-  autoTracking: {
-    exception: false,
-    page: true,
-    pageviewOnLoad: true,
-    pageviewTemplate: null
-  },
-  id: null,
-  userId: null,
-  ignoreRoutes: [],
-  linkers: []
+
+  beforeFirstHit: noop,
+  ready: noop,
+
+  untracked: []
 }
 
-/**
- * Returns the new configuation object
- * @param  {Object} params
- * @return {Object}
- */
-export function updateConfig (params) {
-  return merge(config, params)
+let config = { ...defaultConfig }
+
+export function update (params) {
+  merge(config, params)
+}
+
+export function reset () {
+  config = { ...defaultConfig }
+}
+
+export function getId () {
+  return !config.id ? [] : [].concat(config.id)
 }
 
 export default config

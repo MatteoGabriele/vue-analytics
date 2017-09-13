@@ -9,6 +9,8 @@
  <a href="https://www.npmjs.com/package/vue-analytics">
   <img src="https://img.shields.io/npm/dm/vue-analytics.svg" />
  <a/>
+ 
+ <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
 </p>
 
 # vue-analytics
