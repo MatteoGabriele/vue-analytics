@@ -21,6 +21,9 @@ const defaultConfig = {
     sendHitTask: true
   },
 
+  checkDuplicatedScript: false,
+  disableScriptLoader: false,
+
   beforeFirstHit: noop,
   ready: noop,
 
