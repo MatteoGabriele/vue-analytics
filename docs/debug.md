@@ -6,6 +6,7 @@ Implements Google Analaytics debug library.
 
 ```js
 Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
   debug: {
     enabled: true,
     trace: false,
@@ -15,4 +16,3 @@ Vue.use(VueAnalytics, {
 ```
 
 Google Analytics docs: [debugging](https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging)
-

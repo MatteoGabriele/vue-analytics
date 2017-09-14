@@ -9,7 +9,7 @@
  <a href="https://www.npmjs.com/package/vue-analytics">
   <img src="https://img.shields.io/npm/dm/vue-analytics.svg" />
  <a/>
- 
+
  <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
 </p>
 
@@ -30,6 +30,7 @@ npm install vue-analytics
 ## User guide
 
 * [Get started](/docs/installation.md)
+* [How to load Google Analytics](/docs/script-loader.md)
 * [Untracked hits](/docs/untracked-hits.md)
 * [Page tracking](/docs/page-tracking.md)
   * [Enable page auto tracking](/docs/page-tracking.md#enable-page-auto-tracking)
@@ -40,7 +41,7 @@ npm install vue-analytics
 * [Event tracking](/docs/event-tracking.md)
 * [User timings](/docs/user-timings.md#user-timings)
 * [Exception tracking](/docs/exception-tracking.md)
-  * [Enable exception auto tracking](/docs/exception-tracking.md#enable-exception-auto-tracking) 
+  * [Enable exception auto tracking](/docs/exception-tracking.md#enable-exception-auto-tracking)
 * [Require](/docs/require.md)
 * [Set](/docs/set.md)
 * [Social interactions](/docs/social-interactions.md)
@@ -55,4 +56,3 @@ npm install vue-analytics
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-analytics/issues](https://github.com/MatteoGabriele/vue-analytics/issues)
 
 Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele)
-

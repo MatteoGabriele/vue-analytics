@@ -14,6 +14,16 @@ export function merge (obj, src) {
   return obj
 }
 
+export function hasGoogleScript () {
+  const scriptTags = Array.prototype.slice.call(
+    document.getElementsByTagName('script')
+  ).filter(script => {
+    return script.src.indexOf('analytics') !== -1
+  })
+
+  return scriptTags.length > 0
+}
+
 export function getTracker (trackerId) {
   return trackerId.replace(/-/gi, '')
 }

@@ -1,6 +1,6 @@
 import load from 'load-script'
-import { onAnalyticsReady } from './helpers'
-import config from './config'
+import { onAnalyticsReady, hasGoogleScript } from './helpers'
+import config, { update } from './config'
 import createTrackers from './create-trackers'
 import untracked from 'lib/untracked'
 import { startAutoTracking as pageAutoTracking } from 'lib/page'
@@ -11,31 +11,44 @@ export default function bootstrap () {
     return
   }
 
-  const { id, debug, ready } = config
-  const filename = debug.enabled ? 'analytics_debug.js' : 'analytics.js'
+  const { id, ready, debug, checkDuplicatedScript, disableScriptLoader } = config
+  const filename = debug.enabled ? 'analytics_debug' : 'analytics'
+  const googleScript = `https://www.google-analytics.com/${filename}.js`
 
   if (!id) {
     throw new Error('[vue-analytics] Please enter a Google Analytics tracking ID')
   }
 
-  load(`https://www.google-analytics.com/${filename}`, function (error) {
-    if (error) {
-      console.error('[vue-analytics] It\'s not possible to load Google Analytics script')
-      return
+  return new Promise((resolve, reject) => {
+    if ((checkDuplicatedScript && hasGoogleScript(googleScript)) || disableScriptLoader) {
+      return resolve()
     }
 
-    onAnalyticsReady().then(() => {
-      // we first need to add trackers to be able to track
-      // every other aspect of the application
-      createTrackers()
-      // trigger the plugin `ready` callback right after the trackers
-      ready()
-      // add exceptions auto tracking
-      exceptionAutoTracking()
-      // add page auto tracking
-      pageAutoTracking()
-      // track every untracked events before analytics was ready
-      untracked()
+    load(googleScript, function (error) {
+      if (error) {
+        return reject('[vue-analytics] It\'s not possible to load Google Analytics script')
+      }
+
+      return resolve()
     })
+  })
+  .then(() => {
+    return onAnalyticsReady()
+  })
+  .then(() => {
+    // we first need to add trackers to be able to track
+    // every other aspect of the application
+    createTrackers()
+    // trigger the plugin `ready` callback right after the trackers
+    ready()
+    // add exceptions auto tracking
+    exceptionAutoTracking()
+    // add page auto tracking
+    pageAutoTracking()
+    // track every untracked events before analytics was ready
+    untracked()
+  })
+  .catch(error => {
+    console.error(error)
   })
 }
