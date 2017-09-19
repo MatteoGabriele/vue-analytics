@@ -32,20 +32,12 @@ export default function bootstrap () {
       return resolve()
     })
   })
+  .then(() => onAnalyticsReady())
   .then(() => {
-    return onAnalyticsReady()
-  })
-  .then(() => {
-    // we first need to add trackers to be able to track
-    // every other aspect of the application
     createTrackers()
-    // trigger the plugin `ready` callback right after the trackers
     ready()
-    // add exceptions auto tracking
     exceptionAutoTracking()
-    // add page auto tracking
     pageAutoTracking()
-    // track every untracked events before analytics was ready
     untracked()
   })
   .catch(error => {
