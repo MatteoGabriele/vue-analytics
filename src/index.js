@@ -1,27 +1,30 @@
 import bootstrap from './bootstrap'
-import * as config from './config'
+import { update } from './config'
 import { onAnalyticsReady } from './helpers'
+import event from 'lib/event'
+import exception from 'lib/exception'
+import page from 'lib/page'
+import query from 'lib/query'
+import require from 'lib/require'
+import set from 'lib/set'
+import social from 'lib/social'
+import time from 'lib/time'
+import untracked from 'lib/untracked'
 
 export default function install (Vue, options = {}) {
-  Vue.prototype.$ga = Vue.$ga = [
-    'event',
-    'exception',
-    'page',
-    'query',
-    'require',
-    'set',
-    'social',
-    'time',
-    'untracked'
-  ].reduce((features, feature) => {
-    return {
-      ...features,
-      [feature]: require(`./lib/${feature}`).default
-    }
-  }, {})
+  Vue.prototype.$ga = Vue.$ga = {
+    event,
+    exception,
+    page,
+    query,
+    require,
+    set,
+    social,
+    time,
+    untracked
+  }
 
-  config.update(options)
-
+  update(options)
   bootstrap()
 }
 
