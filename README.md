@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/npm/dm/vue-analytics.svg" />
  <a/>
 
- <a href="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master">
+ <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
 </p>
