@@ -5,9 +5,10 @@ import { noop, getQueryString, isRouteIgnored } from '../helpers'
 
 export default function page (...args) {
   if (typeof args[0] !== 'string' && 'currentRoute' in args[0]) {
+    const { transformRouteParams } = config.autoTracking
     const route = args[0].currentRoute
     const queryString = getQueryString(route.query)
-    const path = route.path + queryString
+    const path = route.path + (transformRouteParams ? queryString : '')
 
     set('page', path)
     query('send', 'pageview', {

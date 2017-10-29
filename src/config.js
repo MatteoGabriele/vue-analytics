@@ -12,6 +12,7 @@ const defaultConfig = {
   autoTracking: {
     exception: false,
     page: true,
+    transformRouteParams: true,
     pageviewOnLoad: true,
     pageviewTemplate: null,
     untracked: true
