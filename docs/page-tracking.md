@@ -126,7 +126,6 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
-```
 
 
 
