@@ -2,6 +2,7 @@ import load from 'load-script'
 import { onAnalyticsReady, hasGoogleScript } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
+import addSetters from './add-setters'
 import untracked from 'lib/untracked'
 import { startAutoTracking as pageAutoTracking } from 'lib/page'
 import { startAutoTracking as exceptionAutoTracking } from 'lib/exception'
@@ -35,6 +36,7 @@ export default function bootstrap () {
   .then(() => onAnalyticsReady())
   .then(() => {
     createTrackers()
+    addSetters()
     ready()
     exceptionAutoTracking()
     pageAutoTracking()

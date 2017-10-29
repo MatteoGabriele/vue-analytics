@@ -7,6 +7,8 @@ const defaultConfig = {
   ignoreRoutes: [],
   linkers: [],
 
+  set: [],
+
   autoTracking: {
     exception: false,
     page: true,
