@@ -114,7 +114,19 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-## 
+## Avoid trasnforming route params into querystring
+It is possible to avoid route params to be sent as querystring using the `transformRouteParams` property
+
+```js
+```js
+Vue.use(VueAnalytics, {
+  router,
+  autoTracking: {
+    transformRouteParmas: false
+  }
+})
+```
+```
 
 
 
