@@ -12,5 +12,17 @@ also possible to pass an object literal
 this.$ga.set({ fieldName, fieldName })
 ```
 
+### Set multiple fields before first hit
+Adding the `set` property to the configuration object, we can set multiple fields automatically before the first hit
 
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
 
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  set: [
+    { field: 'fieldname', value: 'fieldvalue' }
+  ]
+})
+```
