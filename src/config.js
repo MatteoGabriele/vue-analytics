@@ -12,7 +12,7 @@ const defaultConfig = {
   autoTracking: {
     exception: false,
     page: true,
-    transformRouteParams: true,
+    transformQueryString: true,
     pageviewOnLoad: true,
     pageviewTemplate: null,
     untracked: true
