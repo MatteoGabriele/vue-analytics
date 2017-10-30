@@ -121,7 +121,7 @@ It is possible to avoid route params to be sent as querystring using the `transf
 Vue.use(VueAnalytics, {
   router,
   autoTracking: {
-    transformRouteParmas: false
+    transformRouteParams: false
   }
 })
 ```
