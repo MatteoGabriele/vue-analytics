@@ -1,16 +1,23 @@
 import config from '../config'
 import set from 'lib/set'
 import query from 'lib/query'
-import { noop, getQueryString, isRouteIgnored } from '../helpers'
+import { 
+  noop, 
+  getQueryString, 
+  isRouteIgnored,
+  getRouteAnalytics,
+  isRoute
+} from '../helpers'
 
 export default function page (...args) {
-  if (typeof args[0] !== 'string' && 'currentRoute' in args[0]) {
+  if (isRoute(args[0])) {
     const { transformQueryString } = config.autoTracking
-    const route = args[0].currentRoute
+    const route = args[0]
     const queryString = getQueryString(route.query)
     const path = route.path + (transformQueryString ? queryString : '')
 
     set('page', path)
+
     query('send', 'pageview', {
       page: path,
       title: route.name,
@@ -24,14 +31,16 @@ export default function page (...args) {
   query('send', 'pageview', ...args)
 }
 
-export function trackRoute (proxy, router) {
-  const { currentRoute } = router
-
-  if (isRouteIgnored(currentRoute.name)) {
+export function trackRoute (route) {
+  if (isRouteIgnored(route)) {
     return
   }
-
-  page(proxy ? proxy(currentRoute) : router)
+  
+  const { autoTracking } = config
+  const { meta: { analytics = {} } } = route
+  const proxy = analytics.pageviewTemplate || autoTracking.pageviewTemplate
+  
+  page(proxy ? proxy(route) : route)
 }
 
 export function startAutoTracking () {
@@ -42,13 +51,13 @@ export function startAutoTracking () {
   }
 
   if (autoTracking.pageviewOnLoad) {
-    trackRoute(autoTracking.pageviewTemplate, router)
+    trackRoute(router.currentRoute)
   }
 
   config.router.afterEach(function () {
+    // https://github.com/MatteoGabriele/vue-analytics/issues/44
     setTimeout(function () {
-      // https://github.com/MatteoGabriele/vue-analytics/issues/44
-      trackRoute(autoTracking.pageviewTemplate, router)
+      trackRoute(router.currentRoute)
     }, 0)
   })
 }

@@ -114,6 +114,38 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+It is also possible to add custom data structure for each route, using the meta object
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+import VueRouter from 'vue-router'
+
+const router = new VueRouter({
+  routes: [
+    {
+      name: 'home',
+      path: '/',
+      component: {...},
+      meta: {
+        analytics: {
+          pageviewTemplate (route) {
+            return {
+              title: 'This is my custom title',
+              path: route.path,
+              location: 'www.mydomain.com'
+            }
+          }
+        }
+      }
+    }
+  ]
+}) 
+
+```
+important: the route pageviewTemplate has always priority over the global one.
+
+
 ## Avoid trasnforming route query object into querystring
 It is possible to avoid route query to be sent as querystring using the `transformRouteParams` property
 

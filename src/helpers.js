@@ -64,3 +64,9 @@ export function getQueryString (queryMap) {
 export function isRouteIgnored (name) {
   return config.ignoreRoutes.indexOf(name) !== -1
 }
+
+export function isRoute (route) {
+  // just check some random properties that we know
+  // are inside the route object
+  return route.query && route.params
+}
