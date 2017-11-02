@@ -6,13 +6,23 @@ import {
   getQueryString, 
   isRouteIgnored,
   getRouteAnalytics,
-  isRoute
+  isRoute,
+  isRouter
 } from '../helpers'
 
 export default function page (...args) {
+  let route
+
+  if (isRouter(args[0])) {
+    route = args[0].currentRoute
+  }
+
   if (isRoute(args[0])) {
+    route = args[0]
+  }
+
+  if (route) {
     const { transformQueryString } = config.autoTracking
-    const route = args[0]
     const queryString = getQueryString(route.query)
     const path = route.path + (transformQueryString ? queryString : '')
 

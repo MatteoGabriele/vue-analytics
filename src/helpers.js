@@ -65,8 +65,10 @@ export function isRouteIgnored (name) {
   return config.ignoreRoutes.indexOf(name) !== -1
 }
 
-export function isRoute (route) {
-  // just check some random properties that we know
-  // are inside the route object
-  return route.query && route.params
+export function isRoute (data) {
+  return data.query && data.params
+}
+
+export function isRouter (data) {
+  return data.currentRoute
 }
