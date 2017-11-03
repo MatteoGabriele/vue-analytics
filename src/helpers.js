@@ -10,7 +10,6 @@ export function loadScript (url) {
     script.src = url
     script.charset = 'utf8'
 
-
     head.appendChild(script)
 
     script.onload = resolve
