@@ -61,7 +61,5 @@
     "webpack": "^3.4.1",
     "webpack-merge": "^4.1.0"
   },
-  "dependencies": {
-    "load-script": "^1.0.0"
-  }
+  "dependencies": {}
 }

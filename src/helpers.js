@@ -2,6 +2,22 @@ import config, { getId } from './config'
 
 export function noop () {}
 
+export function loadScript (url) {
+  return new Promise((resolve, reject) => {
+    var head = document.head || document.getElementsByTagName('head')[0]
+    const script = document.createElement('script')
+    script.async = true
+    script.src = url
+    script.charset = 'utf8'
+
+
+    head.appendChild(script)
+
+    script.onload = resolve
+    script.onerror = reject
+  })
+}
+
 export function merge (obj, src) {
   Object.keys(src).forEach(function (key) {
     if (obj[key] && typeof obj[key] === 'object') {

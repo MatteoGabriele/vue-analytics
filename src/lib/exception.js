@@ -8,7 +8,7 @@ export default function exception (error, fatal = false) {
   })
 }
 
-export function startAutoTracking () {
+export function autotracking () {
   if (!config.autoTracking.exception) {
     return
   }

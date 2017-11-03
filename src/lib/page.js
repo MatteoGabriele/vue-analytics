@@ -53,7 +53,7 @@ export function trackRoute (route) {
   page(proxy ? proxy(route) : route)
 }
 
-export function startAutoTracking () {
+export function autotracking () {
   const { router, autoTracking } = config
 
   if (!autoTracking.page || !router) {

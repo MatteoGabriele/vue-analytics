@@ -1,18 +1,17 @@
-import load from 'load-script'
-import { onAnalyticsReady, hasGoogleScript } from './helpers'
+import { loadScript, onAnalyticsReady, hasGoogleScript } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
 import addSetters from './add-setters'
 import untracked from 'lib/untracked'
-import { startAutoTracking as pageAutoTracking } from 'lib/page'
-import { startAutoTracking as exceptionAutoTracking } from 'lib/exception'
+import * as page from 'lib/page'
+import * as exception from 'lib/exception'
 
 export default function bootstrap () {
   if (typeof document === 'undefined') {
     return
   }
 
-  const { id, ready, debug, checkDuplicatedScript, disableScriptLoader } = config
+  const { id, debug, checkDuplicatedScript, disableScriptLoader } = config
   const filename = debug.enabled ? 'analytics_debug' : 'analytics'
   const googleScript = `https://www.google-analytics.com/${filename}.js`
 
@@ -25,21 +24,30 @@ export default function bootstrap () {
       return resolve()
     }
 
-    load(googleScript, function (error) {
-      if (error) {
-        return reject('[vue-analytics] It\'s not possible to load Google Analytics script')
-      }
-
-      return resolve()
-    })
+    return loadScript(googleScript)
+      .then(() => {
+        resolve()
+      })
+      .catch(() => {
+        reject('[vue-analytics] It\'s not possible to load Google Analytics script')
+      })
   })
-  .then(() => onAnalyticsReady())
   .then(() => {
+    // Extra check on the availability of the js library
+    return onAnalyticsReady()
+  })
+  .then(() => {
+    // Create analytics trackers first    
     createTrackers()
+    // Add all setters from the array in the plugin configuration
     addSetters()
-    ready()
-    exceptionAutoTracking()
-    pageAutoTracking()
+    // Fire the callback function that analytics is ready
+    config.ready()
+    // Run exception autotracking
+    exception.autotracking()
+    // Run page autotracking
+    page.autotracking()
+    // Fire all untracked events
     untracked()
   })
   .catch(error => {
