@@ -147,7 +147,7 @@ important: the route pageviewTemplate has always priority over the global one.
 
 
 ## Avoid trasnforming route query object into querystring
-It is possible to avoid route query to be sent as querystring using the `transformRouteParams` property
+It is possible to avoid route query to be sent as querystring using the `transformQueryString` property
 
 ```js
 Vue.use(VueAnalytics, {
@@ -158,5 +158,15 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+## Remove vue-router base option
+When a base path is added to the VueRouter instance, the path is merged to the actual router path during the automatic tracking: however it is still possible to remove this behaviour modifying the `prependBase` property in the configuration object
 
+```js
+Vue.use(VueAnalytics, {
+  router,
+  autoTracking: {
+    prependBase: false
+  }
+})
+```
 
