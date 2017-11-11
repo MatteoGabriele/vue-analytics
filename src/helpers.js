@@ -17,6 +17,17 @@ export function loadScript (url) {
   })
 }
 
+export function getBasePath (base, path) {
+  const pathAsArray = path.split('/')
+  const baseAsArray = base.split('/')
+
+  if (pathAsArray[0] === '' && base[base.length - 1] === '/') {
+    pathAsArray.shift()
+  }
+
+  return baseAsArray.join('/') + pathAsArray.join('/')
+}
+
 export function merge (obj, src) {
   Object.keys(src).forEach(function (key) {
     if (obj[key] && typeof obj[key] === 'object') {

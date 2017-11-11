@@ -15,7 +15,8 @@ const defaultConfig = {
     transformQueryString: true,
     pageviewOnLoad: true,
     pageviewTemplate: null,
-    untracked: true
+    untracked: true,
+    prependBase: true
   },
 
   debug: {

@@ -7,7 +7,8 @@ import {
   isRouteIgnored,
   getRouteAnalytics,
   isRoute,
-  isRouter
+  isRouter,
+  getBasePath
 } from '../helpers'
 
 export default function page (...args) {
@@ -22,9 +23,19 @@ export default function page (...args) {
   }
 
   if (route) {
-    const { transformQueryString } = config.autoTracking
+    const {
+      router,
+      autoTracking: {
+        transformQueryString, 
+        prependBase
+      } 
+    } = config
+    
     const queryString = getQueryString(route.query)
-    const path = route.path + (transformQueryString ? queryString : '')
+    const needsBase = prependBase && router.options.base
+    
+    let path = route.path + (transformQueryString ? queryString : '')
+    path = needsBase ? getBasePath(router.options.base, path) : path
 
     set('page', path)
 
