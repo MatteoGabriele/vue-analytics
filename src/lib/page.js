@@ -32,10 +32,11 @@ export default function page (...args) {
     } = config
     
     const queryString = getQueryString(route.query)
-    const needsBase = prependBase && router.options.base
+    const base = router && router.options.base
+    const needsBase = prependBase && base
     
     let path = route.path + (transformQueryString ? queryString : '')
-    path = needsBase ? getBasePath(router.options.base, path) : path
+    path = needsBase ? getBasePath(base, path) : path
 
     set('page', path)
 
