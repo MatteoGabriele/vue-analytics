@@ -16,7 +16,16 @@ export const setters = function () {
 }
 
 export const requires = function () {
-  config.require.forEach(value => _require(value))
+  config.require.forEach(value => {
+    if (typeof value !== 'string') {
+      throw new Error(
+        '[vue-analytics] Wrong configuration in the plugin options. \n' +
+        'The "require" array requires each item to be a string.'
+      )
+    }
+
+    _require(value)
+  })
 }
 
 export default function () {
