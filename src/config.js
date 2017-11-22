@@ -8,6 +8,7 @@ const defaultConfig = {
   linkers: [],
 
   set: [],
+  require: [],
 
   autoTracking: {
     exception: false,

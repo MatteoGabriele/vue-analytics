@@ -1,7 +1,7 @@
 import { loadScript, onAnalyticsReady, hasGoogleScript } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
-import addSetters from './add-setters'
+import collectors from './collectors'
 import untracked from 'lib/untracked'
 import * as page from 'lib/page'
 import * as exception from 'lib/exception'
@@ -24,6 +24,7 @@ export default function bootstrap () {
       return resolve()
     }
 
+    // Load Google Analytics script file
     return loadScript(googleScript)
       .then(() => {
         resolve()
@@ -39,8 +40,8 @@ export default function bootstrap () {
   .then(() => {
     // Create analytics trackers first    
     createTrackers()
-    // Add all setters from the array in the plugin configuration
-    addSetters()
+    // Add all collectors
+    collectors()
     // Fire the callback function that analytics is ready
     config.ready()
     // Run exception autotracking

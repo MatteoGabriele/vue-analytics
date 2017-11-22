@@ -1,7 +1,8 @@
+import _require from 'lib/require'
 import set from 'lib/set'
 import config from './config'
 
-export default function addSetters () {
+export const setters = function () {
   config.set.forEach(({ field, value }) => {
     if (typeof field === 'undefined' || typeof value === 'undefined') {
       throw new Error(
@@ -12,4 +13,13 @@ export default function addSetters () {
 
     set(field, value)
   })
+}
+
+export const requires = function () {
+  config.require.forEach(value => _require(value))
+}
+
+export default function () {
+  setters()
+  requires() 
 }
