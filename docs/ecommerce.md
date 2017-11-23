@@ -26,7 +26,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-Finally it's possible to pass addition option during the installation of the library
+Finally it's possible to pass additional options during the installation of the library
 
 ```js
 Vue.use(VueAnalytics, {
