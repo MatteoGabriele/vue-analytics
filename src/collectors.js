@@ -16,7 +16,16 @@ export const setters = function () {
 }
 
 export const requires = function () {
+  const ecommerce = ['ec', 'ecommerce']
+
   config.require.forEach(value => {
+    if (ecommerce.indexOf(value) !== -1 || ecommerce.indexOf(value.name) !== -1) {
+      throw new Error(
+        '[vue-analytics] The ecommerce features are built-in in the plugin. \n' +
+        'Follow the ecommerce instructions available in the documentation.'
+      )
+    }
+
     if (typeof value !== 'string' && typeof value !== 'object') {
       throw new Error(
         '[vue-analytics] Wrong configuration in the plugin options. \n' +

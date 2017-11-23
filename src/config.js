@@ -10,6 +10,12 @@ const defaultConfig = {
   set: [],
   require: [],
 
+  ecommerce: {
+    enabled: false,
+    options: null,
+    enhanced: false
+  },
+
   autoTracking: {
     exception: false,
     page: true,

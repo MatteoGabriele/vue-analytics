@@ -10,6 +10,7 @@ import set from 'lib/set'
 import social from 'lib/social'
 import time from 'lib/time'
 import untracked from 'lib/untracked'
+import ecommerce from 'lib/ecommerce'
 
 export default function install (Vue, options = {}) {
   Vue.prototype.$ga = Vue.$ga = {
@@ -21,7 +22,8 @@ export default function install (Vue, options = {}) {
     set,
     social,
     time,
-    untracked
+    untracked,
+    ecommerce
   }
 
   update(options)

@@ -21,6 +21,18 @@ export default function createTrackers () {
 
   config.beforeFirstHit()
 
+  const { ecommerce } = config
+
+  if (ecommerce.enabled) {
+    const plugin = ecommerce.enhanced ? 'ec' : 'ecommerce'
+
+    if (ecommerce.options) {
+      query('require', plugin, ecommerce.options)      
+    } else {
+      query('require', plugin)      
+    }
+  }
+
   if (config.linkers.length > 0) {
     query('require', 'linker')
     query('linker:autoLink', config.linkers)
