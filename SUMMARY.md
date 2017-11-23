@@ -21,4 +21,5 @@
 * [Track multiple accounts](/docs/track-multiple-accounts.md)
 * [On Analaytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
+* [Ecommerce](/docs/ecommerce.md)
 * [Debug](/docs/debug.md)
