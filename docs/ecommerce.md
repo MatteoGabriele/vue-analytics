@@ -38,7 +38,36 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-All the available features are documented in Google Analytics dev guide
-
+### Usage
+All ecommerce features are accessable via the `ecommerce` object 
+Please check the relative documentation in the Google Analytics dev guide for all the other methods
 - [Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
 - [Enhanced Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)
+
+
+```html
+<template>
+  <div>
+    <button @click="addItem">Add item!</button>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'myComponent',
+
+    methods: {
+      addItem () {
+        this.$ga.ecommerce.addItem({
+          id: '1234',                     // Transaction ID. Required.
+          name: 'Fluffy Pink Bunnies',    // Product name. Required.
+          sku: 'DD23444',                 // SKU/code.
+          category: 'Party Toys',         // Category or variation.
+          price: '11.99',                 // Unit price.
+          quantity: '1'                   // Quantity.
+        })
+      }
+    }
+  }
+</script>
+```
