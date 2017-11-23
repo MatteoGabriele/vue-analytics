@@ -14,7 +14,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-It is also possible to use the Enhanced Ecommerce library just by change it the configuration like so
+It is also possible to use the Enhanced Ecommerce library just by changing the configuration like so
 
 ```js
 Vue.use(VueAnalytics, {
@@ -39,8 +39,10 @@ Vue.use(VueAnalytics, {
 ```
 
 ### Usage
-All ecommerce features are accessable via the `ecommerce` object 
+All ecommerce features are accessable via the `ecommerce` object
+
 Please check the relative documentation in the Google Analytics dev guide for all the other methods
+
 - [Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
 - [Enhanced Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)
 
