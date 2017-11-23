@@ -54,6 +54,7 @@
     "cz-conventional-changelog": "2.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "jest": "^20.0.0",
+    "jest-cli": "^21.2.1",
     "ora": "^1.2.0",
     "semantic-release": "^7.0.1",
     "vue": "^2.4.2",
