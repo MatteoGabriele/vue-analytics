@@ -41,7 +41,15 @@ Vue.use(VueAnalytics, {
 ### Usage
 All ecommerce features are accessable via the `ecommerce` object
 
-Please check the relative documentation in the Google Analytics dev guide for all the other methods
+- addItem
+- addTransaction 
+- addProduct
+- addImpression 
+- setAction
+- addPromo
+- send
+
+Remember that not all methods are included in the Ecommerce or the Enhanced Ecommerce, so please check the relative documentation in the Google Analytics dev guide.
 
 - [Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
 - [Enhanced Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)
