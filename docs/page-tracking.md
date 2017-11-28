@@ -151,6 +151,7 @@ It is possible to avoid route query to be sent as querystring using the `transfo
 
 ```js
 Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
   router,
   autoTracking: {
     transformQueryString: false
@@ -163,6 +164,7 @@ When a base path is added to the VueRouter instance, the path is merged to the a
 
 ```js
 Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
   router,
   autoTracking: {
     prependBase: false
@@ -170,3 +172,34 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+## Customize router updates
+On every route change, the plugin will track the new route: when we change hashes, query strings or other parameters.
+
+To avoid router to update and start tracking when a route has the same path of the previous one, it is possible to use the `skipSamePath` property in the `autoTracking` object
+
+```js
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  router,
+  autoTracking: {
+    skipSamePath: true
+  }
+})
+```
+
+For other use cases it is also possible to use the `shouldRouterUpdate`, accessable in the plugin configuartion object, inside the `autoTracking` property.
+The methods has the previous and current route as parameters and it needs to return a truthy or falsy value.
+
+```js
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  router,
+  autoTracking: {
+    shouldRouterUpdate (to, from) {
+      // Here I'm allowing tracking only when
+      // next route path is not the same as the previous
+      return to.path !== from.path
+    }
+  }
+})
+```
