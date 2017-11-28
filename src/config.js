@@ -17,6 +17,8 @@ const defaultConfig = {
   },
 
   autoTracking: {
+    shouldRouterUpdate: null,
+    skipSamePath: false,
     exception: false,
     page: true,
     transformQueryString: true,

@@ -98,3 +98,7 @@ export function isRoute (data) {
 export function isRouter (data) {
   return data.currentRoute
 }
+
+export function hasProps (props) {
+  return Object.keys(props).length > 0
+}

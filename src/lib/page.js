@@ -8,7 +8,8 @@ import {
   getRouteAnalytics,
   isRoute,
   isRouter,
-  getBasePath
+  getBasePath,
+  hasProps
 } from '../helpers'
 
 export default function page (...args) {
@@ -76,7 +77,25 @@ export function autotracking () {
     trackRoute(router.currentRoute)
   }
 
-  config.router.afterEach(function () {
+  config.router.afterEach(function (to, from) {
+    const { skipSamePath, shouldRouterUpdate } = autoTracking
+    const hasSamePath = to.path === from.path
+    const hasQueryString = hasProps(to.query) || hasProps(from.query)
+
+    // Default behaviour of the router when the `skipSamePath` is turned on.
+    // Skip router change when current and previous route have the same path
+    // but query string props are empty on both sides
+    // https://github.com/MatteoGabriele/vue-analytics/issues/73
+    if (skipSamePath && (hasSamePath && !hasQueryString)) {
+      return
+    }
+
+    // Adds a custom way to define when the router should track
+    if (typeof shouldRouterUpdate === 'function' && !shouldRouterUpdate(to, from)) {
+      return
+    }
+
+    // Add a 0 timeout so that the browser doesn't register the previous route
     // https://github.com/MatteoGabriele/vue-analytics/issues/44
     setTimeout(function () {
       trackRoute(router.currentRoute)
