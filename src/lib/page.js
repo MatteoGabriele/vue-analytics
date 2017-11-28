@@ -79,14 +79,11 @@ export function autotracking () {
 
   config.router.afterEach(function (to, from) {
     const { skipSamePath, shouldRouterUpdate } = autoTracking
-    const hasSamePath = to.path === from.path
-    const hasQueryString = hasProps(to.query) || hasProps(from.query)
 
     // Default behaviour of the router when the `skipSamePath` is turned on.
     // Skip router change when current and previous route have the same path
-    // but query string props are empty on both sides
     // https://github.com/MatteoGabriele/vue-analytics/issues/73
-    if (skipSamePath && (hasSamePath && !hasQueryString)) {
+    if (skipSamePath && to.path === from.path) {
       return
     }
 
