@@ -1,29 +1,28 @@
-#v-ga
+## v-ga
+
 This directive allows us to centralize all track events in one object and share it across the entire application without needs to add extra logic to our component methods
 
 Taking as an example a button that only has to log a name in the console
 
 ```html
 <template>
-	<button @click="logName">Log me</button>
+    <button @click="logName">Log me</button>
 </template>
 
 <script>
-	export default {
-		name: 'myComponent',
-		
-		data () {
-			return {
-				name: 'John'
-			}
-		},
-		
-		methods: {
-			logName () {
-				console.log(this.name)
-			}
-		}
-	}
+   export default {
+      name: 'myComponent',
+      data () {
+         return {
+            name: 'John'
+         }
+      },
+      methods: {
+         logName () {
+            console.log(this.name)
+         }
+      }
+   }
 </script>
 ```
 
@@ -34,12 +33,12 @@ import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueAnalytics, {
-	id: 'UA-XXX-X',
-	commands: {
-		trackName (name = 'unknown') {
-			this.$ga.track('randomClicks', 'click', 'name', name)
-		}
-	}
+   id: 'UA-XXX-X',
+   commands: {
+      trackName (name = 'unknown') {
+         this.$ga.track('randomClicks', 'click', 'name', name)
+      }
+   }
 })
 ```
 
@@ -47,29 +46,27 @@ then we only need to add the `v-ga` directive to your element and access the met
 
 ```html
 <template>
-	<button 
-		v-ga="$ga.commands.trackName.bind(this, name)" 
-		@click="logName">
-		Log me
-	</button>
+   <button 
+      v-ga="$ga.commands.trackName.bind(this, name)" 
+      @click="logName">
+	Log me
+   </button>
 </template>
 
 <script>
-	export default {
-		name: 'myComponent',
-		
-		data () {
-			return {
-				name: 'John'
-			}
-		},
-		
-		methods: {
-			logName () {
-				console.log(this.name)
-			}
-		}
-	}
+   export default {
+      name: 'myComponent',
+      data () {
+         return {
+            name: 'John'
+         }
+      },
+      methods: {
+         logName () {
+            console.log(this.name)
+         }
+      }
+   }
 </script>
 ```
 
@@ -77,12 +74,12 @@ If there's no need to pass any arguments, we could also just pass the name of th
 
 ```html
 <template>
-	<button v-ga="'trackName'">Click me</button>
+   <button v-ga="'trackName'">Click me</button>
 </template>
 
 <script>
-	export default {
-		name: 'myComponent'
-	}
+   export default {
+      name: 'myComponent'
+   }
 </script>
 ```
