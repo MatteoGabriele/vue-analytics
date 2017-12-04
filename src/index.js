@@ -1,6 +1,11 @@
 import bootstrap from './bootstrap'
-import { update } from './config'
+import config, { update } from './config'
 import { onAnalyticsReady } from './helpers'
+
+// Directives
+import ga from 'directives/ga'
+
+// Features
 import event from 'lib/event'
 import exception from 'lib/exception'
 import page from 'lib/page'
@@ -13,6 +18,10 @@ import untracked from 'lib/untracked'
 import ecommerce from 'lib/ecommerce'
 
 export default function install (Vue, options = {}) {
+  update(options)
+
+  Vue.directive('ga', ga)
+
   Vue.prototype.$ga = Vue.$ga = {
     event,
     exception,
@@ -23,11 +32,13 @@ export default function install (Vue, options = {}) {
     social,
     time,
     untracked,
-    ecommerce
+    ecommerce,
+    commands: config.commands
   }
 
-  update(options)
   bootstrap()
 }
 
-export { onAnalyticsReady }
+export { 
+  onAnalyticsReady 
+}

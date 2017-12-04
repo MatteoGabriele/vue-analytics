@@ -7,6 +7,8 @@ const defaultConfig = {
   ignoreRoutes: [],
   linkers: [],
 
+  commands: {},
+
   set: [],
   require: [],
 

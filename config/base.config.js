@@ -11,9 +11,10 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.vue'],
     alias: {
-      lib: path.resolve(__dirname, '../src/lib')
+      lib: path.resolve(__dirname, '../src/lib'),
+      directives: path.resolve(__dirname, '../src/directives')
     }
   },
   module: {
@@ -25,6 +26,16 @@ module.exports = {
         options: {
           presets: ['blue'],
           babelrc: false
+        }
+      },
+      {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: 'babel-loader'
+          }
         }
       }
     ]

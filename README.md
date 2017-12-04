@@ -33,10 +33,10 @@ npm install vue-analytics
 
 * [Get started](/docs/installation.md)
 * [How to load Google Analytics](/docs/script-loader.md)
-* [Untracked hits](/docs/untracked-hits.md)
 * [Page tracking](/docs/page-tracking.md)
-* [Cross-domain tracking](/docs/cross-domain-tracking.md)
 * [Event tracking](/docs/event-tracking.md)
+* [v-ga](/docs/v-ga.md)
+* [Cross-domain tracking](/docs/cross-domain-tracking.md)
 * [User timings](/docs/user-timings.md#user-timings)
 * [Exception tracking](/docs/exception-tracking.md)
 * [Require](/docs/require.md)
@@ -47,6 +47,7 @@ npm install vue-analytics
 * [On Analaytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
 * [Ecommerce](/docs/ecommerce.md)
+* [Untracked hits](/docs/untracked-hits.md)
 * [Debug](/docs/debug.md)
 
 # Issues and features requests
