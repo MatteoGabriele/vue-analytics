@@ -146,7 +146,7 @@ const router = new VueRouter({
 important: the route pageviewTemplate has always priority over the global one.
 
 
-## Avoid trasnforming route query object into querystring
+## Avoid transforming route query object into querystring
 It is possible to avoid route query to be sent as querystring using the `transformQueryString` property
 
 ```js
