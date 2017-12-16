@@ -14,3 +14,47 @@ Vue.use(VueAnalytics, {
   id: 'UA-XXX-X'
 })
 ```
+
+## Track multiple accounts
+
+Pass an array of strings for a multiple tracking system. Every hit will be fired twice: each time with a different tracker name
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: ['UA-XXX-A', 'UA-XXX-B']
+})
+```
+
+## Use functions or/and Promises
+
+It is also possible to pass a function, a Promise or a function that returns a Promise: as soon as it returns always a string or an array of strings
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+import axios from 'axios'
+
+// a function
+Vue.use(VueAnalytics, {
+  id () {
+    return 'UA-XXX-A'
+  }
+})
+
+// a Promise
+Vue.use(VueAnalytics, {
+  id: axios.get('/api/foo').then(response => {
+    return response.data
+  })
+})
+
+// a function that returns a Promise
+Vue.use(VueAnalytics, {
+  id: () => axios.get('/api/foo').then(response => {
+    return response.data
+  })
+})
+```

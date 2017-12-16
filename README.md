@@ -43,7 +43,6 @@ npm install vue-analytics
 * [Set](/docs/set.md)
 * [Social interactions](/docs/social-interactions.md)
 * [User explorer report](/docs/user-explorer.md)
-* [Track multiple accounts](/docs/track-multiple-accounts.md)
 * [On Analaytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
 * [Ecommerce](/docs/ecommerce.md)

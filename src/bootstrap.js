@@ -38,6 +38,21 @@ export default function bootstrap () {
     return onAnalyticsReady()
   })
   .then(() => {
+    let newId = id
+
+    if (typeof newId === 'function') {
+      newId = newId()
+    }
+
+    if (typeof newId.then === 'function') {
+      return newId.then(response => {
+        config.id = response
+      })
+    }
+
+    return newId
+  })
+  .then(response => {
     // Create analytics trackers first    
     createTrackers()
     // Add all collectors
