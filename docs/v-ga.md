@@ -36,7 +36,7 @@ Vue.use(VueAnalytics, {
    id: 'UA-XXX-X',
    commands: {
       trackName (name = 'unknown') {
-         this.$ga.track('randomClicks', 'click', 'name', name)
+         this.$ga.event('randomClicks', 'click', 'name', name)
       }
    }
 })
