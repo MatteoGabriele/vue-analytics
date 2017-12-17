@@ -1,5 +1,5 @@
 import { loadScript, onAnalyticsReady, hasGoogleScript } from './helpers'
-import config, { update } from './config'
+import config from './config'
 import createTrackers from './create-trackers'
 import collectors from './collectors'
 import untracked from 'lib/untracked'
@@ -38,21 +38,12 @@ export default function bootstrap () {
     return onAnalyticsReady()
   })
   .then(() => {
-    let newId = id
-
-    if (typeof newId === 'function') {
-      newId = newId()
-    }
-
-    if (typeof newId.then === 'function') {
-      return newId.then(response => {
-        config.id = response
-      })
-    }
-
-    return newId
+    // see https://github.com/MatteoGabriele/vue-analytics/issues/78
+    return typeof id === 'function' ? id() : id
   })
-  .then(response => {
+  .then(id => {
+    // Update the ID with the new value
+    config.id = id
     // Create analytics trackers first    
     createTrackers()
     // Add all collectors
