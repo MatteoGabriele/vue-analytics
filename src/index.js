@@ -7,7 +7,7 @@ import ga from 'directives/ga'
 
 // Features
 import event from 'lib/event'
-import exception from 'lib/exception'
+import exception, { setupErrorHandler } from 'lib/exception'
 import page from 'lib/page'
 import query from 'lib/query'
 import require from 'lib/require'
@@ -35,6 +35,8 @@ export default function install (Vue, options = {}) {
     ecommerce,
     commands: config.commands
   }
+
+  setupErrorHandler(Vue)
 
   bootstrap()
 }
