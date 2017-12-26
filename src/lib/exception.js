@@ -8,24 +8,9 @@ export default function exception (error, fatal = false) {
   })
 }
 
-export function setupErrorHandler(Vue) {
-  if (config.autoTracking.exception) {
-    const originalErrorHandler = Vue.config.errorHandler
-    Vue.config.errorHandler = function (error, vm, info) {
-      vm.$ga.exception(error.message || error, true)
-      if (typeof originalErrorHandler === 'function') {
-        originalErrorHandler.call(this, error, vm, info)
-      }
-    }
-  }
-}
+export function errorHandler (error, vm) {
+  const { exception } = config.autoTracking
+  const message = error.message || error
 
-export function autotracking () {
-  if (!config.autoTracking.exception) {
-    return
-  }
-
-  window.addEventListener('error', function (error) {
-    exception(error.message || error)
-  })
+  exception && vm.$ga.exception(message, true)
 }

@@ -4,7 +4,6 @@ import createTrackers from './create-trackers'
 import collectors from './collectors'
 import untracked from 'lib/untracked'
 import * as page from 'lib/page'
-import * as exception from 'lib/exception'
 
 export default function bootstrap () {
   if (typeof document === 'undefined') {
@@ -44,14 +43,12 @@ export default function bootstrap () {
   .then(id => {
     // Update the ID with the new value
     config.id = id
-    // Create analytics trackers first    
+    // Create analytics trackers first
     createTrackers()
     // Add all collectors
     collectors()
     // Fire the callback function that analytics is ready
     config.ready()
-    // Run exception autotracking
-    exception.autotracking()
     // Run page autotracking
     page.autotracking()
     // Fire all untracked events

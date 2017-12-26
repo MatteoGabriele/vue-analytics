@@ -3,9 +3,6 @@ import VueAnalytics from '../../src'
 
 window.ga = jest.fn()
 
-const originalErrorHandler = jest.fn()
-Vue.config.errorHandler = originalErrorHandler
-
 Vue.use(VueAnalytics, {
   id: 'UA-1234-5',
   autoTracking: {
@@ -33,5 +30,6 @@ it('should track Vue render error', () => {
 })
 
 it('should preserve original error handler', () => {
-  expect(originalErrorHandler).toBeCalledWith(renderError, $vm, 'created hook')
+  Vue.config.errorHandler = jest.fn()
+  expect(window.ga).not.toBeCalledWith(renderError, $vm, 'created hook')
 })
