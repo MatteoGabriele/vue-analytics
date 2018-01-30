@@ -1,6 +1,6 @@
 ## Debug
 
-Implements Google Analaytics debug library.
+Implements Google Analytics debug library.
 
 **Please remember that it is for debug only. The file size of analytics\_debug.js is way larger than analytics.js**
 

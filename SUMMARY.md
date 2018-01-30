@@ -13,7 +13,7 @@
 * [Set](/docs/set.md)
 * [Social interactions](/docs/social-interactions.md)
 * [User explorer report](/docs/user-explorer.md)
-* [On Analaytics script ready](/docs/when-google-analytics-is-loaded.md)
+* [On Analytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
 * [Ecommerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
