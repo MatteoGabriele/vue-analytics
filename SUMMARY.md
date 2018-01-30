@@ -15,6 +15,6 @@
 * [User explorer report](/docs/user-explorer.md)
 * [On Analytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
-* [Ecommerce](/docs/ecommerce.md)
+* [E-commerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
 * [Debug](/docs/debug.md)
