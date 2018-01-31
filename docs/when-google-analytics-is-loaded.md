@@ -26,7 +26,7 @@ Vue.use(VueAnalytics, { ... })
 
 const App = new Vue({ ... })
 
-onAnalyticsReady.then(() => {
+onAnalyticsReady().then(() => {
   App.$mount('#app')
 })
 ```
