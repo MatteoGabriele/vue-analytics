@@ -19,6 +19,20 @@
 
 Vue plugin for Google Analytics
 
+## Why should I use it?
+
+The plugin isn't just a wrapper of the Google Analytics API, but provides a solution to issues that most of the time you don't want to deal with or you not even know you have to deal with.
+
+For example:
+
+* Automatic Google Analytics script loading
+* Automatic page tracking
+* Collects and tracks back all missing events fired during script loading
+* Multiple domain ID tracking system
+* E-commerce API
+* Vue error exception tracking system
+* Debugging API
+
 ## Requirements
 
 Vue ^2.0.0
