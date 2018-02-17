@@ -13,6 +13,8 @@
  <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
+ 
+ <img src="https://img.shields.io/badge/size-3.07kB-brightgreen.svg" />
 </p>
 
 # vue-analytics
