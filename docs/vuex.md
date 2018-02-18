@@ -1,6 +1,6 @@
 ## Vuex and Google Analytics
 
-Google Analytics it is now supported also using the Vuex store, by installing the `analyticsMiddleware` plugin
+Google Analytics it is supported also using the Vuex store, by installing the `analyticsMiddleware` plugin
 
 ### Install
 
