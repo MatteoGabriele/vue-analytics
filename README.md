@@ -13,11 +13,27 @@
  <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
+ 
+ <img src="https://img.shields.io/badge/size-3.07kB-brightgreen.svg" />
 </p>
 
 # vue-analytics
 
 Vue plugin for Google Analytics
+
+## Why should I use it?
+
+The plugin isn't just a wrapper of the Google Analytics API, but provides a solution to issues that most of the time you don't want to deal with or you not even know you have to deal with.
+
+For example:
+
+* Automatic Google Analytics script loading
+* Automatic page tracking
+* Collects and tracks back all missing events fired during script loading
+* Multiple domain ID tracking system
+* E-commerce API
+* Vue error exception tracking system
+* Debugging API
 
 ## Requirements
 
@@ -43,9 +59,9 @@ npm install vue-analytics
 * [Set](/docs/set.md)
 * [Social interactions](/docs/social-interactions.md)
 * [User explorer report](/docs/user-explorer.md)
-* [On Analaytics script ready](/docs/when-google-analytics-is-loaded.md)
+* [On Analytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
-* [Ecommerce](/docs/ecommerce.md)
+* [E-commerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
 * [Vuex](/docs/vuex.md)
 * [Debug](/docs/debug.md)

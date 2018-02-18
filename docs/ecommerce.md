@@ -1,6 +1,6 @@
-## Ecommerce
+## E-commerce
 
-All ecommerce features are built-in in the plugin, so there's no need to require any ecommerce libraries: just enable the ecommerce features from the plugin configuration
+All e-commerce features are built-in in the plugin, so there's no need to require any e-commerce libraries: just enable the e-commerce features from the plugin configuration
 
 ```js
 import Vue from 'vue'
@@ -14,7 +14,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-It is also possible to use the Enhanced Ecommerce library just by changing the configuration like so
+It is also possible to use the Enhanced E-commerce library just by changing the configuration like so
 
 ```js
 Vue.use(VueAnalytics, {
@@ -39,20 +39,20 @@ Vue.use(VueAnalytics, {
 ```
 
 ### Usage
-All ecommerce features are accessable via the `ecommerce` object
+All e-commerce features are accessable via the `ecommerce` object
 
 - addItem
-- addTransaction 
+- addTransaction
 - addProduct
-- addImpression 
+- addImpression
 - setAction
 - addPromo
 - send
 
-Remember that not all methods are included in the Ecommerce or the Enhanced Ecommerce, so please check the relative documentation in the Google Analytics dev guide.
+Remember that not all methods are included in the E-commerce or the Enhanced E-commerce, so please check the relative documentation in the Google Analytics dev guide.
 
-- [Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
-- [Enhanced Ecommerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)
+- [E-commerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)
+- [Enhanced E-commerce](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)
 
 
 ```html

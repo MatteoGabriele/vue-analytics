@@ -12,7 +12,7 @@ Vue.use(VueAnalytics, {
     // this is right after the tracker and before every other hit to Google Analytics
   },
   ready () {
-    // here Google Analaytics is ready to track!
+    // here Google Analytics is ready to track!
   }
 })
 ```
@@ -26,7 +26,7 @@ Vue.use(VueAnalytics, { ... })
 
 const App = new Vue({ ... })
 
-onAnalyticsReady.then(() => {
+onAnalyticsReady().then(() => {
   App.$mount('#app')
 })
 ```
