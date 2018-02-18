@@ -35,6 +35,8 @@ Vue.use(VueAnalytics, {
 })
 
 new Vue({
+  el: '#root',
+  store,
   ...
 })
 ```
@@ -89,7 +91,7 @@ The way we can construct the track method is just by creating an array and the f
 * ecommerce
 * commands
 
-the second parameter will be our data as usual constructed in a normal call, so if in a component we will have
+the second parameter will be our data constructed the same way as we were inside a component, for example:
 
 ```js
 export default {
