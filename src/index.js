@@ -4,6 +4,7 @@ import { errorHandler } from 'lib/exception'
 import config, { update } from './config'
 import { onAnalyticsReady } from './helpers'
 import ga from 'directives/ga'
+import analyticsMiddleware from './vuex/analyticsMiddleware'
 
 export default function install (Vue, options = {}) {
   update(options)
@@ -20,5 +21,6 @@ export default function install (Vue, options = {}) {
 }
 
 export {
-  onAnalyticsReady
+  onAnalyticsReady,
+  analyticsMiddleware
 }

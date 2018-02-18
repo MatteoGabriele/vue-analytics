@@ -32,7 +32,7 @@ const webpackConfig = merge.smart({}, base, {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$/,
-      threshold: 10240,
+      threshold: 0,
       minRatio: 0.8
     }),
     new webpack.optimize.ModuleConcatenationPlugin()

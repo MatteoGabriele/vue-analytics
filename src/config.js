@@ -1,5 +1,7 @@
 import { merge, noop } from './helpers'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 const defaultConfig = {
   id: null,
   router: null,
@@ -31,9 +33,9 @@ const defaultConfig = {
   },
 
   debug: {
-    enabled: false,
+    enabled: !isProduction,
     trace: false,
-    sendHitTask: true
+    sendHitTask: isProduction
   },
 
   checkDuplicatedScript: false,

@@ -47,6 +47,7 @@ npm install vue-analytics
 * [Custom methods](/docs/custom-methods.md)
 * [Ecommerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
+* [Vuex](/docs/vuex.md)
 * [Debug](/docs/debug.md)
 
 # Issues and features requests

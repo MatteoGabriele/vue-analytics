@@ -15,7 +15,7 @@ it ('should initialize single tracker', () => {
 
   createTrackers()
   expect(window.ga).toBeCalledWith('create', config.id, 'auto', {})
-  expect(window.ga).not.toBeCalledWith('set', 'sendHitTask', null)
+  expect(window.ga).toBeCalledWith('set', 'sendHitTask', null)
 })
 
 it ('should initialize multiple trackers', () => {
