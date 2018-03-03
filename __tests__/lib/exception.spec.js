@@ -6,6 +6,8 @@ window.ga = jest.fn()
 let $vm
 
 beforeEach(() => {
+  Vue.config.errorHandler = jest.fn()
+
   Vue.use(VueAnalytics, {
     id: 'UA-1234-5'
   })

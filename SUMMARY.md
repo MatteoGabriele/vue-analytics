@@ -18,4 +18,6 @@
 * [E-commerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
 * [Vuex](/docs/vuex.md)
+* [Turn off during development](/docs/turn-off-development.md)
+* [Console logs](/docs/console-logs.md)
 * [Debug](/docs/debug.md)

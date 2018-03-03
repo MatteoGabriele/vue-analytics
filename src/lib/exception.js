@@ -1,16 +1,39 @@
 import query from 'lib/query'
 import config from '../config'
 
-export default function exception (error, fatal = false) {
+const exception = (error, fatal = false) => {
   query('send', 'exception', {
     exDescription: error,
     exFatal: fatal
   })
 }
 
-export function errorHandler (error, vm) {
-  const { exception } = config.autoTracking
-  const message = error.message || error
+export const autotracking = Vue => {
+  if (!config.autoTracking.exception) {
+    return
+  }
 
-  exception && vm.$ga.exception(message, true)
+  // Handler errors outside Vue components
+  window.addEventListener('error', error => {
+    exception(error.message)
+  })
+
+  // Save the Vue.config.errorHandler if one already registered
+  const oldErrorHandler = Vue.config.errorHandler
+
+  // Handles errors inside component life
+  Vue.config.errorHandler = (error, vm, info) => {
+    exception(error.message)
+
+    if (config.autoTracking.exceptionLogs) {
+      console.error(`[vue-analytics] Error in ${info}: ${error.message}`)
+      console.error(error)
+    }
+
+    if (typeof oldErrorHandler === 'function') {
+      oldErrorHandler.call(this, error, vm, info)
+    }
+  }
 }
+
+export default exception

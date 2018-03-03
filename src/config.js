@@ -24,6 +24,7 @@ const defaultConfig = {
     shouldRouterUpdate: null,
     skipSamePath: false,
     exception: false,
+    exceptionLogs: true,
     page: true,
     transformQueryString: true,
     pageviewOnLoad: true,
@@ -33,9 +34,9 @@ const defaultConfig = {
   },
 
   debug: {
-    enabled: !isProduction,
+    enabled: false,
     trace: false,
-    sendHitTask: isProduction
+    sendHitTask: true
   },
 
   checkDuplicatedScript: false,

@@ -13,7 +13,7 @@
  <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
- 
+
  <img src="https://img.shields.io/badge/size-3.07kB-brightgreen.svg" />
 </p>
 
@@ -64,6 +64,8 @@ npm install vue-analytics
 * [E-commerce](/docs/ecommerce.md)
 * [Untracked hits](/docs/untracked-hits.md)
 * [Vuex](/docs/vuex.md)
+* [Turn off during development](/docs/turn-off-development.md)
+* [Console logs](/docs/console-logs.md)
 * [Debug](/docs/debug.md)
 
 # Issues and features requests
