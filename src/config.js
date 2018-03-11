@@ -39,6 +39,12 @@ const defaultConfig = {
     sendHitTask: true
   },
 
+  batch: {
+    enabled: false,
+    delay: 1000,
+    amount: 5
+  },
+
   checkDuplicatedScript: false,
   disableScriptLoader: false,
 
