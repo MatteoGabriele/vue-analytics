@@ -1,5 +1,4 @@
-import query from '../lib/query'
-import lib from '../lib'
+import lib from './lib'
 
 export default store => {
   store.subscribe((mutation, state) => {

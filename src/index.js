@@ -3,8 +3,8 @@ import lib from './lib'
 import config, { update } from './config'
 import { onAnalyticsReady } from './helpers'
 import ga from 'directives/ga'
-import { autotracking } from 'lib/exception'
-import analyticsMiddleware from './vuex/analyticsMiddleware'
+import * as exception from 'lib/exception'
+import analyticsMiddleware from './vuex-middleware'
 
 export default function install (Vue, options = {}) {
   update(options)
@@ -13,7 +13,7 @@ export default function install (Vue, options = {}) {
 
   Vue.prototype.$ga = Vue.$ga = lib
 
-  autotracking(Vue)
+  exception.autotracking(Vue)
 
   bootstrap()
 }

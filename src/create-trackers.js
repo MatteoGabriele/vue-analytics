@@ -6,17 +6,24 @@ import { getTracker } from './helpers'
 export default function createTrackers () {
   const ids = getId()
 
+  if (!window.ga) {
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    }
+    ga.l = Number(new Date())
+  }
+
   if (config.debug.enabled) {
     window.ga_debug = {
       trace: config.debug.trace
     }
   }
 
-  ids.forEach(function (id) {
-    const name = getTracker(id)
+  ids.forEach(function (domain) {
+    const name = getTracker(domain)
     const options = ids.length > 1 ? { ...config.fields, name } : config.fields
 
-    window.ga('create', id, 'auto', options)
+    window.ga('create', (domain.id || domain), 'auto', options)
   })
 
   config.beforeFirstHit()
@@ -27,9 +34,9 @@ export default function createTrackers () {
     const plugin = ecommerce.enhanced ? 'ec' : 'ecommerce'
 
     if (ecommerce.options) {
-      query('require', plugin, ecommerce.options)      
+      query('require', plugin, ecommerce.options)
     } else {
-      query('require', plugin)      
+      query('require', plugin)
     }
   }
 

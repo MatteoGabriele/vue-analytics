@@ -11,7 +11,7 @@ export function loadScript (url) {
     script.charset = 'utf8'
 
     head.appendChild(script)
-
+    
     script.onload = resolve
     script.onerror = reject
   })
@@ -50,8 +50,8 @@ export function hasGoogleScript () {
   return scriptTags.length > 0
 }
 
-export function getTracker (trackerId) {
-  return trackerId.replace(/-/gi, '')
+export function getTracker (tracker) {
+  return tracker.name || tracker.replace(/-/gi, '')
 }
 
 export function onAnalyticsReady () {
