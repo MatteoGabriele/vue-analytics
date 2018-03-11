@@ -41,9 +41,9 @@ Vue.use(VueAnalytics, {
    }
 })
 ```
-lets take in mind that every function we write in the `commands` object is also binded to the current component scope, so that we have access to the Vue instance prototype object and eventually to methods, data and computed values of the component itself __(I raccomand to not use any component specific properties to avoid the method to be coupled to a specific component structure)__
+Lets take in mind that every function we write in the `commands` object is also bound to the current component scope, so that we have access to the Vue instance prototype object and eventually to methods, data and computed values of the component itself. __(I do not recommend to use any component specific properties to avoid the method to be coupled to a specific component structure)__
 
-then we only need to add the `v-ga` directive to your element and access the method from the `commands` list that now is shared in the `$ga` object
+Then we only need to add the `v-ga` directive to your element and access the method from the `commands` list that now is shared in the `$ga` object
 
 ```html
 <template>
