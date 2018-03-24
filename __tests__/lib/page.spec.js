@@ -55,7 +55,7 @@ beforeEach(done => {
 it ('should track a page', () => {
   $vm.$ga.page('/')
 
-  expect(window.ga).not.toBeCalledWith('set', 'page', '/')
+  expect(window.ga).toBeCalledWith('set', 'page', '/')
   expect(window.ga).toBeCalledWith('send', 'pageview', '/')
 })
 
