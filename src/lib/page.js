@@ -15,11 +15,11 @@ import {
 export default function page (...args) {
   let route
 
-  if (isRouter(args[0])) {
+  if (args.length && isRouter(args[0])) {
     route = args[0].currentRoute
   }
 
-  if (isRoute(args[0])) {
+  if (args.length && isRoute(args[0])) {
     route = args[0]
   }
 

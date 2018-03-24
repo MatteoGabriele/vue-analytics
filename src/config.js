@@ -41,8 +41,8 @@ const defaultConfig = {
 
   batch: {
     enabled: false,
-    delay: 1000,
-    amount: 5
+    delay: 500,
+    amount: 2
   },
 
   checkDuplicatedScript: false,
