@@ -56,6 +56,8 @@ npm install vue-analytics
 * [How to load Google Analytics](/docs/script-loader.md)
 * [Page tracking](/docs/page-tracking.md)
 * [Event tracking](/docs/event-tracking.md)
+* [Screen tracking](/docs/screen-tracking.md)
+* [Event batches](/docs/batch.md)
 * [v-ga](/docs/v-ga.md)
 * [Cross-domain tracking](/docs/cross-domain-tracking.md)
 * [User timings](/docs/user-timings.md#user-timings)
@@ -71,7 +73,9 @@ npm install vue-analytics
 * [Vuex](/docs/vuex.md)
 * [Turn off during development](/docs/turn-off-development.md)
 * [Console logs](/docs/console-logs.md)
+* [Opt-out from Google Analytics](/docs/opt-out.md)
 * [Debug](/docs/debug.md)
+
 
 # Issues and features requests
 

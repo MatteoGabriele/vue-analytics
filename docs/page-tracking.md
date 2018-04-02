@@ -26,6 +26,22 @@ this.$ga.page(this.$router)
 
 Google Analytics docs: [page tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages)
 
+### Use screenview
+
+It is also possible to use autotracking and screen tracking by passing true to the `screeview` property in the `autoTracking` object
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  autoTracking: {
+    screenview: true
+  }
+})
+```
+
 ### Enable page auto tracking
 
 The most easy way to track your application, is to pass the VueRouter instance to the plugin and let it handle everything for you
@@ -140,7 +156,7 @@ const router = new VueRouter({
       }
     }
   ]
-}) 
+})
 
 ```
 important: the route pageviewTemplate has always priority over the global one.
