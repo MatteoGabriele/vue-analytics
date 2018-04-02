@@ -3,13 +3,14 @@ import config, { update } from './config'
 import createTrackers from './create-trackers'
 import collectors from './collectors'
 import { autoTracking } from 'lib/page'
+import noga from './no-ga'
 
 export default () => {
   if (typeof document === 'undefined') {
     return
   }
 
-  const { wait, id, debug, disableScriptLoader } = config
+  const { wait, id, disabled, debug, disableScriptLoader } = config
   const filename = debug.enabled ? 'analytics_debug' : 'analytics'
   const resource = `https://www.google-analytics.com/${filename}.js`
 
@@ -28,9 +29,18 @@ export default () => {
   }
 
   Promise.resolve(
-    typeof id === 'function' ? id() : id
+    (typeof id === 'function') ? id() : id
   ).then(newId => {
     update({ id: newId })
+  }).then(() => {
+    return (typeof disabled === 'function') ? disabled() : disabled
+  }).then(disableTracking => {
+    update({ disabled: disableTracking })
+
+    if (disableTracking) {
+      noga()
+    }
+
     createTrackers()
     collectors()
     autoTracking()

@@ -6,8 +6,10 @@ const defaultConfig = {
   fields: {},
   ignoreRoutes: [],
   linkers: [],
-
   commands: {},
+
+  // https://github.com/MatteoGabriele/vue-analytics/issues/103
+  disabled: false,
 
   set: [],
   require: [],
