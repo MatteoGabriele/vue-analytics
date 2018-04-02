@@ -29,8 +29,10 @@ For example:
 
 * Automatic Google Analytics script loading
 * Automatic page tracking
-* Collects and tracks back all missing events fired during script loading
+* Event batching
+* Opt-out from Google Analytics with promise support
 * Multiple domain ID tracking system
+* Vuex support
 * E-commerce API
 * Vue error exception tracking system
 * Debugging API
