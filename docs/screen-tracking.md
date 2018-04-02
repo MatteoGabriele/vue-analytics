@@ -48,3 +48,5 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
+
+**Route name property is mandatory**
