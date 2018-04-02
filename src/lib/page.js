@@ -1,5 +1,6 @@
 import config from '../config'
 import set from 'lib/set'
+import screenview from 'lib/screenview'
 import query from 'lib/query'
 import {
   noop,
@@ -54,6 +55,17 @@ export function trackRoute (route) {
   const { autoTracking } = config
   const { meta: { analytics = {} } } = route
   const proxy = analytics.pageviewTemplate || autoTracking.pageviewTemplate
+
+  if (autoTracking.screenview && !route.name) {
+    throw new Error(
+      '[vue-analytics] Route name is mandatory when using screenview.'
+    )
+  }
+
+  if (autoTracking.screenview) {
+    screenview(route.name)
+    return
+  }
 
   page(proxy ? proxy(route) : route)
 }

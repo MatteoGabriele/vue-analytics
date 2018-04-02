@@ -7,6 +7,7 @@ import set from 'lib/set'
 import social from 'lib/social'
 import time from 'lib/time'
 import ecommerce from 'lib/ecommerce'
+import screenview from 'lib/screenview'
 import config from '../config'
 
 export default {
@@ -18,6 +19,7 @@ export default {
   set,
   social,
   time,
+  screenview,
   ecommerce,
   commands: config.commands
 }

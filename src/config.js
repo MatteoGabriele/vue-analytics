@@ -1,7 +1,5 @@
 import { merge, noop } from './helpers'
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 const defaultConfig = {
   id: null,
   router: null,
@@ -21,6 +19,7 @@ const defaultConfig = {
   },
 
   autoTracking: {
+    screenview: false,
     shouldRouterUpdate: null,
     skipSamePath: false,
     exception: false,

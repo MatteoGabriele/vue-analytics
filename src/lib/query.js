@@ -11,7 +11,7 @@ export default function query (method, ...args) {
         m: getMethod(method, id),
         a: args
       })
-      
+
       if (!intr) {
         intr = setInterval(() => {
           if (!coll.length) {
