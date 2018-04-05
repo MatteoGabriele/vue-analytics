@@ -71,6 +71,32 @@ Then we only need to add the `v-ga` directive to your element and access the met
 </script>
 ```
 
+By default, the directive is executed when the element is clicked. However, if you want to change the event type for the logging, you can add the proper event as a modifier.
+
+```html
+<template>
+   <input
+      v-model="name"
+      v-ga.focus="$ga.commands.trackFocus.bind(this, 'name')" />
+</template>
+
+<script>
+   export default {
+      name: 'myComponent',
+      data () {
+         return {
+            name: 'John'
+         }
+      },
+      methods: {
+         logName () {
+            console.log(this.name)
+         }
+      }
+   }
+</script>
+```
+
 If there's no need to pass any arguments, we could also just pass the name of the method as a string, and the plugin will look it up for us
 
 ```html
