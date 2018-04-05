@@ -6,13 +6,6 @@ import { getTracker } from './helpers'
 export default function createTrackers () {
   const ids = getId()
 
-  if (!window.ga) {
-    window.ga = window.ga || function () {
-      (ga.q = ga.q || []).push(arguments)
-    }
-    ga.l = Number(new Date())
-  }
-
   if (config.debug.enabled) {
     window.ga_debug = {
       trace: config.debug.trace

@@ -9,6 +9,13 @@ import analyticsMiddleware from './vuex-middleware'
 export default function install (Vue, options = {}) {
   update(options)
 
+  if (!window.ga) {
+    window.ga = window.ga || function () {
+      (window.ga.q = window.ga.q || []).push(arguments)
+    }
+    window.ga.l = Number(new Date())
+  }
+
   Vue.directive('ga', ga)
 
   Vue.prototype.$ga = Vue.$ga = lib
