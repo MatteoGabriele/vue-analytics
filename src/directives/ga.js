@@ -15,7 +15,9 @@ export default {
           : binding.value
 
         if (!fn) {
-          throw new Error('[vue-analytics] The value passed to v-ga is not defined in the commands list.')
+          throw new Error(
+            '[vue-analytics] The value passed to v-ga is not defined in the commands list.'
+          )
         }
 
         fn.apply(vnode.context)
