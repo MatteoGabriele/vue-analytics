@@ -88,8 +88,10 @@ The way we can construct the track method is just by creating an array and the f
 * social
 * time
 * untracked
-* ecommerce
+* ecommerce (*)
 * commands
+
+**(*) pay attention to the ecommerce API at the bottom of this page, since it has a different structure**
 
 the second parameter will be our data constructed the same way as we were inside a component, for example:
 
@@ -162,6 +164,27 @@ commit('someAction', {
       ['event', 'counter', 'increase', 'counter experiment', 1],
       ['page', '/about'],
       ['set', 'userId', 12345]
+    ]
+  }
+})
+```
+
+### Ecommerce and Vuex
+
+Because of its differnet API nature, the ecommerce plugin needs to be called as it in the original Google Analytics documentation.
+
+```js
+commit('someAction', {
+  meta: {
+    analytics: [
+       ['ecommerce:addItem', {
+          id: '1234',
+          name: 'Fluffy Pink Bunnies',
+          sku: 'DD23444',
+          category: 'Party Toys',
+          price: '11.99',
+          quantity: '1'
+        }]
     ]
   }
 })
