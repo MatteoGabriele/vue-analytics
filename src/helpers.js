@@ -11,7 +11,7 @@ export function loadScript (url) {
     script.charset = 'utf8'
 
     head.appendChild(script)
-    
+
     script.onload = resolve
     script.onerror = reject
   })
@@ -40,14 +40,19 @@ export function merge (obj, src) {
   return obj
 }
 
-export function hasGoogleScript () {
+export function hasScript () {
   const scriptTags = Array.prototype.slice.call(
     document.getElementsByTagName('script')
   ).filter(script => {
-    return script.src.indexOf('analytics') !== -1
+    return (script.src.indexOf('analytics') !== -1) ||
+      (script.src.indexOf('gtag') !== -1)
   })
 
   return scriptTags.length > 0
+}
+
+export function shouldGaLoad () {
+  return !(config.checkDuplicatedScript && hasScript())
 }
 
 export function getTracker (tracker) {

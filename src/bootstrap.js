@@ -1,4 +1,4 @@
-import { loadScript } from './helpers'
+import { loadScript, shouldGaLoad } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
 import collectors from './collectors'
@@ -20,10 +20,11 @@ export default () => {
     )
   }
 
-  if (!window.ga || !disableScriptLoader) {
+  if (shouldGaLoad() && (!window.ga || !disableScriptLoader)) {
     loadScript(resource).catch(() => {
       console.error(
-        `[vue-analytics] An error occured trying to load ${resource}. Please check your connection.`
+        `[vue-analytics] An error occured trying to load ${resource}. Please check your connection ` +
+        `or if you have any Google Analytics blocker installed in your browser.`
       )
     })
   }
