@@ -11,7 +11,7 @@ Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
   debug: {
     enabled: false, // default value
-    track: false, // default value
+    trace: false, // default value
     sendHitTask: true // default value
   }
 })
