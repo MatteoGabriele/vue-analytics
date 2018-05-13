@@ -6,7 +6,7 @@ import { autoTracking } from 'lib/page'
 import noga from './no-ga'
 
 export default () => {
-  if (typeof document === 'undefined') {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
     return
   }
 

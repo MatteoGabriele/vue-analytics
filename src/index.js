@@ -7,9 +7,9 @@ import * as exception from 'lib/exception'
 import analyticsMiddleware from './vuex-middleware'
 
 export default function install (Vue, options = {}) {
-  update(options)
+  update({ ...options, $vue: Vue })
 
-  if (!window.ga) {
+  if (window && !window.ga) {
     window.ga = window.ga || function () {
       (window.ga.q = window.ga.q || []).push(arguments)
     }

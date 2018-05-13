@@ -5,6 +5,10 @@ let intr
 let coll = []
 
 export default function query (method, ...args) {
+  if (typeof window === 'undefined') {
+    return
+  }
+
   getId().forEach(function (id) {
     if (config.batch.enabled) {
       coll.push({

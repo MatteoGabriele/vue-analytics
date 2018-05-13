@@ -1,6 +1,7 @@
 import { merge, noop } from './helpers'
 
 const defaultConfig = {
+  $vue: null,
   id: null,
   router: null,
   fields: {},
