@@ -96,10 +96,10 @@ export function autoTracking () {
       return
     }
 
-    // Add a 0 timeout so that the browser doesn't register the previous route
+    // Fire tracking after the nextTick or it will still register the previous route
     // https://github.com/MatteoGabriele/vue-analytics/issues/44
-    setTimeout(function () {
+    config.$vue.nextTick().then(() => {
       trackRoute(router.currentRoute)
-    }, 0)
+    })
   })
 }
