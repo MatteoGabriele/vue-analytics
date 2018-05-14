@@ -9,7 +9,7 @@ import analyticsMiddleware from './vuex-middleware'
 export default function install (Vue, options = {}) {
   update({ ...options, $vue: Vue })
 
-  if (window && !window.ga) {
+  if (typeof window !== 'undefined' && !window.ga) {
     window.ga = window.ga || function () {
       (window.ga.q = window.ga.q || []).push(arguments)
     }

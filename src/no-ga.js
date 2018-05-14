@@ -1,7 +1,7 @@
 import { getId } from './config'
 
 export default () => {
-  if (!window) {
+  if (typeof window === 'undefined') {
     return
   }
 
