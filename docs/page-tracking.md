@@ -148,7 +148,7 @@ const router = new VueRouter({
           pageviewTemplate (route) {
             return {
               title: 'This is my custom title',
-              path: route.path,
+              page: route.path,
               location: 'www.mydomain.com'
             }
           }
