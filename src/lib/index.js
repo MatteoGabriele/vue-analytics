@@ -22,6 +22,7 @@ export default {
   time,
   screenview,
   ecommerce,
-  disable: noga,
+  disable: () => noga(true),
+  enable: () => noga(false),
   commands: config.commands
 }
