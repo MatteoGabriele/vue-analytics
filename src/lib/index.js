@@ -9,6 +9,7 @@ import time from 'lib/time'
 import ecommerce from 'lib/ecommerce'
 import screenview from 'lib/screenview'
 import config from '../config'
+import noga from '../no-ga'
 
 export default {
   event,
@@ -21,5 +22,6 @@ export default {
   time,
   screenview,
   ecommerce,
+  disable: noga,
   commands: config.commands
 }
