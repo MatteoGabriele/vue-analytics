@@ -41,3 +41,22 @@ Vue.use(VueAnalytics, {
   }
 })
 ```
+
+It is also possible to disable tracking from everywhere at any time using the `disable` method.
+
+```js
+export default {
+  methods: {
+    disableTracking () {
+      this.$ga.disable(true)
+      // from now on analytics is disabled!
+    }
+  }
+}
+```
+
+or
+
+```js
+Vue.$ga.disable(true)
+```
