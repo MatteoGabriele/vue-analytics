@@ -43,6 +43,7 @@ export default function page (...args) {
     set('page', path)
     query('send', 'pageview')
   } else {
+    set('page', args[0].page)
     query('send', 'pageview', ...args)
   }
 }
