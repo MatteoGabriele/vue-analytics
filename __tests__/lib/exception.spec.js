@@ -6,6 +6,8 @@ window.ga = jest.fn()
 let $vm
 
 beforeEach(() => {
+  window.ga.mockClear()
+
   Vue.config.errorHandler = jest.fn()
 
   Vue.use(VueAnalytics, {

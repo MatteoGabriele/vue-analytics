@@ -30,6 +30,8 @@ window.ga = jest.fn()
 let $vm
 
 beforeEach(done => {
+  window.ga.mockClear()
+
   Vue.use(VueRouter)
 
   const router = new VueRouter({
