@@ -58,9 +58,9 @@ export default {
   }
 }
 ```
-
 or
 
 ```js
-Vue.$ga.disable(true)
+Vue.$ga.disable()
+Vue.$ga.enable()
 ```
