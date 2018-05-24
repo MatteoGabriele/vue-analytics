@@ -1,6 +1,27 @@
 ## Page tracking
 
-Page tracking is the most important feature of Google Analytics and you can achieve that in 3 different ways
+Page tracking is the most important feature of Google Analytics and you can achieve that in different ways
+
+### Enable page auto tracking
+
+The most easy way to track your application, is to pass your VueRouter instance to the plugin and let it handle everything for you
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
+
+const router = new VueRouter({
+  router: // your routes
+})
+
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  router
+})
+```
+
+### Manual page tracking 
 
 The standard way is just passing the current page path
 
@@ -26,7 +47,7 @@ this.$ga.page(this.$router)
 
 Google Analytics docs: [page tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages)
 
-### Use screenview
+### Use screenview with autotracking
 
 It is also possible to use autotracking and screen tracking by passing true to the `screeview` property in the `autoTracking` object
 
@@ -39,25 +60,6 @@ Vue.use(VueAnalytics, {
   autoTracking: {
     screenview: true
   }
-})
-```
-
-### Enable page auto tracking
-
-The most easy way to track your application, is to pass the VueRouter instance to the plugin and let it handle everything for you
-
-```js
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueAnalytics from 'vue-analytics'
-
-const router = new VueRouter({
-  router: // your routes
-})
-
-Vue.use(VueAnalytics, {
-  id: 'UA-XXX-X',
-  router
 })
 ```
 
