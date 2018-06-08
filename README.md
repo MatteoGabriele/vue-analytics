@@ -42,6 +42,8 @@ For example:
 Vue ^2.0.0
 
 ## Articles
+[Google Analytics, GDPR and Vuejs](https://medium.com/@matteo_gabriele/google-analytics-gdpr-and-vuejs-e1bd6affd2b4)
+
 [Vuejs and Google Analytics](https://medium.com/@matteo_gabriele/vuejs-and-google-analytics-689a07e00116)
 
 [Tips & tricks for vue-analytics](https://medium.com/@matteo_gabriele/tips-tricks-for-vue-analytics-87a9d2838915)
