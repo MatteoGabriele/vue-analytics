@@ -8,9 +8,8 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "dev": "webpack --mode development --config webpack.config.js",
-    "build": "webpack --config webpack.prod.js",
-    "build:web": "webpack --config webpack.prod.web.js",
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --config ./jest.config.js --watch --verbose",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -48,6 +47,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "brotli-gzip-webpack-plugin": "^0.5.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "2.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",

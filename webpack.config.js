@@ -1,14 +1,13 @@
 const path = require('path')
 const pkg = require('./package.json')
-const CompressionPlugin = require('compression-webpack-plugin')
-console.log(path.resolve(__dirname, 'src/lib'))
 
 module.exports = {
   entry: './src/index.js',
-  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `${pkg.name}.web.js`
+    filename: `${pkg.name}.js`,
+    libraryTarget: 'umd',
+    library: 'VueAnalytics'
   },
   resolve: {
     alias: {
