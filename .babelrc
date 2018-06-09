@@ -1,4 +1,14 @@
 {
-  "presets": ["blue"],
-  "plugins": ["transform-runtime"]
+  "presets": [
+    ["env", {
+      "modules": false,
+      "useBuiltIns": true,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 10"]
+      }
+    }]
+  ],
+  "plugins": [
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
+  ]
 }

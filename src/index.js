@@ -6,7 +6,7 @@ import ga from 'directives/ga'
 import * as exception from 'lib/exception'
 import analyticsMiddleware from './vuex-middleware'
 
-export default function install (Vue, options = {}) {
+export const install = (Vue, options = {}) => {
   update({ ...options, $vue: Vue })
 
   if (typeof window !== 'undefined' && !window.ga) {
@@ -25,7 +25,6 @@ export default function install (Vue, options = {}) {
   bootstrap()
 }
 
-export {
-  onAnalyticsReady,
-  analyticsMiddleware
-}
+export default install
+
+export { onAnalyticsReady, analyticsMiddleware }
