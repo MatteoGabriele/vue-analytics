@@ -1,12 +1,12 @@
 import lib from './lib'
 
 export default store => {
-  store.subscribe((mutation, state) => {
-    if (!mutation.payload || !mutation.payload.meta || !mutation.payload.meta.analytics) {
+  store.subscribe(({ payload }) => {
+    if (!payload || !payload.meta || !payload.meta.analytics) {
       return
     }
 
-    const { analytics } = mutation.payload.meta
+    const { analytics } = payload.meta
 
     if (!Array.isArray(analytics)) {
       throw new Error('The "analytics" property needs to be an array')
