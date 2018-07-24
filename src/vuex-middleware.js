@@ -2,7 +2,7 @@ import lib from './lib'
 
 export default store => {
   store.subscribe((mutation, state) => {
-    if (!mutation.payload || !mutation.payload.meta) {
+    if (!mutation.payload || !mutation.payload.meta || !mutation.payload.meta.analytics) {
       return
     }
 
