@@ -7,7 +7,7 @@ const id = 'UA-1234567-8'
 
 localVue.use(VueAnalytics, { id })
 
-describe('lib/social', () => {
+describe('lib/time', () => {
   let wrapper
 
   beforeEach(() => {

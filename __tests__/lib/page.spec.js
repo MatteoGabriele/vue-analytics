@@ -1,10 +1,15 @@
+import VueAnalytics from '../../src'
+import VueRouter from 'vue-router'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
+
 jest.mock('config')
 jest.mock('load-script')
 
-import Vue from 'vue'
-import VueAnalytics from '../../src/index'
-import VueRouter from 'vue-router'
-import config, { mockUpdate } from 'config'
+const localVue = createLocalVue()
+
+const id = 'UA-1234567-8'
+
+localVue.use(VueRouter)
 
 const routes = [
   {
@@ -25,43 +30,51 @@ const routes = [
   }
 ]
 
-window.ga = jest.fn()
-
-let $vm
-
-beforeEach(done => {
-  Vue.use(VueRouter)
-
-  const router = new VueRouter({
-    mode: 'hash',
-    routes
-  })
-
-  Vue.use(VueAnalytics, {
-    id: 'UA-1234-5',
-    router
-  })
-
-  $vm = new Vue({
-    router,
-    render: (h) => h('router-view')
-  })
-
-  $vm.$mount()
-
-  Vue.nextTick(done)
+const router = new VueRouter({
+  mode: 'hash',
+  routes
 })
 
-it ('should track a page', () => {
-  $vm.$ga.page('/')
-
-  expect(window.ga).toBeCalledWith('set', 'page', '/')
-  expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+localVue.use(VueAnalytics, {
+  id,
+  router
 })
 
-it ('should set and track page with a VueRouter instance', () => {
-  $vm.$ga.page($vm.$router)
+describe('lib/page', () => {
+  let wrapper
 
-  expect(window.ga).toBeCalledWith('set', 'page', '/')
-  expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+  beforeEach(() => {
+    window.ga = jest.fn()
+  })
+
+  afterEach(() => {
+    wrapper && wrapper.destroy()
+  })
+
+  it ('should track a page', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue,
+      router
+    })
+
+    wrapper.vm.$ga.page('/')
+
+    expect(window.ga).toBeCalledWith('send', 'pageview', '/')
+  })
+
+  it ('should set and track page with a VueRouter instance', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue,
+      router
+    })
+
+    wrapper.vm.$ga.page(wrapper.vm.$router)
+
+    expect(window.ga).toBeCalledWith('set', 'page', '/')
+    expect(window.ga).toBeCalledWith('send', 'pageview')
+  })
 })

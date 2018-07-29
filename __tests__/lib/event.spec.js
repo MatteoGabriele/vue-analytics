@@ -1,21 +1,32 @@
-import Vue from 'vue'
 import VueAnalytics from '../../src'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-window.ga = jest.fn()
+const localVue = createLocalVue()
 
-let $vm
+const id = 'UA-1234567-8'
 
-beforeEach(() => {
-  Vue.use(VueAnalytics, {
-    id: 'UA-1234-5'
+localVue.use(VueAnalytics, { id })
+
+describe('lib/event', () => {
+  let wrapper
+
+  beforeEach(() => {
+    window.ga = jest.fn()
   })
 
-  $vm = new Vue({})
+  afterEach(() => {
+    wrapper && wrapper.destroy()
+  })
 
-  $vm.$mount()
-})
+  it('should require a plugin', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue
+    })
 
-it ('should track an event', () => {
-  $vm.$ga.event('foo', 'bar')
-  expect(window.ga).toBeCalledWith('send', 'event', 'foo', 'bar')
+    wrapper.vm.$ga.event('foo', 'bar')
+
+    expect(window.ga).toBeCalledWith('send', 'event', 'foo', 'bar')
+  })
 })
