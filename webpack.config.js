@@ -1,7 +1,6 @@
 const path = require('path')
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const Compression = require('brotli-gzip-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -31,13 +30,6 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin({
       banner: 'hash:[hash]'
-    }),
-    new Compression({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.js$/,
-        threshold: 10240,
-        minRatio: 0.8
-      })
+    })
   ]
 }

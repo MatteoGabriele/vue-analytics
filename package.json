@@ -10,7 +10,7 @@
     "commit": "git-cz",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "test": "jest --config ./jest.config.js",
+    "test": "jest",
     "test:watch": "jest --config ./jest.config.js --watch --verbose",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -43,7 +43,9 @@
   },
   "homepage": "https://github.com/MatteoGabriele/vue-analytics#readme",
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.18",
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -51,8 +53,11 @@
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "2.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
-    "jest": "^20.0.0",
+    "jest": "^23.1.0",
+    "jest-vue-preprocessor": "^1.4.0",
     "semantic-release": "^7.0.1",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.3"
   }
