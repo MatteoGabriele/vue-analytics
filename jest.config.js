@@ -1,13 +1,13 @@
 const path = require('path')
 
 module.exports = {
-  // coverageDirectory: '<rootDir>/src/__tests__/coverage',
+  coverageDirectory: '<rootDir>/src/__tests__/coverage',
   collectCoverageFrom: [
     'src/**/*.js',
     '!**/node_modules/**'
   ],
   testPathIgnorePatterns: [
-    // '<rootDir>/__tests__/coverage/'
+    '<rootDir>/__tests__/coverage/'
   ],
   testMatch: ['**/__tests__/**/*.spec.js'],
   coverageReporters: ['html', 'text-summary'],

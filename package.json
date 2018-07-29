@@ -11,6 +11,7 @@
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "test:watch": "jest --config ./jest.config.js --watch --verbose",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
