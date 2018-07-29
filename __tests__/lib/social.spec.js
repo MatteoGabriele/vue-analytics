@@ -1,35 +1,52 @@
-import Vue from 'vue'
 import VueAnalytics from '../../src'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-window.ga = jest.fn()
+const localVue = createLocalVue()
 
-let $vm
+const id = 'UA-1234567-8'
 
-beforeEach(() => {
-  Vue.use(VueAnalytics, {
-    id: 'UA-1234-5'
+localVue.use(VueAnalytics, { id })
+
+describe('lib/social', () => {
+  let wrapper
+
+  beforeEach(() => {
+    window.ga = jest.fn()
   })
 
-  $vm = new Vue({})
-
-  $vm.$mount()
-})
-
-it ('should track a social interaction', () => {
-  $vm.$ga.social('Facebook', 'like', 'http://foo.com')
-  expect(window.ga).toBeCalledWith('send', 'social', 'Facebook', 'like', 'http://foo.com')
-})
-
-it ('should track a social interaction with an object literal', () => {
-  $vm.$ga.social({
-    socialNetwork: 'Facebook',
-    socialAction: 'like',
-    socialTarget: 'http://foo.com'
+  afterEach(() => {
+    wrapper && wrapper.destroy()
   })
 
-  expect(window.ga).toBeCalledWith('send', 'social', {
-    socialNetwork: 'Facebook',
-    socialAction: 'like',
-    socialTarget: 'http://foo.com'
+  it('should track social interaction', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue
+    })
+
+    wrapper.vm.$ga.social('Facebook', 'like', 'foo.com')
+
+    expect(window.ga).toBeCalledWith('send', 'social', 'Facebook', 'like', 'foo.com')
+  })
+
+  it('should social interaction with an object literal', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue
+    })
+
+    wrapper.vm.$ga.social({
+      socialNetwork: 'Facebook',
+      socialAction: 'like',
+      socialTarget: 'foo.com'
+    })
+
+    expect(window.ga).toBeCalledWith('send', 'social', {
+      socialNetwork: 'Facebook',
+      socialAction: 'like',
+      socialTarget: 'foo.com'
+    })
   })
 })

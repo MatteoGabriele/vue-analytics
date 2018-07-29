@@ -49,9 +49,9 @@
     conventional-changelog "1.1.4"
     github-url-from-git "^1.4.0"
 
-"@vue/test-utils@^1.0.0-beta.18":
-  version "1.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.18.tgz#53c22c4b90211a98dbf2708c0b717c18adaa993c"
+"@vue/test-utils@^1.0.0-beta.21":
+  version "1.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.21.tgz#fe1ee11ce16072da7ef29420df4aa5c11f4560ff"
   dependencies:
     lodash "^4.17.4"
 
@@ -6303,6 +6303,10 @@ vue-property-decorator@6.0.0:
   dependencies:
     reflect-metadata "^0.1.10"
     vue-class-component "^6.0.0"
+
+vue-router@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
 
 vue-template-compiler@^2.5.16:
   version "2.5.16"

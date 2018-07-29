@@ -1,38 +1,54 @@
-import Vue from 'vue'
 import VueAnalytics from '../../src'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-window.ga = jest.fn()
+const localVue = createLocalVue()
 
-let $vm
+const id = 'UA-1234567-8'
 
-beforeEach(() => {
-  Vue.use(VueAnalytics, {
-    id: 'UA-1234-5'
+localVue.use(VueAnalytics, { id })
+
+describe('lib/social', () => {
+  let wrapper
+
+  beforeEach(() => {
+    window.ga = jest.fn()
   })
 
-  $vm = new Vue({})
-
-  $vm.$mount()
-})
-
-it ('should track timing', () => {
-  $vm.$ga.time('category', 'variable', 123, 'label')
-
-  expect(window.ga).toBeCalledWith('send', 'timing', 'category', 'variable', 123, 'label')
-})
-
-it ('should track timing with an object literal', () => {
-  $vm.$ga.time({
-    timingCategory: 'category',
-    timingVar: 'variable',
-    timingValue: 123,
-    timingLabel: 'label'
+  afterEach(() => {
+    wrapper && wrapper.destroy()
   })
 
-  expect(window.ga).toBeCalledWith('send', 'timing', {
-    timingCategory: 'category',
-    timingVar: 'variable',
-    timingValue: 123,
-    timingLabel: 'label'
+  it('should track timing', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue
+    })
+
+    wrapper.vm.$ga.time('category', 'variable', 123, 'label')
+
+    expect(window.ga).toBeCalledWith('send', 'timing', 'category', 'variable', 123, 'label')
+  })
+
+  it('should track timing with an object literal', () => {
+    wrapper = shallowMount({
+      template: '<div></div>'
+    }, {
+      localVue
+    })
+
+    wrapper.vm.$ga.time({
+      timingCategory: 'category',
+      timingVar: 'variable',
+      timingValue: 123,
+      timingLabel: 'label'
+    })
+
+    expect(window.ga).toBeCalledWith('send', 'timing', {
+      timingCategory: 'category',
+      timingVar: 'variable',
+      timingValue: 123,
+      timingLabel: 'label'
+    })
   })
 })
