@@ -9,7 +9,7 @@ this.$ga.set(fieldName, fieldValue)
 also possible to pass an object literal
 
 ```js
-this.$ga.set({ fieldName, fieldValue })
+this.$ga.set({ fieldName: fieldValue })
 ```
 
 ### Set multiple fields before first hit
