@@ -5,6 +5,7 @@ const defaultConfig = {
   id: null,
   router: null,
   fields: {},
+  customIdFields: {},
   ignoreRoutes: [],
   linkers: [],
   commands: {},
