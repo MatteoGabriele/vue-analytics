@@ -66,8 +66,18 @@ describe('getQueryString', () => {
 })
 
 describe('isRouteIgnored', () => {
-  it ('should return true if home route is added to ignoreRoutes list', () => {
+  it ('should be truthy if home route name is added to ignoreRoutes list', () => {
     mockUpdate({ id: 'UA-1234-5', ignoreRoutes: ['home'] })
-    expect(helpers.isRouteIgnored('home')).toBe(true)
+    expect(helpers.isRouteIgnored({ name: 'home' })).toBeTruthy()
+  })
+
+  it ('should be truthy if home route path is added to ignoreRoutes list', () => {
+    mockUpdate({ id: 'UA-1234-5', ignoreRoutes: ['/'] })
+    expect(helpers.isRouteIgnored({ path: '/' })).toBeTruthy()
+  })
+
+  it ('should be falsy if a `null` value is added to ignoreRoutes list', () => {
+    mockUpdate({ id: 'UA-1234-5', ignoreRoutes: [null] })
+    expect(helpers.isRouteIgnored({ path: '/' })).toBeFalsy()
   })
 })
