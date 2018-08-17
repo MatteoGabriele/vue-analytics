@@ -21,7 +21,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-### Manual page tracking 
+### Manual page tracking
 
 The standard way is just passing the current page path
 
@@ -101,12 +101,13 @@ Vue.use(VueAnalytics, {
 
 ### Ignore routes on page auto tracking
 
-To disable auto tracking for specific routes, you need to pass an array of names of routes to the plugin options
+To disable auto tracking for specific routes, you need to pass an array of strings to the plugin options.
+The string needs to be the route `name` or the route `path`.
 
 ```js
 Vue.use(VueAnalytics, {
   router,
-  ignoreRoutes: ['home', 'contacts']
+  ignoreRoutes: ['home', '/contacts']
 })
 ```
 
