@@ -48,15 +48,19 @@ It is also possible to disable tracking from everywhere at any time using the `d
 export default {
   methods: {
     disableTracking () {
-      this.$ga.disable(true)
-      // from now on analytics is disabled!
+      this.$ga.disable()
+      // from now on analytics is disabled
+    },
+    enableTracking () {
+      this.$ga.enable()
+      // from now on analytics is enabled
     }
   }
 }
 ```
-
 or
 
 ```js
-Vue.$ga.disable(true)
+Vue.$ga.disable()
+Vue.$ga.enable()
 ```

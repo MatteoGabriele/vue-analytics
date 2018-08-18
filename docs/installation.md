@@ -15,6 +15,16 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+**Important**
+
+For all the ES5 users out there, this package uses a default export so if you want to use `require` instead of `import` you should import the plugin like this 
+
+```js
+const VueAnalytics = require('vue-analytics').default
+
+Vue.use(VueAnalytics, { ... })
+```
+
 ## Track multiple accounts
 
 Pass an array of strings for a multiple tracking system. Every hit will be fired twice: each time with a different tracker name

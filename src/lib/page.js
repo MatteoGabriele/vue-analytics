@@ -25,30 +25,17 @@ export default function page (...args) {
   }
 
   if (route) {
-    const {
-      router,
-      autoTracking: {
-        transformQueryString,
-        prependBase
-      }
-    } = config
-
-    const queryString = getQueryString(route.query)
-    const base = router && router.options.base
-    const needsBase = prependBase && base
-
-    let path = route.path + (transformQueryString ? queryString : '')
-    path = needsBase ? getBasePath(base, path) : path
-
-    set('page', path)
-    query('send', 'pageview')
+    trackRoute(route)
   } else {
+    // We can call with `page('/my/path')`
+    let page = typeof args[0] === 'object' ? args[0].page : args[0]
+    set('page', page)
     query('send', 'pageview', ...args)
   }
 }
 
 export function trackRoute (route) {
-  if (isRouteIgnored(route.name)) {
+  if (isRouteIgnored(route)) {
     return
   }
 
@@ -67,7 +54,26 @@ export function trackRoute (route) {
     return
   }
 
-  page(proxy ? proxy(route) : route)
+  if (proxy) {
+    page(proxy(route))
+  } else {
+    const {
+      router,
+      autoTracking: {
+        transformQueryString,
+        prependBase
+      }
+    } = config
+
+    const queryString = getQueryString(route.query)
+    const base = router && router.options.base
+    const needsBase = prependBase && base
+
+    let path = route.path + (transformQueryString ? queryString : '')
+    path = needsBase ? getBasePath(base, path) : path
+    
+    page(path)
+  }
 }
 
 export function autoTracking () {

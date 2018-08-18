@@ -92,8 +92,10 @@ export function getQueryString (queryMap) {
   return queryString !== '' ? `?${queryString}` : ''
 }
 
-export function isRouteIgnored (name) {
-  return config.ignoreRoutes.indexOf(name) !== -1
+export function isRouteIgnored ({ name, path }) {
+  return [name, path]
+    .filter(Boolean)
+    .find(value => config.ignoreRoutes.indexOf(value) !== -1)
 }
 
 export function isRoute (data) {

@@ -1,48 +1,34 @@
+import Vue from 'vue'
 import VueAnalytics from '../../src'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-const localVue = createLocalVue()
+window.ga = jest.fn()
 
-const id = 'UA-1234567-8'
+let $vm
 
-localVue.use(VueAnalytics, { id })
+beforeEach(() => {
+  window.ga.mockClear()
 
-describe('lib/require', () => {
-  let wrapper
-
-  beforeEach(() => {
-    window.ga = jest.fn()
+  Vue.use(VueAnalytics, {
+    id: 'UA-1234-5'
   })
 
-  afterEach(() => {
-    wrapper && wrapper.destroy()
+  $vm = new Vue({})
+
+  $vm.$mount()
+})
+
+it ('should require a plugin', () => {
+  $vm.$ga.require('myplugin')
+
+  expect(window.ga).toBeCalledWith('require', 'myplugin')
+})
+
+it ('should require a plugin with options', () => {
+  $vm.$ga.require('myplugin', {
+    foo: 'bar'
   })
 
-  it('should require a plugin', () => {
-    wrapper = shallowMount({
-      template: '<div></div>'
-    }, {
-      localVue
-    })
-
-    wrapper.vm.$ga.require('myplugin')
-
-    expect(window.ga).toBeCalledWith('require', 'myplugin')
-  })
-
-  it('should require a plugin with options', () => {
-    wrapper = shallowMount({
-      template: '<div></div>'
-    }, {
-      localVue
-    })
-
-    wrapper.vm.$ga.require('myplugin', {
-      foo: 'bar'
-    })
-
-    expect(window.ga).toBeCalledWith('require', 'myplugin', {
-      foo: 'bar'
-    })
+  expect(window.ga).toBeCalledWith('require', 'myplugin', {
+    foo: 'bar'
   })
 })

@@ -1,35 +1,29 @@
+import Vue from 'vue'
 import VueAnalytics from '../../src'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-const localVue = createLocalVue()
+window.ga = jest.fn()
 
-const id = 'UA-1234567-8'
+let $vm
 
-localVue.use(VueAnalytics, { id })
+beforeEach(() => {
+  window.ga.mockClear()
 
-describe('lib/exception', () => {
-  let wrapper
+  Vue.config.errorHandler = jest.fn()
 
-  beforeEach(() => {
-    window.ga = jest.fn()
+  Vue.use(VueAnalytics, {
+    id: 'UA-1234-5'
   })
 
-  afterEach(() => {
-    wrapper && wrapper.destroy()
-  })
+  $vm = new Vue({})
 
-  it ('should track an error exception', () => {
-    wrapper = shallowMount({
-      template: '<div></div>'
-    }, {
-      localVue
-    })
+  $vm.$mount()
+})
 
-    wrapper.vm.$ga.exception('bad stuff', true)
+it ('should track an error exception', () => {
+  $vm.$ga.exception('bad stuff', true)
 
-    expect(window.ga).toBeCalledWith('send', 'exception', {
-      exDescription: 'bad stuff',
-      exFatal: true
-    })
+  expect(window.ga).toBeCalledWith('send', 'exception', {
+    exDescription: 'bad stuff',
+    exFatal: true
   })
 })

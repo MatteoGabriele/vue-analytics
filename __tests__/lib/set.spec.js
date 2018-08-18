@@ -1,50 +1,36 @@
+import Vue from 'vue'
 import VueAnalytics from '../../src'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
 
-const localVue = createLocalVue()
+window.ga = jest.fn()
 
-const id = 'UA-1234567-8'
+let $vm
 
-localVue.use(VueAnalytics, { id })
+beforeEach(() => {
+  window.ga.mockClear()
 
-describe('lib/set', () => {
-  let wrapper
-
-  beforeEach(() => {
-    window.ga = jest.fn()
+  Vue.use(VueAnalytics, {
+    id: 'UA-1234-5'
   })
 
-  afterEach(() => {
-    wrapper && wrapper.destroy()
+  $vm = new Vue({})
+
+  $vm.$mount()
+})
+
+it ('should set a variable on Google Analytics', () => {
+  $vm.$ga.set('foo', 'bar')
+
+  expect(window.ga).toBeCalledWith('set', 'foo', 'bar')
+})
+
+it ('should set a variable on Google Analytics with an object literal', () => {
+  $vm.$ga.set({
+    fieldName: 'foo',
+    fieldValue: 'bar'
   })
 
-  it('should set a variable on Google Analytics', () => {
-    wrapper = shallowMount({
-      template: '<div></div>'
-    }, {
-      localVue
-    })
-
-    wrapper.vm.$ga.set('foo', 'bar')
-
-    expect(window.ga).toBeCalledWith('set', 'foo', 'bar')
-  })
-
-  it('should set a variable on Google Analytics', () => {
-    wrapper = shallowMount({
-      template: '<div></div>'
-    }, {
-      localVue
-    })
-
-    wrapper.vm.$ga.set({
-      fieldName: 'foo',
-      fieldValue: 'bar'
-    })
-
-    expect(window.ga).toBeCalledWith('set', {
-      fieldName: 'foo',
-      fieldValue: 'bar'
-    })
+  expect(window.ga).toBeCalledWith('set', {
+    fieldName: 'foo',
+    fieldValue: 'bar'
   })
 })

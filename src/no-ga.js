@@ -1,11 +1,11 @@
 import { getId } from './config'
 
-export default () => {
+export default (disable = true) => {
   if (typeof window === 'undefined') {
     return
   }
 
   getId().forEach(id => {
-    window[`ga-disable-${id}`] = true
+    window[`ga-disable-${id}`] = disable
   })
 }
