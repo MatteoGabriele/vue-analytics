@@ -14,7 +14,7 @@
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
 
- <img src="https://img.shields.io/badge/size-3.92kB-brightgreen.svg" />
+ <img src="https://img.shields.io/badge/size-4.01kB-brightgreen.svg" />
 </p>
 
 # vue-analytics
