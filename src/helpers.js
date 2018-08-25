@@ -106,6 +106,16 @@ export function isRouter (data) {
   return data.currentRoute
 }
 
-export function hasProps (props) {
-  return Object.keys(props).length > 0
+export const promisify = value => {
+  if (value.then) {
+    return value
+  }
+
+  if (typeof value === 'function') {
+    const payload = value()
+
+    return payload.then ? payload : Promise.resolve(payload)
+  }
+
+  return Promise.resolve(value)
 }
