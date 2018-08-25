@@ -1,6 +1,6 @@
-## User explorer
+## Trakcer fields
 
-Add the `userId` on first load just passing it in the options object
+It is possible to setup initial tracker fields using the `fields` prop
 
 ```js
 Vue.use(VueAnalytics, {
@@ -11,7 +11,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-It's also possible to add fields per id, useful for read only fields.
+It's also possible to add fields per id
 
 ```js
 Vue.use(VueAnalytics, {
@@ -31,4 +31,4 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-**it is also possible to set the **`userId`** in runtime using the **[**set**](/docs/set.md)** method**
+**it is also possible to set fields in runtime using the **[**set**](/docs/set.md)** method**
