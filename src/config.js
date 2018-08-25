@@ -13,6 +13,8 @@ const defaultConfig = {
   // https://github.com/MatteoGabriele/vue-analytics/issues/103
   disabled: false,
 
+  customResourceURL: null,
+
   set: [],
   require: [],
 

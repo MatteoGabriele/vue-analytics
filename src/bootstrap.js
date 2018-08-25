@@ -13,7 +13,7 @@ export default () => {
 
   const { disableScriptLoader: noScript } = config
   const filename = config.debug.enabled ? 'analytics_debug' : 'analytics'
-  const resource = `https://www.google-analytics.com/${filename}.js`
+  const resource = config.customResourceURL || `https://www.google-analytics.com/${filename}.js`
 
   if (!config.id) {
     throw new Error(
