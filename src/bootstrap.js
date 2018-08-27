@@ -27,7 +27,15 @@ export default () => {
   ]
 
   if (shouldGaLoad() && (!window.ga || !noScript)) {
-    queue.push(loadScript(resource))
+    queue.push(
+      loadScript(resource).catch(() => {
+        throw new Error (
+          `[vue-analytics] An error occured! Please check your connection, ` +
+          `if you have any Google Analytics blocker installed in your browser ` +
+          `or check your custom resource URL if you have added any.`
+        )
+      })
+    )
   }
 
   return Promise.all(queue).then(response => {
@@ -51,11 +59,7 @@ export default () => {
 
     // Starts auto tracking
     autoTracking()
-  }).catch(response => {
-    console.error(
-      `[vue-analytics] An error occured! Please check your connection, ` +
-      `if you have any Google Analytics blocker installed in your browser ` +
-      `or check your custom resource URL if you have added any.`
-    )
+  }).catch(error => {
+    console.error(error.message)
   })
 }
