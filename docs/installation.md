@@ -1,6 +1,6 @@
 ## Get started
 
-Install the package
+### Installation
 ```bash
 npm install vue-analytics
 ```
@@ -17,13 +17,62 @@ Vue.use(VueAnalytics, {
 
 **Important**
 
-For all the ES5 users out there, this package uses a default export so if you want to use `require` instead of `import` you should import the plugin like this 
+For all the ES5 users out there, this package uses a default export so if you want to use `require` instead of `import` you should import the plugin like this
 
 ```js
 const VueAnalytics = require('vue-analytics').default
 
 Vue.use(VueAnalytics, { ... })
 ```
+
+### Usage
+it is possible to use the api in two different ways:
+ - within the component scope
+ - importing methods separately
+
+#### Component scope
+
+```js
+export default {
+  name: 'MyComponent',
+
+  methods: {
+    track () {
+      this.$ga.page('/')
+    }
+  }
+}
+```
+
+#### Import methods
+
+To be able to use methods import, make sure you install vue-analytics **before** you want to use them
+
+```js
+import { page } from 'vue-analytics'
+
+export default {
+  name: 'MyComponent',
+
+  methods: {
+    track () {
+      page('/')
+    }
+  }
+}
+```
+
+#### API
+- event
+- ecommerce
+- set
+- page
+- query
+- screenview
+- time
+- require
+- exception
+- social
 
 ## Track multiple accounts
 
