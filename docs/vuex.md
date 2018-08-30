@@ -29,7 +29,7 @@ Start using vue-analytics API in your store
 // store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { page } from 'vue-analytics'
+import { event } from 'vue-analytics'
 
 Vue.use(Vuex)
 
