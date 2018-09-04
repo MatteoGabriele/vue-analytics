@@ -1,6 +1,6 @@
 ## How to load Google Analytics script
 
-By default nothing is needed: the plugin does everything for you!
+**By default nothing is needed: the plugin does everything for you!**
 
 However, in some cases, you might want to avoid auto-loading the analytics.js script because:
 - maybe the framework you're using already does it for you
