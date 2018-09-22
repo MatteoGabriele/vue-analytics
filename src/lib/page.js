@@ -3,14 +3,11 @@ import set from 'lib/set'
 import screenview from 'lib/screenview'
 import query from 'lib/query'
 import {
-  noop,
   getQueryString,
   isRouteIgnored,
-  getRouteAnalytics,
   isRoute,
   isRouter,
-  getBasePath,
-  hasProps
+  getBasePath
 } from '../helpers'
 
 export default function page (...args) {
@@ -71,7 +68,7 @@ export function trackRoute (route) {
 
     let path = route.path + (transformQueryString ? queryString : '')
     path = needsBase ? getBasePath(base, path) : path
-    
+
     page(path)
   }
 }

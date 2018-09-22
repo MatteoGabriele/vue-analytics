@@ -28,6 +28,35 @@ it ('should initialize multiple trackers', () => {
   })
 })
 
+it('should intialize each id with its own configuration', () => {
+  const customIdFields = { 
+    'UA-12345-1': {
+      clientId: '1'
+    },
+    'UA-54321-1': {
+      clientId: '2'
+    },
+  }
+
+  mockUpdate({ 
+    id: ['UA-12345-1', 'UA-54321-1'], 
+    fields: {
+      'global': true
+    },
+    customIdFields,
+  })
+
+  createTrackers()
+
+  mockGetId().forEach(id => {
+    expect(window.ga).toBeCalledWith('create', id, 'auto', {
+      global: true,
+      ...customIdFields[id],
+      name: getTracker(id),
+    })
+  })
+})
+
 it ('should add linkers if list is not empty', function () {
   mockUpdate({
     id: 'UA-1234-1',

@@ -10,11 +10,18 @@ export default function query (method, ...args) {
   }
 
   getId().forEach(function (id) {
+    const t = {
+      m: getMethod(method, id),
+      a: args
+    }
+
+    if(!window.ga) {
+      config.untracked.push(t)
+      return
+    }
+
     if (config.batch.enabled) {
-      coll.push({
-        m: getMethod(method, id),
-        a: args
-      })
+      coll.push(t)
 
       if (!intr) {
         intr = setInterval(() => {

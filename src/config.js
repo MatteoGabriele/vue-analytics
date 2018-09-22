@@ -5,12 +5,15 @@ const defaultConfig = {
   id: null,
   router: null,
   fields: {},
+  customIdFields: {},
   ignoreRoutes: [],
   linkers: [],
   commands: {},
 
   // https://github.com/MatteoGabriele/vue-analytics/issues/103
   disabled: false,
+
+  customResourceURL: null,
 
   set: [],
   require: [],

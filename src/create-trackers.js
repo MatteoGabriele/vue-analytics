@@ -14,7 +14,8 @@ export default function createTrackers () {
 
   ids.forEach(function (domain) {
     const name = getTracker(domain)
-    const options = ids.length > 1 ? { ...config.fields, name } : config.fields
+    const customIdConfig = config.customIdFields[domain] || {}
+    const options = ids.length > 1 ? { ...config.fields, ...customIdConfig, name } : config.fields
 
     window.ga('create', (domain.id || domain), 'auto', options)
   })

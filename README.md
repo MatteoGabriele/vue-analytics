@@ -14,7 +14,7 @@
   <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
  </a>
 
- <img src="https://img.shields.io/badge/size-3.92kB-brightgreen.svg" />
+ <img src="https://img.shields.io/badge/size-4kB-brightgreen.svg" />
 </p>
 
 # vue-analytics
@@ -69,7 +69,7 @@ npm install vue-analytics
 * [Require](/docs/require.md)
 * [Set](/docs/set.md)
 * [Social interactions](/docs/social-interactions.md)
-* [User explorer report](/docs/user-explorer.md)
+* [Fields](/docs/fields.md)
 * [On Analytics script ready](/docs/when-google-analytics-is-loaded.md)
 * [Custom methods](/docs/custom-methods.md)
 * [E-commerce](/docs/ecommerce.md)
@@ -78,6 +78,7 @@ npm install vue-analytics
 * [Turn off during development](/docs/turn-off-development.md)
 * [Console logs](/docs/console-logs.md)
 * [Opt-out from Google Analytics](/docs/opt-out.md)
+* [Custom analytics.js URL](/docs/custom-analytics.md)
 * [Debug](/docs/debug.md)
 
 
