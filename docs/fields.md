@@ -1,4 +1,4 @@
-## Trakcer fields
+## Tracker fields
 
 It is possible to setup initial tracker fields using the `fields` prop
 
