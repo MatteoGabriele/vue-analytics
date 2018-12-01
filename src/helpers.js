@@ -44,7 +44,7 @@ export function hasScript () {
   const scriptTags = Array.prototype.slice.call(
     document.getElementsByTagName('script')
   ).filter(script => {
-    return (script.src.indexOf('analytics') !== -1) ||
+    return (script.src.indexOf('google-analytics') !== -1) ||
       (script.src.indexOf('gtag') !== -1)
   })
 
