@@ -62,7 +62,10 @@ export function getTracker (tracker) {
 export function onAnalyticsReady () {
   return new Promise((resolve, reject) => {
     const poll = setInterval(() => {
-      if (typeof window === 'undefined' || !window.ga) {
+      if (window.ga == null) {
+        reject()
+        clearInterval(poll)
+      } else if (typeof window === 'undefined' || typeof window.ga === 'undefined') {
         return
       }
 

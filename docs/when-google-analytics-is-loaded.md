@@ -28,5 +28,7 @@ const App = new Vue({ ... })
 
 onAnalyticsReady().then(() => {
   App.$mount('#app')
+}).catch(() => {
+  
 })
 ```

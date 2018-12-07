@@ -29,6 +29,7 @@ export default () => {
   if (shouldGaLoad() && (!window.ga || !noScript)) {
     queue.push(
       loadScript(resource).catch(() => {
+        window.ga = null
         throw new Error (
           `[vue-analytics] An error occured! Please check your connection, ` +
           `if you have any Google Analytics blocker installed in your browser ` +
