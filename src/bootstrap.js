@@ -50,12 +50,12 @@ export default () => {
     // Creates necessary trackers
     createTrackers()
 
+    // Fires all shorthand fields in the options
+    collectors()
+
     // Fires all untracked event that have been fired
     // meanwhile GoogleAnalayitcs script was loading
     untracked()
-
-    // Fires all shorthand fields in the options
-    collectors()
 
     // Starts auto tracking
     autoTracking()
