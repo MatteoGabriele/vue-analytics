@@ -1,18 +1,21 @@
 import query from 'lib/query'
-import config from '../config'
 
 const getMethod = function (name) {
-  return `${config.ecommerce.enhanced ? 'ec' : 'ecommerce'}:${name}`
+  return `${enhancedFeaturesList.includes(name) ? 'ec' : 'ecommerce'}:${name}`
 }
 
-const featuresList = [
-  'addItem', 
-  'addTransaction', 
-  'addProduct', 
-  'addImpression', 
+const enhancedFeaturesList = [
+  'addProduct',
+  'addImpression',
   'setAction',
-  'addPromo',
-  'send'
+  'addPromo'
+]
+
+const featuresList = [
+  'addItem',
+  'addTransaction',
+  'send',
+  ...enhancedFeaturesList
 ]
 
 export default featuresList.reduce((coll, feature) => {

@@ -25,13 +25,19 @@ export default function createTrackers () {
   const { ecommerce } = config
 
   if (ecommerce.enabled) {
-    const plugin = ecommerce.enhanced ? 'ec' : 'ecommerce'
+    const plugins = ['ecommerce']
 
-    if (ecommerce.options) {
-      query('require', plugin, ecommerce.options)
-    } else {
-      query('require', plugin)
+    if (ecommerce.enhanced) {
+      plugins.push('ec')
     }
+
+    plugins.forEach(plugin => {
+      if (ecommerce.options) {
+        query('require', plugin, ecommerce.options)
+      } else {
+        query('require', plugin)
+      }
+    })
   }
 
   if (config.linkers.length > 0) {
