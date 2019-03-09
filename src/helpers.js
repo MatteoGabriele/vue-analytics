@@ -30,7 +30,9 @@ export function getBasePath (base, path) {
 
 export function merge (obj, src) {
   Object.keys(src).forEach(function (key) {
-    if (obj[key] && typeof obj[key] === 'object') {
+    const type = obj[key] && Object.prototype.toString.call(obj[key])
+
+    if (type === '[object Object]' || type === '[object Array]') {
       merge(obj[key], src[key])
       return
     }
