@@ -8,7 +8,7 @@ export function loadScript (url) {
     const script = document.createElement('script')
     script.async = true
     script.src = url
-    script.charset = 'utf8'
+    script.charset = 'utf-8'
 
     head.appendChild(script)
 
