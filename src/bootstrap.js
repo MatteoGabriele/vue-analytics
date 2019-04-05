@@ -30,7 +30,7 @@ export default () => {
     queue.push(
       loadScript(resource).catch(() => {
         throw new Error (
-          `[vue-analytics] An error occured! Please check your connection, ` +
+          `[vue-analytics] An error occurred! Please check your connection, ` +
           `if you have any Google Analytics blocker installed in your browser ` +
           `or check your custom resource URL if you have added any.`
         )
