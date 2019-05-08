@@ -80,7 +80,7 @@ export function autoTracking () {
     return
   }
 
-  if (autoTracking.pageviewOnLoad) {
+  if (autoTracking.pageviewOnLoad && router.history.ready) {
     trackRoute(router.currentRoute)
   }
 
