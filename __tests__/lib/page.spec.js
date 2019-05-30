@@ -67,3 +67,21 @@ it ('should set and track page with a VueRouter instance', () => {
   expect(window.ga).toBeCalledWith('set', 'page', '/')
   expect(window.ga).toBeCalledWith('send', 'pageview', '/')
 })
+
+it ('should skip tracking when page first argument is a falsy value', () => {
+  $vm.$ga.page(null)
+  $vm.$ga.page(false)
+  $vm.$ga.page(undefined)
+  // Google officially states that page path must begin with '/'
+  // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#page
+  $vm.$ga.page('')
+
+  expect(window.ga).not.toHaveBeenCalled()
+  expect(window.ga).not.toHaveBeenCalled()
+
+  // Skip behavior must be explicit
+  $vm.$ga.page()
+
+  expect(window.ga).toHaveBeenCalled()
+  expect(window.ga).toHaveBeenCalled()
+})
