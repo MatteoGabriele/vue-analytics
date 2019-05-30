@@ -49,7 +49,7 @@ Google Analytics docs: [page tracking](https://developers.google.com/analytics/d
 
 ### Use screenview with autotracking
 
-It is also possible to use autotracking and screen tracking by passing true to the `screeview` property in the `autoTracking` object
+It is also possible to use autotracking and screen tracking by passing true to the `screenview` property in the `autoTracking` object
 
 ```js
 import Vue from 'vue'
