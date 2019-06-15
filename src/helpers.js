@@ -8,7 +8,7 @@ export function loadScript (url) {
     const script = document.createElement('script')
     script.async = true
     script.src = url
-    script.charset = 'utf8'
+    script.charset = 'utf-8'
 
     head.appendChild(script)
 
@@ -30,7 +30,9 @@ export function getBasePath (base, path) {
 
 export function merge (obj, src) {
   Object.keys(src).forEach(function (key) {
-    if (obj[key] && typeof obj[key] === 'object') {
+    const type = obj[key] && Object.prototype.toString.call(obj[key])
+
+    if (type === '[object Object]' || type === '[object Array]') {
       merge(obj[key], src[key])
       return
     }
@@ -85,7 +87,13 @@ export function getQueryString (queryMap) {
   const queryString = Object.keys(queryMap)
     .reduce((string, key, index, keys) => {
       const isLastKey = index === (keys.length - 1)
-      string += `${key}=${queryMap[key]}${isLastKey ? '' : '&'}`
+      const value = queryMap[key]
+
+      if (value == null) {
+        return string
+      }
+
+      string += `${key}=${value}${isLastKey ? '' : '&'}`
       return string
     }, '')
 

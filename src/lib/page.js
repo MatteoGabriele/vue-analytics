@@ -11,6 +11,11 @@ import {
 } from '../helpers'
 
 export default function page (...args) {
+  if (args.length && !args[0]) {
+    // allows to dynamically prevent tracking in pageviewTemplate proxy
+    return
+  }
+
   let route
 
   if (args.length && isRouter(args[0])) {
@@ -80,7 +85,7 @@ export function autoTracking () {
     return
   }
 
-  if (autoTracking.pageviewOnLoad) {
+  if (autoTracking.pageviewOnLoad && router.history.ready) {
     trackRoute(router.currentRoute)
   }
 

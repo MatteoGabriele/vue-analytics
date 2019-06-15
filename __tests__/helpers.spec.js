@@ -24,6 +24,23 @@ describe('merge', () => {
       }
     })
   })
+
+  it ('should merge objects containing non-objects', () => {
+    const a = { c: [ 1, 2, 3 ], d: Promise.resolve({ a: 1 }) }
+    const b = { c: [ 4, 5 ], d: { b: 1 } }
+    const c = helpers.merge(a, b)
+
+    expect(c).toEqual({
+      c: [
+        4,
+        5,
+        3
+      ],
+      d: {
+        b: 1
+      }
+    })
+  })
 })
 
 describe('getMethod', () => {

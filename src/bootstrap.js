@@ -11,7 +11,7 @@ export default () => {
     return
   }
 
-  const { disableScriptLoader: noScript } = config
+  const { disableScriptLoader: noScript, ready } = config
   const filename = config.debug.enabled ? 'analytics_debug' : 'analytics'
   const resource = config.customResourceURL || `https://www.google-analytics.com/${filename}.js`
 
@@ -30,9 +30,9 @@ export default () => {
     queue.push(
       loadScript(resource).catch(() => {
         throw new Error (
-          `[vue-analytics] An error occured! Please check your connection, ` +
-          `if you have any Google Analytics blocker installed in your browser ` +
-          `or check your custom resource URL if you have added any.`
+          '[vue-analytics] An error occured! Please check your connection, ' +
+          'if you have any Google Analytics blocker installed in your browser ' +
+          'or check your custom resource URL if you have added any.'
         )
       })
     )
@@ -50,16 +50,22 @@ export default () => {
     // Creates necessary trackers
     createTrackers()
 
+    // Fires all shorthand fields in the options
+    collectors()
+
     // Fires all untracked event that have been fired
     // meanwhile GoogleAnalayitcs script was loading
     untracked()
 
-    // Fires all shorthand fields in the options
-    collectors()
-
     // Starts auto tracking
     autoTracking()
+
+    ready()
   }).catch(error => {
+    if (!config.debug.enabled) {
+      return
+    }
+
     console.error(error.message)
   })
 }

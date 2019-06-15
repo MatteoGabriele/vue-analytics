@@ -49,7 +49,7 @@ Google Analytics docs: [page tracking](https://developers.google.com/analytics/d
 
 ### Use screenview with autotracking
 
-It is also possible to use autotracking and screen tracking by passing true to the `screeview` property in the `autoTracking` object
+It is also possible to use autotracking and screen tracking by passing true to the `screenview` property in the `autoTracking` object
 
 ```js
 import Vue from 'vue'
@@ -164,6 +164,10 @@ const router = new VueRouter({
 ```
 important: the route pageviewTemplate has always priority over the global one.
 
+`pageviewTemplate` can return a falsy value to skip tracking, which can be useful for specific needs:
+
+- `shouldRouterUpdate` documented below is more appropriate for tracking control based on routing, but is not enough when you need to disable initial tracking on some pages, since it only applies to navigation after initial page load.
+- `pageviewOnLoad: false` is global and can’t depend on current route.
 
 ## Avoid transforming route query object into querystring
 It is possible to avoid route query to be sent as querystring using the `transformQueryString` property
@@ -206,7 +210,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-For other use cases it is also possible to use the `shouldRouterUpdate`, accessable in the plugin configuartion object, inside the `autoTracking` property.
+For other use cases it is also possible to use the `shouldRouterUpdate`, accessible in the plugin configuration object, inside the `autoTracking` property.
 The methods has the previous and current route as parameters and it needs to return a truthy or falsy value.
 
 ```js
