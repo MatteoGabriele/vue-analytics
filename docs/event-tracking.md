@@ -7,7 +7,6 @@ passing parameters in this exact order
 ```js
 this.$ga.event('category', 'action', 'label', 123, {
   hitCallback : () => {},
-  hitCallbackFail: () => {}
 })
 ```
 
@@ -20,7 +19,6 @@ this.$ga.event({
   eventLabel: 'label',
   eventValue: 123,
   hitCallback: () => {},
-  hitCallbackFail: () => {}
 })
 ```
 
