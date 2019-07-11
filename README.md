@@ -61,6 +61,7 @@ npm install vue-analytics
 * [Page tracking](/docs/page-tracking.md)
 * [Event tracking](/docs/event-tracking.md)
 * [Screen tracking](/docs/screen-tracking.md)
+* [Callbacks](/docs/callbacks.md)
 * [Event batches](/docs/batch.md)
 * [v-ga](/docs/v-ga.md)
 * [Cross-domain tracking](/docs/cross-domain-tracking.md)
