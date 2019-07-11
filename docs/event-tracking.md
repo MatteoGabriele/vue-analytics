@@ -8,14 +8,16 @@ passing parameters in this exact order
 this.$ga.event('category', 'action', 'label', 123)
 ```
 
-an object literal is also possible
+an object literal is also possible. Sometimes with slow internet connection, it's important to add a callback function to be called after the event has been sent.
 
 ```js
 this.$ga.event({
   eventCategory: 'category',
   eventAction: 'action',
   eventLabel: 'label',
-  eventValue: 123
+  eventValue: 123,
+  hitCallback: () => {},
+  hitCallbackFail: () => {}
 })
 ```
 
