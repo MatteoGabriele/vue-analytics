@@ -1,6 +1,6 @@
 ## Callbacks
 
-Google Analytics have a `hitCallback` function that will be called after a request has been sent successfully. This is useful to turn the requests into promises or at least to know when the requests are done.
+Google Analytics have a `hitCallback` function that will be called after a request has been sent successfully. A function can be passed into `hitCallback`. This is useful when you want to to know when the requests are done.
 
 ```js
     sendEvent () {
