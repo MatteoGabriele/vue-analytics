@@ -46,11 +46,7 @@ export default new Vuex.Store({
     increase ({state, commit}) {
       return new Promise((resolve,reject) => {
         commit('increase');
-        event({
-          eventCategory: 'user-click',
-          eventAction: 'increase',
-          eventLabel: 'counter',
-          eventValue: state.counter,
+        event('user-click', 'increase','counter', state.counter, {
           hitCallback: resolve,
           hitCallbackFail: reject
         })
