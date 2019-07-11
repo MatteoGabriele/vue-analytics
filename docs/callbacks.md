@@ -26,3 +26,6 @@ also with an object literal
       })
     }
 ```
+
+Google analytics reference [hitCallback](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#hitCallback) and guide [Knowing when the hit has been sent
+](https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#knowing_when_the_hit_has_been_sent)
