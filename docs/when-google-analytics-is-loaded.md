@@ -17,7 +17,7 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-It is also possible to use the `onScriptLoaded` method, which returns a promise.
+It is also possible to use the `onAnalyticsReady` method, which returns a promise.
 
 ```js
 import VueAnalytics, { onAnalyticsReady } from 'vue-analytics'
