@@ -54,7 +54,18 @@ export function hasScript () {
 }
 
 export function shouldGaLoad () {
-  return !(config.checkDuplicatedScript && hasScript())
+  const {
+    checkDuplicatedScript,
+    disableScriptLoader
+  } = config
+
+  const requires = [
+    Boolean(window && window.ga),
+    (checkDuplicatedScript && !hasScript()),
+    !disableScriptLoader
+  ]
+
+  return requires.some(Boolean)
 }
 
 export function getTracker (tracker) {
