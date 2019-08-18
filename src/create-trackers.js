@@ -4,6 +4,14 @@ import config, { getId } from './config'
 import { getTracker } from './helpers'
 
 export default function createTrackers () {
+  if (!window.ga && config.debug.enabled) {
+    throw new Error('[vue-analytics] Google Analytics has probably been blocked.')
+  }
+
+  if (!window.ga) {
+    return
+  }
+
   const ids = getId()
 
   if (config.debug.enabled) {

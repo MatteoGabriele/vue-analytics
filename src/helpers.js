@@ -87,7 +87,13 @@ export function getQueryString (queryMap) {
   const queryString = Object.keys(queryMap)
     .reduce((string, key, index, keys) => {
       const isLastKey = index === (keys.length - 1)
-      string += `${key}=${queryMap[key]}${isLastKey ? '' : '&'}`
+      const value = queryMap[key]
+
+      if (value == null) {
+        return string
+      }
+
+      string += `${key}=${value}${isLastKey ? '' : '&'}`
       return string
     }, '')
 
