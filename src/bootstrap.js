@@ -11,7 +11,7 @@ export default () => {
     return
   }
 
-  const { disableScriptLoader: noScript, ready } = config
+  const { ready } = config
   const filename = config.debug.enabled ? 'analytics_debug' : 'analytics'
   const resource = config.customResourceURL || `https://www.google-analytics.com/${filename}.js`
 
@@ -26,7 +26,7 @@ export default () => {
     promisify(config.disabled)
   ]
 
-  if (shouldGaLoad() && (!window.ga || !noScript)) {
+  if (shouldGaLoad()) {
     queue.push(
       loadScript(resource).catch(() => {
         throw new Error (
