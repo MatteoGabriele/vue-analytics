@@ -3,6 +3,12 @@ import config, { getId } from './config'
 export function noop () {}
 
 export function loadScript (url) {
+  window['GoogleAnalyticsObject'] = 'ga'
+  window['ga'] = window['ga'] || function () {
+    (window['ga'].q = window['ga'].q || []).push(arguments)
+  }
+  window['ga'].l = 1 * new Date()
+
   return new Promise((resolve, reject) => {
     var head = document.head || document.getElementsByTagName('head')[0]
     const script = document.createElement('script')
@@ -53,23 +59,12 @@ export function hasScript () {
   return scriptTags.length > 0
 }
 
-export function shouldGaLoad () {
-  const {
-    checkDuplicatedScript,
-    disableScriptLoader
-  } = config
-
-  const requires = [
-    Boolean(window && window.ga),
-    (checkDuplicatedScript && !hasScript()),
-    !disableScriptLoader
-  ]
-
-  return requires.some(Boolean)
-}
-
 export function getTracker (tracker) {
-  return tracker.name || tracker.replace(/-/gi, '')
+  if (typeof tracker === 'string') {
+    return tracker.replace(/-/gi, '')
+  }
+
+  return tracker.get('name')
 }
 
 export function onAnalyticsReady () {
@@ -86,12 +81,15 @@ export function onAnalyticsReady () {
 }
 
 export function getMethod (name, trackerId) {
-  if (getId().length > 1) {
-    const domain = getTracker(trackerId)
-    return `${domain}.${name}`
+  console.log(getId())
+  console.log(trackerId)
+  if (name === 'create') {
+    return 'create'
   }
 
-  return name
+  const domain = getTracker(trackerId)
+
+  return `${domain}.${name}`
 }
 
 export function getQueryString (queryMap) {
@@ -126,6 +124,10 @@ export function isRouter (data) {
 }
 
 export const promisify = value => {
+  if (value == null) {
+    return Promise.resolve(null)
+  }
+
   if (value.then) {
     return value
   }

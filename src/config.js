@@ -56,7 +56,7 @@ const defaultConfig = {
   beforeFirstHit: noop,
   ready: noop,
 
-  untracked: []
+  isInstalled: false
 }
 
 let config = { ...defaultConfig }
