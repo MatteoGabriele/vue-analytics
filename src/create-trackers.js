@@ -1,6 +1,6 @@
 import set from 'lib/set'
 import query from 'lib/query'
-import config, { getId } from './config'
+import config, { getId, getTrackerName } from './config'
 import { getTracker } from './helpers'
 
 export default function createTrackers () {
@@ -13,6 +13,7 @@ export default function createTrackers () {
   }
 
   const ids = getId()
+  const trackerName = getTrackerName()
 
   if (config.debug.enabled) {
     window.ga_debug = {
@@ -25,7 +26,11 @@ export default function createTrackers () {
     const customIdConfig = config.customIdFields[domain] || {}
     const options = ids.length > 1 ? { ...config.fields, ...customIdConfig, name } : config.fields
 
-    window.ga('create', (domain.id || domain), 'auto', options)
+    if (trackerName) {
+      window.ga('create', (domain.id || domain), 'auto', trackerName, options)
+    } else {
+      window.ga('create', (domain.id || domain), 'auto', options)
+    }
   })
 
   config.beforeFirstHit()

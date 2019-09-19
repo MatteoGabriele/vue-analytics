@@ -1,10 +1,8 @@
 jest.mock('config')
 jest.mock('load-script')
 
-import Vue from 'vue'
-import VueAnalytics from '../../src/index'
 import VueRouter from 'vue-router'
-import config, { mockUpdate } from 'config'
+import config from 'config'
 
 const routes = [
   {
@@ -29,7 +27,10 @@ window.ga = jest.fn()
 
 let $vm
 
-beforeEach(done => {
+const initContext = async (options) => {
+  const Vue = require('vue')
+  const VueAnalytics = require('../../src/index').default
+
   window.ga.mockClear()
 
   Vue.use(VueRouter)
@@ -40,7 +41,7 @@ beforeEach(done => {
   })
 
   Vue.use(VueAnalytics, {
-    id: 'UA-1234-5',
+    ...options,
     router
   })
 
@@ -51,24 +52,64 @@ beforeEach(done => {
 
   $vm.$mount()
 
-  Vue.nextTick(done)
+  return Vue.nextTick()
+}
+
+beforeEach(() => {
+  jest.resetModules()
 })
 
-it ('should track a page', () => {
+it ('should track a page', async () => {
+  await initContext({
+    id: 'UA-1234-5'
+  })
+
   $vm.$ga.page('/')
 
   expect(window.ga).toBeCalledWith('set', 'page', '/')
   expect(window.ga).toBeCalledWith('send', 'pageview', '/')
 })
 
-it ('should set and track page with a VueRouter instance', () => {
+it ('should track a page with tracker name', async () => {
+  await initContext({
+    id: 'UA-1234-5',
+    trackerName: 'trackerName'
+  })
+
+  $vm.$ga.page('/')
+
+  expect(window.ga).toBeCalledWith('trackerName.set', 'page', '/')
+  expect(window.ga).toBeCalledWith('trackerName.send', 'pageview', '/')
+})
+
+it ('should set and track page with a VueRouter instance', async () => {
+  await initContext({
+    id: 'UA-1234-5'
+  })
+
   $vm.$ga.page($vm.$router)
 
   expect(window.ga).toBeCalledWith('set', 'page', '/')
   expect(window.ga).toBeCalledWith('send', 'pageview', '/')
 })
 
-it ('should skip tracking when page first argument is a falsy value', () => {
+it ('should set and track page with a VueRouter instance and a tracker name', async () => {
+  await initContext({
+    id: 'UA-1234-5',
+    trackerName: 'trackerName'
+  })
+
+  $vm.$ga.page($vm.$router)
+
+  expect(window.ga).toBeCalledWith('trackerName.set', 'page', '/')
+  expect(window.ga).toBeCalledWith('trackerName.send', 'pageview', '/')
+})
+
+it ('should skip tracking when page first argument is a falsy value', async () => {
+  await initContext({
+    id: 'UA-1234-5'
+  })
+
   $vm.$ga.page(null)
   $vm.$ga.page(false)
   $vm.$ga.page(undefined)

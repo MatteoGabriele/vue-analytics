@@ -3,6 +3,7 @@ import { merge, noop } from './helpers'
 const defaultConfig = {
   $vue: null,
   id: null,
+  trackerName: null,
   router: null,
   fields: {},
   customIdFields: {},
@@ -71,6 +72,10 @@ export function reset () {
 
 export function getId () {
   return !config.id ? [] : [].concat(config.id)
+}
+
+export function getTrackerName () {
+  return config.trackerName
 }
 
 export default config
