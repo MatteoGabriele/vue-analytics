@@ -1,4 +1,4 @@
-import config from '../config'
+import config, { getTrackerName } from '../config'
 import set from 'lib/set'
 import screenview from 'lib/screenview'
 import query from 'lib/query'
@@ -32,7 +32,11 @@ export default function page (...args) {
     // We can call with `page('/my/path')`
     let page = typeof args[0] === 'object' ? args[0].page : args[0]
     set('page', page)
-    query('send', 'pageview', ...args)
+
+    const trackerName = getTrackerName()
+    const command = trackerName ? `${trackerName}.send` : 'send'
+
+    query(command, 'pageview', ...args)
   }
 }
 

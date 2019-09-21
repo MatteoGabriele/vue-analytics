@@ -15,6 +15,21 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+You can also specify a (non mandatory) [tracker name](https://developers.google.com/analytics/devguides/collection/analyticsjs/creating-trackers#naming_trackers)
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  trackerName: '<TRACKER_NAME>'
+})
+```
+The tracker name will prefix the following commands sent to Google Analytics:
+- `send` becomes `<TRACKER_NAME>.send` (for events, exceptions, pages, social, timing),
+- `require`becomes `<TRACKER_NAME>.require`,
+- `set`becomes `<TRACKER_NAME>.set` .
+
 **Important**
 
 For all the ES5 users out there, this package uses a default export so if you want to use `require` instead of `import` you should import the plugin like this

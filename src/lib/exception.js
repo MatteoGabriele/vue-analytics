@@ -1,8 +1,11 @@
 import query from 'lib/query'
-import config from '../config'
+import config, { getTrackerName } from '../config'
 
 const exception = (error, fatal = false) => {
-  query('send', 'exception', {
+  const trackerName = getTrackerName()
+  const command = trackerName ? `${trackerName}.send` : 'send'
+
+  query(command, 'exception', {
     exDescription: error,
     exFatal: fatal
   })

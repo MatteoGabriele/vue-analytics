@@ -14,6 +14,18 @@ it ('should initialize single tracker', () => {
   mockUpdate({ id: 'UA-1234-1' })
 
   createTrackers()
+
+  expect(window.ga).toBeCalledWith('create', config.id, 'auto', {})
+  expect(window.ga).not.toBeCalledWith('set', 'sendHitTask', null)
+})
+
+it ('should initialize single tracker with tracker name', () => {
+  mockUpdate({
+    id: 'UA-1234-1',
+    trackerName: 'trackerName'
+  })
+
+  createTrackers()
   expect(window.ga).toBeCalledWith('create', config.id, 'auto', {})
   expect(window.ga).not.toBeCalledWith('set', 'sendHitTask', null)
 })
@@ -25,6 +37,19 @@ it ('should initialize multiple trackers', () => {
 
   mockGetId().forEach((id) => {
     expect(window.ga).toBeCalledWith('create', id, 'auto', { 'name': getTracker(id) })
+  })
+})
+
+it ('should initialize multiple trackers with tracker name', () => {
+  mockUpdate({
+    id: [ 'UA-1234-1', 'UA-1234-2' ],
+    trackerName: 'trackerName'
+  })
+
+  createTrackers()
+
+  mockGetId().forEach((id) => {
+    expect(window.ga).toBeCalledWith('create', id, 'auto', 'trackerName', { 'name': getTracker(id) })
   })
 })
 
