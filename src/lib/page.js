@@ -1,7 +1,7 @@
 import config from '../config'
-import set from 'lib/set'
-import screenview from 'lib/screenview'
-import query from 'lib/query'
+import set from './set'
+import screenview from './screenview'
+import query from './query'
 import {
   getQueryString,
   isRouteIgnored,

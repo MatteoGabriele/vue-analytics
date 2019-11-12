@@ -1,4 +1,4 @@
-import query from 'lib/query'
+import query from './query'
 import config from '../config'
 
 const getMethod = function (name) {
@@ -6,10 +6,10 @@ const getMethod = function (name) {
 }
 
 const featuresList = [
-  'addItem', 
-  'addTransaction', 
-  'addProduct', 
-  'addImpression', 
+  'addItem',
+  'addTransaction',
+  'addProduct',
+  'addImpression',
   'setAction',
   'addPromo',
   'send'

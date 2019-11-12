@@ -1,5 +1,5 @@
-import set from 'lib/set'
-import query from 'lib/query'
+import set from './lib/set'
+import query from './lib/query'
 import config, { getId } from './config'
 import { getTracker } from './helpers'
 

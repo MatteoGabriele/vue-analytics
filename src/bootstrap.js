@@ -2,7 +2,7 @@ import { promisify, loadScript, shouldGaLoad } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
 import collectors from './collectors'
-import { autoTracking } from 'lib/page'
+import { autoTracking } from './lib/page'
 import untracked from './untracked'
 import noga from './no-ga'
 

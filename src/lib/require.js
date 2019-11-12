@@ -1,4 +1,4 @@
-import query from 'lib/query'
+import query from './query'
 
 export default function (...args) {
   if (args.length == 2) {
