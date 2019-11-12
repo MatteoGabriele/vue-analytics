@@ -2,8 +2,8 @@ import bootstrap from './bootstrap'
 import lib from './lib'
 import { update } from './config'
 import * as helpers from './helpers'
-import ga from 'directives/ga'
-import { autotracking as expectionAutotracking } from 'lib/exception'
+import ga from './directives/ga'
+import { autotracking as expectionAutotracking } from './lib/exception'
 import vuexMiddleware from './vuex-middleware'
 
 export default function install (Vue, options = {}) {

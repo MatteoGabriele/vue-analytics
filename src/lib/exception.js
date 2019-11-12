@@ -1,4 +1,4 @@
-import query from 'lib/query'
+import query from './query'
 import config from '../config'
 
 const exception = (error, fatal = false) => {

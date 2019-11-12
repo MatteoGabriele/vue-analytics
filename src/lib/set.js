@@ -1,4 +1,4 @@
-import query from 'lib/query'
+import query from './query'
 
 export default function set (...args) {
   if (typeof args[0] === 'object' && args[0].constructor === Object) {

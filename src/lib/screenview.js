@@ -1,4 +1,4 @@
-import query from 'lib/query'
+import query from './query'
 
 export default function screenview (...args) {
   const [screenName] = args
