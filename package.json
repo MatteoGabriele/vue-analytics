@@ -42,6 +42,10 @@
     "url": "https://github.com/MatteoGabriele/vue-analytics/issues"
   },
   "homepage": "https://github.com/MatteoGabriele/vue-analytics#readme",
+  "resolutions": {
+    "mixin-deep": "^2.0.1",
+    "set-value": "^3.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
