@@ -3,8 +3,7 @@
     [
       "@babel/preset-env",
       {
-        "targets": "last 3 versions, ie >= 9",
-        "modules": false
+        "targets": "last 3 versions, ie >= 9"
       }
     ]
   ]
