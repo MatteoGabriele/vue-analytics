@@ -1,4 +1,4 @@
-import { promisify, loadScript, shouldGaLoad } from './helpers'
+import { promisify, loadScript, shouldGaLoad, log } from './helpers'
 import config, { update } from './config'
 import createTrackers from './create-trackers'
 import collectors from './collectors'
@@ -16,9 +16,8 @@ export default () => {
   const resource = config.customResourceURL || `https://www.google-analytics.com/${filename}.js`
 
   if (!config.id) {
-    throw new Error(
-      '[vue-analytics] Missing the "id" parameter. Add at least one tracking domain ID'
-    )
+    log('Missing the "id" parameter. Add at least one tracking domain ID')
+    return
   }
 
   const queue = [
@@ -29,11 +28,7 @@ export default () => {
   if (shouldGaLoad()) {
     queue.push(
       loadScript(resource).catch(() => {
-        throw new Error (
-          '[vue-analytics] An error occured! Please check your connection, ' +
-          'if you have any Google Analytics blocker installed in your browser ' +
-          'or check your custom resource URL if you have added any.'
-        )
+        log('An error occured! Please check your connection or disable your AD blocker')
       })
     )
   }
@@ -66,6 +61,6 @@ export default () => {
       return
     }
 
-    console.error(error.message)
+    log(error.message)
   })
 }

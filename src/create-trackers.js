@@ -1,11 +1,12 @@
 import set from './lib/set'
 import query from './lib/query'
 import config, { getId } from './config'
-import { getTracker } from './helpers'
+import { log, getTracker } from './helpers'
 
 export default function createTrackers () {
   if (!window.ga && config.debug.enabled) {
-    throw new Error('[vue-analytics] Google Analytics has probably been blocked.')
+    log('Google Analytics has probably been blocked.')
+    return
   }
 
   if (!window.ga) {

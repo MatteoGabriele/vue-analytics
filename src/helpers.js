@@ -2,6 +2,10 @@ import config, { getId } from './config'
 
 export function noop () {}
 
+export const log = message => {
+  console.warn(`[vue-analytics] ${message}`)
+}
+
 export function loadScript (url) {
   return new Promise((resolve, reject) => {
     var head = document.head || document.getElementsByTagName('head')[0]

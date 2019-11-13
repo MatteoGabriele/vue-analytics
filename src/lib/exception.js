@@ -26,7 +26,6 @@ export const autotracking = Vue => {
     exception(error.message)
 
     if (config.autoTracking.exceptionLogs) {
-      console.error(`[vue-analytics] Error in ${info}: ${error.message}`)
       console.error(error)
     }
 
