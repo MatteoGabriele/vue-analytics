@@ -1,3 +1,4 @@
+const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
@@ -7,7 +8,8 @@ module.exports = function (env, argv) {
   return {
     output: {
       libraryTarget: 'umd',
-      filename: 'vue-analytics.js'
+      filename: 'vue-analytics.js',
+      globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     optimization: {
       minimize: isProduction,
@@ -17,6 +19,15 @@ module.exports = function (env, argv) {
             compress: isProduction
           }
         })
+      ]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include: path.resolve(__dirname, './src'),
+          loader: 'babel-loader'
+        }
       ]
     },
     plugins: [
