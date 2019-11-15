@@ -12,6 +12,7 @@ export function loadScript (url) {
     const script = document.createElement('script')
     script.async = true
     script.src = url
+    script.setAttribute('rel', 'preconnect')
     script.charset = 'utf-8'
 
     head.appendChild(script)
