@@ -22,7 +22,9 @@
 Vue plugin for Google Analytics
 
 ## Notes
-I've published a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag) which uses the new gtag.js library for Google Analytics
+_I've published a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag) which uses the new gtag.js library for Google Analytics._
+
+_The vue-analytics package will soon be deprecated in favor of the new gtag api plugin._
 
 ## Why should I use it?
 
