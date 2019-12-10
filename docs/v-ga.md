@@ -112,7 +112,7 @@ If there's no need to pass any arguments, we could also just pass the name of th
 ```
 
 ### v-ga in v-for loops
-'this' is not available when using it on a child in a v-for loop. In that case, use '$parent' instead.
+'this' is not available on child elements in a v-for loop. To get the current component scope, use '$parent'.
 
 ```html
 <template>
