@@ -110,3 +110,25 @@ If there's no need to pass any arguments, we could also just pass the name of th
    }
 </script>
 ```
+
+### v-ga in v-for loops
+'this' is not available on child elements in a v-for loop. To get the current component scope, use '$parent'.
+
+```html
+<template>
+	<div v-for="button in buttons" :key="button.key">
+		<button v-ga="$ga.commands.trackFocus.bind($parent, button.value)">{{ button.name }}</button>
+	</div>
+</template>
+
+<script>
+	export default {
+		name: 'myComponent',
+		data: () => ({
+			buttons: [
+				{ name: 'Click me', value: 1 }
+			]
+		})
+	}
+</script>
+```
