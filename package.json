@@ -30,8 +30,10 @@
     "vue"
   ],
   "main": "dist/vue-analytics.js",
+  "types": "vue-analytics.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "vue-analytics.d.ts"
   ],
   "author": {
     "name": "Matteo Gabriele",
