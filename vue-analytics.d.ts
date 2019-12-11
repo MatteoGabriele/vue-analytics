@@ -7,9 +7,9 @@ declare module 'vue-analytics' {
     (category: string, action?: string, label?: string, value?: number): void;
     (options: {
       eventCategory: string,
-      eventAction: string,
-      eventLabel: string,
-      eventValue: number
+      eventAction?: string,
+      eventLabel?: string,
+      eventValue?: number
     }): void;
   }
 
