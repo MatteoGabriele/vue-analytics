@@ -50,58 +50,60 @@ declare module 'vue-analytics' {
       timingLabel: string
     }): void;
   }
+  
+  export interface InstallOptions {
+    id: string | string[] | (() => string) | (() => Promise<string>) | Promise<string>,
+    router?: VueRouter,
+    ignoreRoutes?: string[],
+    debug?: {
+      enabled?: boolean,
+      trace?: boolean,
+      sendHitTask?: boolean
+    },
+    batch?: {
+      enabled?: boolean,
+      amount?: number,
+      delay?: number
+    },
+    linkers?: string[],
+    customResourceURL?: string,
+    ecommerce?: {
+      enabled?: boolean,
+      enhanced?: boolean,
+      options?: any
+    },
+    autoTracking?: {
+      exception?: boolean,
+      exceptionLogs?: boolean,
+      screenview?: boolean,
+      pageviewOnLoad?: boolean,
+      page?: boolean,
+      pageviewTemplate?: (route: Route) => pageDetails,
+      transformQueryString?: boolean,
+      prependBase?: boolean,
+      skipSamePath: boolean,
+      shouldRouterUpdate: (to: Route, from: Route) => string,
+      untracked?: boolean
+    },
+    fields?: {
+      [field: string]: any
+    },
+    customIdFields?: {
+      [id: string]: {
+        [field: string]: any
+      }
+    },
+    disabled?: boolean | (() => boolean) | (() => Promise<boolean>) | Promise<boolean>,
+    checkDuplicatedScript?: boolean,
+    disableScriptLoader?: boolean
+    set?: { field: string, value: string }[],
+    commands?: any,
+    beforeFirstHit?: () => void,
+    ready?: () => void
+  }
 
   export default class VueAnalytics {
-    static install(Vue: typeof _Vue, options: {
-      id: string | string[] | (() => string) | (() => Promise<string>) | Promise<string>,
-      router?: VueRouter,
-      ignoreRoutes?: string[],
-      debug?: {
-        enabled?: boolean,
-        trace?: boolean,
-        sendHitTask?: boolean
-      },
-      batch?: {
-        enabled?: boolean,
-        amount?: number,
-        delay?: number
-      },
-      linkers?: string[],
-      customResourceURL?: string,
-      ecommerce?: {
-        enabled?: boolean,
-        enhanced?: boolean,
-        options?: any
-      },
-      autoTracking?: {
-        exception?: boolean,
-        exceptionLogs?: boolean,
-        screenview?: boolean,
-        pageviewOnLoad?: boolean,
-        page?: boolean,
-        pageviewTemplate?: (route: Route) => pageDetails,
-        transformQueryString?: boolean,
-        prependBase?: boolean,
-        skipSamePath: boolean,
-        shouldRouterUpdate: (to: Route, from: Route) => string,
-        untracked?: boolean
-      },
-      fields?: {
-        [field: string]: any
-      },
-      customIdFields?: {
-        [id: string]: {
-          [field: string]: any
-        }
-      },
-      disabled?: boolean | (() => boolean) | (() => Promise<boolean>) | Promise<boolean>,
-      checkDuplicatedScript?: boolean,
-      disableScriptLoader?: boolean
-      set?: { field: string, value: string }[],
-      commands?: any,
-      beforeFirstHit?: () => void,
-      ready?: () => void
-    }): void;
+    static install(Vue: typeof _Vue, options: InstallOptions): void;
     analyticsMiddleware: any;
     onAnalyticsReady: () => Promise<void>;
     event: eventFn;
