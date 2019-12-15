@@ -2,6 +2,7 @@
 declare module 'vue-analytics' {
   import _Vue, { PluginFunction } from 'vue';
   import VueRouter, { Route } from 'vue-router';
+  import { Store } from 'vuex';
 
   interface eventFn {
     (category: string, action?: string, label?: string, value?: number): void;
@@ -50,7 +51,7 @@ declare module 'vue-analytics' {
       timingLabel: string
     }): void;
   }
-  
+
   interface EcommerceItem {
     id: string;
     name: string;
@@ -236,21 +237,34 @@ declare module 'vue-analytics' {
 
   export default class VueAnalytics {
     static install(Vue: typeof _Vue, options: InstallOptions): void;
-    analyticsMiddleware: any;
-    onAnalyticsReady: () => Promise<void>;
+    analyticsMiddleware<T>(store: Store<T>): void;
+    onAnalyticsReady: onAnalyticsReadyFn;
     event: eventFn;
     ecommerce: Ecommerce;
     set: setFn;
     page: pageFn;
-    query: any;
-    screenview: ((screen: string) => void) | ((option: { screenName: string, [otherProperties: string]: any }) => void);
+    query: queryFn;
+    screenview: screenviewFn;
     time: timeFn;
-    require: (pluginName: string, options?: any) => void;
-    exception: (exception: Error | string) => void;
+    require: requireFn;
+    exception: exceptionFn;
     social: socialFn;
     disable: () => void;
     enable: () => void;
   }
+
+  export const analyticsMiddleware: analyticsMiddlewareFn;
+  export const onAnalyticsReady: onAnalyticsReadyFn;
+  export const event: eventFn;
+  export const ecommerce: Ecommerce;
+  export const set: setFn;
+  export const page: pageFn;
+  export const query: queryFn;
+  export const screenview: screenviewFn;
+  export const time: timeFn;
+  export const require: requireFn;
+  export const exception: exceptionFn;
+  export const social: socialFn;
 
   module 'vue/types/options' {
     interface ComponentOptions<V extends _Vue> {
