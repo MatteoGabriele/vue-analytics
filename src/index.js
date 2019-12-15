@@ -15,6 +15,7 @@ export default function install (Vue, options = {}) {
   expectionAutotracking(Vue)
   bootstrap()
 }
+export { install }
 
 // Vuex middleware
 export const analyticsMiddleware = vuexMiddleware

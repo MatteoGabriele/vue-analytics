@@ -15,16 +15,6 @@ Vue.use(VueAnalytics, {
 })
 ```
 
-**Important**
-
-For all the ES5 users out there, this package uses a default export so if you want to use `require` instead of `import` you should import the plugin like this
-
-```js
-const VueAnalytics = require('vue-analytics').default
-
-Vue.use(VueAnalytics, { ... })
-```
-
 ### Usage
 it is possible to use the api in two different ways:
  - within the component scope
