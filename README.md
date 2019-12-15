@@ -1,4 +1,4 @@
-> :warning: **This plugin will stop receiving feature requests. I will only spend time for important bug fixes**. Google moved towards its new gtag.js library and I've created a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag). I suggest you to start using that one if you are about to create a new project.
+> :warning: **This plugin will stop receiving feature requests. I will only spend time for important bug fixes**. Google moved from analytics.js to its new gtag.js library and I've created a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag). I suggest you to start using that one if you are about to create a new project.
 
 <p align="center">
 <img src="http://i.imgur.com/whvHAT6.png" width="180" />
