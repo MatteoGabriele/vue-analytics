@@ -26,11 +26,14 @@ declare module 'vue-analytics' {
     (route: VueRouter): void;
   }
 
+  interface SetFieldValue {
+    field: string;
+    value: any;
+  }
+
   interface setFn {
-    (fieldName: string, fieldValue: string): void;
-    (options: {
-      field: string, value: string
-    }): void;
+    (fieldName: string, fieldValue: any): void;
+    (options: Record<string, any>): void;
   }
 
   interface socialFn {
@@ -229,7 +232,7 @@ declare module 'vue-analytics' {
     disabled?: boolean | (() => boolean) | (() => Promise<boolean>) | Promise<boolean>,
     checkDuplicatedScript?: boolean,
     disableScriptLoader?: boolean
-    set?: { field: string, value: string }[],
+    set?: SetFieldValue[],
     commands?: any,
     beforeFirstHit?: () => void,
     ready?: () => void
