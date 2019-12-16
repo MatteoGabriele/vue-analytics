@@ -4,14 +4,16 @@ declare module 'vue-analytics' {
   import VueRouter, { Route } from 'vue-router';
   import { Store } from 'vuex';
 
+  interface EventPayload {
+    eventCategory: string;
+    eventAction?: string;
+    eventLabel?: string;
+    eventValue?: number;
+  }
+
   interface eventFn {
     (category: string, action?: string, label?: string, value?: number): void;
-    (options: {
-      eventCategory: string,
-      eventAction?: string,
-      eventLabel?: string,
-      eventValue?: number
-    }): void;
+    (options: EventPayload): void;
   }
 
   type pageDetails = {
@@ -33,23 +35,27 @@ declare module 'vue-analytics' {
     }): void;
   }
 
+  interface SocialPayload {
+    socialNetwork: string;
+    socialAction: string;
+    socialTarget: string;
+  }
+
   interface socialFn {
     (network: string, action: string, target: string): void;
-    (options: {
-      socialNetwork: string,
-      socialAction: string,
-      socialTarget: string
-    }): void;
+    (options: SocialPayload): void;
+  }
+
+  interface TimePayload {
+    timingCategory: string;
+    timingVar: string;
+    timingValue: number;
+    timingLabel: string;
   }
 
   interface timeFn {
     (category: string, variable: string, value: number, label: string): void;
-    (options: {
-      timingCategory: string,
-      timingVar: string,
-      timingValue: number,
-      timingLabel: string
-    }): void;
+    (options: TimePayload): void;
   }
 
   interface EcommerceItem {
@@ -156,12 +162,14 @@ declare module 'vue-analytics' {
     send(): void;
   }
 
+  interface ScreenViewPayload {
+    screenName: string;
+    [otherProperties: string]: any;
+  }
+
   interface screenviewFn {
     (screen: string) :void;
-    (option: {
-      screenName: string;
-      [otherProperties: string]: any;
-    }): void;
+    (option: ScreenViewPayload): void;
   }
 
   interface requireFn {
