@@ -85,28 +85,26 @@ export function autoTracking () {
     return
   }
 
-  if (autoTracking.pageviewOnLoad && router.history.ready) {
-    trackRoute(router.currentRoute)
-  }
-
-  config.router.afterEach(function (to, from) {
-    const { skipSamePath, shouldRouterUpdate } = autoTracking
-
-    // Default behaviour of the router when the `skipSamePath` is turned on.
-    // Skip router change when current and previous route have the same path
-    // https://github.com/MatteoGabriele/vue-analytics/issues/73
-    if (skipSamePath && to.path === from.path) {
-      return
+  router.onReady(() => {
+    if (autoTracking.pageviewOnLoad && router.history.ready) {
+      trackRoute(router.currentRoute)
     }
 
-    // Adds a custom way to define when the router should track
-    if (typeof shouldRouterUpdate === 'function' && !shouldRouterUpdate(to, from)) {
-      return
-    }
+    router.afterEach(function (to, from) {
+      const { skipSamePath, shouldRouterUpdate } = autoTracking
 
-    // Fire tracking after the nextTick or it will still register the previous route
-    // https://github.com/MatteoGabriele/vue-analytics/issues/44
-    config.$vue.nextTick().then(() => {
+      // Default behaviour of the router when the `skipSamePath` is turned on.
+      // Skip router change when current and previous route have the same path
+      // https://github.com/MatteoGabriele/vue-analytics/issues/73
+      if (skipSamePath && to.path === from.path) {
+        return
+      }
+
+      // Adds a custom way to define when the router should track
+      if (typeof shouldRouterUpdate === 'function' && !shouldRouterUpdate(to, from)) {
+        return
+      }
+
       trackRoute(router.currentRoute)
     })
   })
