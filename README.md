@@ -14,7 +14,7 @@
     <img src="https://badgen.net/travis/MatteoGabriele/vue-analytics/master">
   </a>
   <a href="https://bundlephobia.com/result?p=vue-analytics">
-    <img src="https://badgen.net/bundlephobia/min/vue-analytics">
+    <img src="https://badgen.net/bundlephobia/minzip/vue-analytics">
   </a>
 </p>
 
