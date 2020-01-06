@@ -79,7 +79,7 @@ export function trackRoute (route) {
 }
 
 export function autoTracking () {
-  const { router, autoTracking } = config
+  const { router, autoTracking, $vue } = config
 
   if (!autoTracking.page || !router) {
     return
@@ -105,7 +105,10 @@ export function autoTracking () {
         return
       }
 
-      trackRoute(router.currentRoute)
+      // see https://github.com/nuxt-community/analytics-module/issues/8
+      $vue.nextTick().then(() => {
+        trackRoute(router.currentRoute)
+      })
     })
   })
 }
