@@ -1,28 +1,26 @@
 > :warning: **This plugin will stop receiving feature requests. I will only spend time for important bug fixes**. Google moved from analytics.js to its new gtag.js library and I've created a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag). I suggest you to start using that one if you are about to create a new project.
 
 <p align="center">
-<img src="http://i.imgur.com/whvHAT6.png" width="180" />
-<br>
-<br>
-<a href="https://badge.fury.io/js/vue-analytics">
- <img src="https://badge.fury.io/js/vue-analytics.svg" />
-<a/>
-
- <a href="https://www.npmjs.com/package/vue-analytics">
-  <img src="https://img.shields.io/npm/dm/vue-analytics.svg" />
- <a/>
-
- <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
-  <img src="https://travis-ci.org/MatteoGabriele/vue-analytics.svg?branch=master" />
- </a>
-
- <img src="https://img.shields.io/badge/size-4kB-brightgreen.svg" />
+  <img width="180" src="http://i.imgur.com/whvHAT6.png">
+  <br>
+  <br>
+  <a href="https://npm.im/vue-analytics">
+    <img src="https://badgen.net/npm/v/vue-analytics">
+  </a>
+  <a href="https://npm.im/vue-analytics">
+    <img src="https://badgen.net/npm/dm/vue-analytics">
+  </a>
+  <a href="https://travis-ci.org/MatteoGabriele/vue-analytics">
+    <img src="https://badgen.net/travis/MatteoGabriele/vue-analytics/master">
+  </a>
+  <a href="https://bundlephobia.com/result?p=vue-analytics">
+    <img src="https://badgen.net/bundlephobia/minzip/vue-analytics">
+  </a>
 </p>
 
 # vue-analytics
 
 Vue plugin for Google Analytics
-
 
 ## Why should I use it?
 
@@ -45,6 +43,7 @@ For example:
 Vue ^2.0.0
 
 ## Articles
+
 [Google Analytics, GDPR and Vuejs](https://medium.com/@matteo_gabriele/google-analytics-gdpr-and-vuejs-e1bd6affd2b4)
 
 [Vuejs and Google Analytics](https://medium.com/@matteo_gabriele/vuejs-and-google-analytics-689a07e00116)
@@ -83,7 +82,6 @@ npm install vue-analytics
 * [Opt-out from Google Analytics](/docs/opt-out.md)
 * [Custom analytics.js URL](/docs/custom-analytics.md)
 * [Debug](/docs/debug.md)
-
 
 # Issues and features requests
 
