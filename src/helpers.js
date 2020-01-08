@@ -10,11 +10,16 @@ export function loadScript (url) {
   return new Promise((resolve, reject) => {
     var head = document.head || document.getElementsByTagName('head')[0]
     const script = document.createElement('script')
+    const link = document.createElement('link')
+
     script.async = true
     script.src = url
-    script.setAttribute('rel', 'preconnect')
     script.charset = 'utf-8'
 
+    link.href = url
+    link.rel = 'preconnect'
+
+    head.appendChild(link)
     head.appendChild(script)
 
     script.onload = resolve
