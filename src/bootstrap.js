@@ -11,10 +11,6 @@ export default () => {
     return
   }
 
-  const { ready } = config
-  const filename = config.debug.enabled ? 'analytics_debug' : 'analytics'
-  const resource = config.customResourceURL || `https://www.google-analytics.com/${filename}.js`
-
   if (!config.id) {
     log('Missing the "id" parameter. Add at least one tracking domain ID')
     return
@@ -26,8 +22,14 @@ export default () => {
   ]
 
   if (shouldGaLoad()) {
+    const domain = 'https://www.google-analytics.com'
+    const filename = config.debug.enabled ? 'analytics_debug' : 'analytics'
+    const resourcePromise = config.customResourceURL
+      ? loadScript(config.customResourceURL)
+      : loadScript(`${domain}/${filename}.js`, domain)
+
     queue.push(
-      loadScript(resource).catch(() => {
+      resourcePromise.catch(() => {
         log('An error occured! Please check your connection or disable your AD blocker')
       })
     )
@@ -55,7 +57,7 @@ export default () => {
     // Starts auto tracking
     autoTracking()
 
-    ready()
+    config.ready()
   }).catch(error => {
     if (!config.debug.enabled) {
       return

@@ -6,20 +6,24 @@ export const log = message => {
   console.warn(`[vue-analytics] ${message}`)
 }
 
-export function loadScript (url) {
+export function loadScript (url, domain) {
   return new Promise((resolve, reject) => {
-    var head = document.head || document.getElementsByTagName('head')[0]
+    const head = document.head || document.getElementsByTagName('head')[0]
     const script = document.createElement('script')
-    const link = document.createElement('link')
 
     script.async = true
     script.src = url
     script.charset = 'utf-8'
 
-    link.href = url
-    link.rel = 'preconnect'
+    if (domain) {
+      const link = document.createElement('link')
 
-    head.appendChild(link)
+      link.href = domain
+      link.rel = 'preconnect'
+
+      head.appendChild(link)
+    }
+
     head.appendChild(script)
 
     script.onload = resolve
