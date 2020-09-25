@@ -31,6 +31,29 @@ Vue.use(VueAnalytics, {
 })
 ```
 
+### Bootstrap later
+It is possible to setup the entire plugin options, but to bootstrap it later on whenever the user decide too. This could also be useful for any GDPR proof projects.
+
+```js
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: 'UA-XXX-X',
+  bootstrap: false
+})
+```
+
+Later on you can simply import and call the boostrap function
+
+```js
+import { bootstrap, hasScript } from '@/vendor/vue-analytics.js'
+
+if (!hasScript()){
+  bootstrap()
+}
+```
+
 ### Important
 It is not possible for the plugin to remove the initial trackers, because it needs them to create all methods for the multi-tracking feature.
 **If you can't remove initial trackers, don't use this plugin: the outcome could be unpredictable.**
