@@ -62,7 +62,7 @@ const defaultConfig = {
 let config = { ...defaultConfig }
 
 export function update (params) {
-  merge(config, params)
+  return merge(config, params)
 }
 
 export function reset () {
