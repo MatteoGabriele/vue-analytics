@@ -10,6 +10,7 @@ import ecommerce from './ecommerce'
 import screenview from './screenview'
 import config from '../config'
 import noga from '../no-ga'
+import bootstrap from '../bootstrap'
 
 export default {
   event,
@@ -22,6 +23,7 @@ export default {
   time,
   screenview,
   ecommerce,
+  bootstrap,
   disable: () => noga(true),
   enable: () => noga(false),
   commands: config.commands
