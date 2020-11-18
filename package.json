@@ -52,7 +52,7 @@
     "compression-webpack-plugin": "^3.0.0",
     "cz-conventional-changelog": "^3.0.2",
     "jest": "^24.9.0",
-    "semantic-release": "^15.13.30",
+    "semantic-release": "^17.2.3",
     "terser-webpack-plugin": "^2.2.1",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
