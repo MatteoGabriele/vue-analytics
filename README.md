@@ -1,4 +1,4 @@
-> :warning: **This plugin will stop receiving feature requests. I will only spend time for important bug fixes**. Google moved from analytics.js to its new gtag.js library and I've created a new plugin called [vue-gtag](https://github.com/MatteoGabriele/vue-gtag). I suggest you to start using that one if you are about to create a new project.
+> :warning: Sorry but vue-analytics is not longer maintained. I would suggest you to switch to [vue-gtag](https://github.com/MatteoGabriele/vue-gtag). With love, the guy who made the package.
 
 <p align="center">
   <img width="180" src="http://i.imgur.com/whvHAT6.png">
