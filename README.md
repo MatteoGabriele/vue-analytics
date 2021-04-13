@@ -38,6 +38,10 @@ For example:
 * Vue error exception tracking system
 * Debugging API
 
+## Does this library support GA4?
+Nope! GA4 is only supported by the new gtag.js library which you can find in the `vue-gtag` package. 
+This package only uses analytics.js which doesn't provide that feature.
+
 ## Requirements
 
 Vue ^2.0.0
