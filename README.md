@@ -87,8 +87,4 @@ npm install vue-analytics
 * [Custom analytics.js URL](/docs/custom-analytics.md)
 * [Debug](/docs/debug.md)
 
-# Issues and features requests
-
-Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-analytics/issues](https://github.com/MatteoGabriele/vue-analytics/issues)
-
 Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele)
